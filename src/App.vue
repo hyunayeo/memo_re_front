@@ -1,20 +1,19 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
-  <div>
-    <button type="button" class="btn btn-primary">Primary</button>
-  </div>
+  <div><main-header-vue /></div>
+  <div><nav-bar-vue /></div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import MainHeaderVue from './components/MainHeader.vue';
+import NavBarVue from './components/NavBar.vue';
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    MainHeaderVue,
+    NavBarVue
+  },
+};
 </script>
 
 <style>
