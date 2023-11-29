@@ -67,7 +67,7 @@
 
 <script>
 export default {
-  name: "MainHeader",
+  name: "NavBar",
 };
 </script>
 

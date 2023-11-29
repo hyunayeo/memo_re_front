@@ -1,28 +1,31 @@
 <template>
-  <div><main-header-vue /></div>
-  <div><nav-bar-vue /></div>
+  <div id="app">
+    <page-header />
+    <nav-bar />
+    <p>
+      <!-- use router-link component for navigation. -->
+      <!-- specify the link by passing the `to` prop. -->
+      <!-- <router-link> will be rendered as an `<a>` tag by default -->
+      <!-- <router-link to="/home">Go to home</router-link> -->
+      <!-- <router-link to="/about">Go to about</router-link> -->
+    </p>
+    <!-- route outlet -->
+    <!-- component matched by the route will render here -->
+    <router-view></router-view>
+    <page-footer />
+  </div>
 </template>
 
 <script>
-import MainHeaderVue from './components/MainHeader.vue';
-import NavBarVue from './components/NavBar.vue';
+import NavBar from "@/components/NavBar.vue";
+import PageHeader from "./components/PageHeader.vue";
+import PageFooter from "./components/PageFooter.vue";
 
 export default {
-  name: "App",
-  components: {
-    MainHeaderVue,
-    NavBarVue
-  },
+  components: { NavBar, PageHeader, PageFooter },
 };
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>
+
+MainHeader
