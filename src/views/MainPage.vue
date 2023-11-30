@@ -2,45 +2,27 @@
   <!-- 메인화면 -->
   <div class="home">
     <div class="container-xxl p-x5">
-      <h1 class="text-center mb-4">베스트셀러입니다</h1>
-      <div class="row row-cols-auto justify-content-center pb-5 mb-4">
-        <BookCardVue />
-        <BookCardVue />
-        <BookCardVue />
-        <BookCardVue />
-      </div>
+      <hr />
+      <h1 class="mb-4">Bestsellers</h1>
+      <hr />
+      <wrap-around-vue />
     </div>
 
-    <div class="container">
-      <h1 class="text-center mb-4">신간 도서입니다</h1>
-      <div class="row pb-5 mb-4">
-        <BookCardVue />
-        <BookCardVue />
-        <BookCardVue />
-        <BookCardVue />
-      </div>
+    <div class="container-xxl p-x5">
+      <hr />
+      <h1 class="mb-4">New books</h1>
+      <hr />
+      <wrap-around-vue />
     </div>
   </div>
 </template>
 
 <script>
-import BookCardVue from "@/components/BookCard.vue";
+import WrapAroundVue from "@/components/WrapAround.vue";
 
 export default {
-  components: { BookCardVue },
+  components: { WrapAroundVue },
 };
 </script>
 
-<style>
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-li {
-  margin: 0 0 0 0;
-  padding: 0 0 0 0;
-  border: 0;
-  float: left;
-}
-</style>
+<style></style>
