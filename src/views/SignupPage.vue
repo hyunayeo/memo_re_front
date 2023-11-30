@@ -42,8 +42,7 @@
 export default {
   data() {
     return {
-      style: "color: magenta;",
-
+      
     }
   },
 
@@ -68,7 +67,9 @@ export default {
 .form {
   background: white;
   border-radius: 1rem;
-  /* border-width: ; */
+  border-color: blueviolet;
+  border-style: solid;
+  border-width: 1px;
   display: flex;
   flex-direction: column;
   align-items: center;
