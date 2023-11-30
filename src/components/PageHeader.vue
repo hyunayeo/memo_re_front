@@ -1,5 +1,12 @@
 <template>
-  <h1 onclick="location.href='/'">Memo.re</h1>
+  <div class="d-flex align-items-baseline mx-5 my-3">
+    <h1 onclick="location.href='/'">Memo.re</h1>
+    <div class="ms-auto">
+      <a href="/login">login</a>
+      &nbsp;&nbsp; / &nbsp;&nbsp;
+      <a href="/signup">signup</a>
+    </div>
+  </div>
 </template>
 
 <script>

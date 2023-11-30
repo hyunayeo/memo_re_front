@@ -1,40 +1,103 @@
 <template>
-  <div class="signup">
-    <h1>회원가입</h1>
-  </div>
+  <div class="login">
+    <section class="vh-90" style="background-color: #ffffff">
+      <div class="container py-5 h-100">
+        <div
+          class="d-flex flex-row justify-content-center align-items-center h-100"
+        >
+          <div class="col-md-8 col-lg-5">
+            <div class="card" style="border-radius: 1rem">
+              <div class="row g-0">
+                <div class="card-body text-black">
+                  <form>
+                    <div class="d-flex align-items-center mb-3 pb-1">
+                      <i
+                        class="fas fa-cubes fa-2x me-3"
+                        style="color: #ff6219"
+                      ></i>
+                      <span class="h1 fw-bold mb-0">회원가입</span>
+                    </div>
 
-  <div class="col-md-6 mx-auto">
-    <form class="form">
-      <div class="form-row">
+                    <p>&nbsp;&nbsp;</p>
 
-        <div class="form-group col-md-6">
-          <label for="id" class="large-label">아이디</label>
-          <input type="email" class="form-control" id="id" placeholder="이메일을 입력하세요.">
-          <button type="button" class="btn btn-dark btn-lg" style = "position: absolute; margin-left: 350px; margin-top: -50px;">중복확인</button>
-        </div>
+                    <div class="form-outline mb-4">
+                      <label class="form-label" for="form2Example17"
+                        >이메일 주소</label
+                      >
+                      <input
+                        type="email"
+                        id="email"
+                        class="form-control form-control-lg"
+                      />
+                      <button
+                        type="button"
+                        class="btn btn-dark btn-lg float-end"
+                        id="emailCheck"
+                      >
+                        중복확인
+                      </button>
+                    </div>
 
-        <div class="form-group col-md-6">
-          <label for="password" class="large-label">비밀번호</label>
-          <input type="password" class="form-control" id="password" placeholder="비밀번호를 입력하세요.">
-        </div>
+                    <div class="form-outline mb-4">
+                      <label class="form-label" for="form2Example27"
+                        >비밀번호</label
+                      >
+                      <input
+                        type="password"
+                        id="password1"
+                        class="form-control form-control-lg"
+                      />
+                    </div>
 
-        <div class="form-group col-md-6">
-          <label for="passwordCheck" class="large-label">비밀번호(확인)</label>
-          <input type="password" class="form-control" id="passwordCkeck" placeholder="비밀번호 확인">
-        </div>
+                    <div class="form-outline mb-4">
+                      <label class="form-label" for="form2Example27"
+                        >비밀번호 확인</label
+                      >
+                      <input
+                        type="password"
+                        id="password2"
+                        class="form-control form-control-lg"
+                      />
+                    </div>
 
-        <div class="form-group col-md-6">
-          <label for="nickname" class="large-label">닉네임</label>
-          <input type="text" class="form-control" id="nickname" placeholder="닉네임을 입력하세요.">
-        </div>
+                    <div class="form-outline mb-4">
+                      <label class="form-label" for="form2Example27"
+                        >닉네임</label
+                      >
+                      <input
+                        type="text"
+                        id="name"
+                        class="form-control form-control-lg"
+                      />
+                      <button
+                        type="button"
+                        class="btn btn-dark btn-lg float-end d-inline"
+                        id="nameCheck"
+                      >
+                        중복확인
+                      </button>
+                    </div>
 
-        <div class="form-group col-md-6">
-          <label for="phone" class="large-label">전화번호</label>
-          <input type="text" class="form-control" id="phone" placeholder="010 - 0000 - 0000">
+                    <div class="pt-2 mb-4" style="text-align: center">
+                      <button type="button" class="btn btn-dark btn-lg">
+                        가입하기
+                      </button>
+                    </div>
+
+                    <p class="mb-5 pb-lg-2" style="text-align: center">
+                      이미 Memo.re 회원인가요?
+                      <a href="/login" style="color: #6b21a8"
+                        >로그인하러 가기</a
+                      >
+                    </p>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <button type="button" class="btn btn-dark btn-lg" style = "margin-top: -15px; margin-bottom: 30px;">회원가입</button>
-    </form>
+    </section>
   </div>
 </template>
 
@@ -43,50 +106,13 @@ export default {
   data() {
     return {
       style: "color: magenta;",
-
-    }
+    };
   },
 
-  methods: {
-  },
+  methods: {},
 
-  components: {
-  }
-}
+  components: {},
+};
 </script>
 
-<style>
-.signup {
-  text-align: center;
-  margin-bottom: 15px;
-}
-
-.signup h1 {
-  color: black;
-}
-
-.form {
-  background: white;
-  border-radius: 1rem;
-  /* border-width: ; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.form-row {
-  margin-top: 50px;
-  margin-bottom: 50px;
-}
-
-.form-control {
-  width: 300px;
-  height: 50px;
-  margin-bottom: 10px;
-  font-size: large;
-}
-
-.large-label {
-  font-size: 22px;
-}
-</style>
+<style></style>
