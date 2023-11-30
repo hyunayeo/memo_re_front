@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-<section class="vh-90" style="background-color: #483d8b;">
+<section class="vh-90" style="background-color: #FFFFFF;">
   <div class="container py-5 h-100">
     <div class="d-flex flex-row justify-content-center align-items-center h-100">
       <div class ="col-md-8 col-lg-5">
@@ -27,8 +27,8 @@
                     <input type="password" id="form2Example27" class="form-control form-control-lg" />                    
                   </div>
 
-                  <div class="pt-1 mb-4" style="text-align:center">
-                    <button class="btn btn-dark btn-lg btn-block" type="button">로그인</button>
+                  <div class="pt-2 mb-4" style="text-align:center">
+                    <button type="button" class="btn btn-dark btn-lg">로그인</button>                  
                   </div>
 
                   <div class="mb-3">
