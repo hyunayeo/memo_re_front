@@ -18,14 +18,21 @@
 
 <script>
 import NavBar from "@/components/NavBar.vue";
-import PageHeader from "./components/PageHeader.vue";
-import PageFooter from "./components/PageFooter.vue";
+import PageHeader from "@/components/PageHeader.vue";
+import PageFooter from "@/components/PageFooter.vue";
 
 export default {
   components: { NavBar, PageHeader, PageFooter },
 };
 </script>
 
-<style></style>
-
-MainHeader
+<style>
+@font-face {
+  font-family: "Yeongdeok";
+  font-weight: 400;
+  src: url("@/assets/fonts/Yeongdeok/YeongdeokSea.ttf");
+}
+* {
+  font-family: "Yeongdeok" !important;
+}
+</style>
