@@ -23,7 +23,7 @@ const todos = ref([
     description: 'Tummmmme.',
     isComplete: false,
     dates: [
-            new Date(2018, 0, 1),
+            
             new Date(2018, 0, 1),           // Jan 1st
             new Date(2018, 0, 1),      
             new Date(2018, 0, 1),          
