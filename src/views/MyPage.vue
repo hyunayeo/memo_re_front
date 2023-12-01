@@ -14,8 +14,7 @@
             up to you.
           </p>
         </div>
-        <calendar-dot />
-      
+
         <div>
           <h4 class="fst-italic">Recent posts</h4>
           <ul class="list-unstyled">
@@ -38,8 +37,7 @@
 <script>
 import CardSmallVue from "@/components/CardSmall.vue";
 import MyNavVue from "@/components/MyNav.vue";
-import CalendarDot from "@/components/CalendarDot.vue";
-export default { components: { CardSmallVue, MyNavVue, CalendarDot } };
+export default { components: { CardSmallVue, MyNavVue } };
 </script>
 
 <style></style>
