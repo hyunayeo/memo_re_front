@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper px-5">
-    <Carousel :items-to-show="5" :wrap-around="true">
+    <!-- <h1>Width: {{ window.width }} px</h1> -->
+    <Carousel vi :items-to-show="5" v :wrap-around="true">
       <!-- <Slide v-for="slide in 10" :key="slide">
       <div class="carousel__item">{{ slide }}</div>
     </Slide> -->
