@@ -2,8 +2,8 @@
   <div class="row g-5">
     <card-big-vue />
     <div class="row mb-2">
-      <card-medium-vue />
-      <card-medium-vue />
+      <card-medium-vue :article="articles[0]" :book_img="book_imgs[0]" />
+      <card-medium-vue :article="articles[1]" :book_img="book_imgs[1]"/>
     </div>
 
     <wrap-around-vue />
@@ -59,7 +59,27 @@ import CardBigVue from "@/components/CardBig.vue";
 import CardMediumVue from "@/components/CardMedium.vue";
 import CardSmallVue from "@/components/CardSmall.vue";
 import WrapAroundVue from "@/components/WrapAround.vue";
+
+import axios from "axios";
 export default {
+  data() {
+    return {
+      articles : [],
+      book_imgs : []
+    }
+  },
+  mounted() {
+    const URL = '/api/articles'
+    axios.get(URL)
+    .then((result) => {
+      let articles = result.data.list;
+      this.articles = articles;
+    })
+    .catch((err)=> {
+      console.log(err)
+    })
+
+  },
   components: {
     BlogPostVue,
     CardBigVue,
