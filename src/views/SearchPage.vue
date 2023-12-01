@@ -1,5 +1,5 @@
 <template>
-  <h1>검색페이지입니다</h1>
+  <h1>검색 상세 페이지 입니다.</h1>
 </template>
 
 <script>
