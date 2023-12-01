@@ -1,11 +1,10 @@
 <template>
-<<<<<<< HEAD
   <div class="home">
     <h1>여기는 메인화면입니다.</h1>
     <!-- <MyPageMenu /> -->
     <EmailModal />
+  </div>
 
-=======
   <div class="row g-5">
     <card-big-vue />
     <card-medium-vue />
@@ -15,11 +14,7 @@
       <h3 class="pb-4 mb-4 fst-italic border-bottom">From the Firehose</h3>
       <nav class="blog-pagination" aria-label="Pagination">
         <a class="btn btn-outline-primary rounded-pill" href="#">Older</a>
-        <a
-          class="btn btn-outline-secondary rounded-pill disabled"
-          aria-disabled="true"
-          >Newer</a
-        >
+        <a class="btn btn-outline-secondary rounded-pill disabled" aria-disabled="true">Newer</a>
       </nav>
       <blog-post-vue />
       <blog-post-vue />
@@ -53,12 +48,10 @@
         </div>
       </div>
     </div>
->>>>>>> 6bbbe8ad030bcd74cb94b90beac13d3df90380de
   </div>
 </template>
 
 <script>
-<<<<<<< HEAD
 
 // import MyPageMenu from "@/components/MyPageMenu.vue";
 import EmailModal from "@/components/EmailModal.vue";
@@ -67,7 +60,6 @@ export default {
   components: { EmailModal },
 };
 </script>
-=======
 import BlogPostVue from "@/components/BlogPost.vue";
 import CardBigVue from "@/components/CardBig.vue";
 import CardMediumVue from "@/components/CardMedium.vue";
@@ -85,4 +77,3 @@ export default {
 </script>
 
 <style></style>
->>>>>>> 6bbbe8ad030bcd74cb94b90beac13d3df90380de
