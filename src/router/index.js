@@ -3,6 +3,8 @@ import LoginPage from "@/views/LoginPage.vue";
 import SignupPage from "@/views/SignupPage.vue";
 import MyPage from "@/views/MyPage.vue";
 import SearchPage from "@/views/SearchPage.vue";
+import BookDetail from "@/views/BookDetail.vue";
+import ArticleDetail from "@/views/ArticleDetail.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
@@ -30,6 +32,16 @@ const routes = [
     path: "/search",
     name: "SearchPage",
     component: SearchPage,
+  },
+  {
+    path: "/book",
+    name: "BookDetail",
+    component: BookDetail,
+  },
+  {
+    path: "/article",
+    name: "ArticleDetail",
+    component: ArticleDetail,
   },
 ];
 
