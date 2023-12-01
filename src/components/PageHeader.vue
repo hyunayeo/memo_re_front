@@ -7,8 +7,8 @@
       <div class="col-4 text-center">
         <a
           class="blog-header-logo text-body-emphasis text-decoration-none"
-          href="#"
-          >Large</a
+          href="/"
+          >Memo.re</a
         >
       </div>
       <div class="col-4 d-flex justify-content-end align-items-center">
@@ -31,7 +31,8 @@
             <path d="M21 21l-5.2-5.2" />
           </svg>
         </a>
-        <a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a>
+        <a class="btn btn-sm btn-outline-secondary mx-1" href="/login">Login</a>
+        <a class="btn btn-sm btn-outline-secondary" href="/signup">Sign up</a>
       </div>
     </div>
   </header>

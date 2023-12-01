@@ -1,7 +1,11 @@
 <template>
   <div class="row g-5">
     <card-big-vue />
-    <card-medium-vue />
+    <div class="row mb-2">
+      <card-medium-vue />
+      <card-medium-vue />
+    </div>
+
     <wrap-around-vue />
 
     <div class="col-md-8">
