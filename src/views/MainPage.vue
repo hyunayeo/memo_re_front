@@ -52,19 +52,13 @@
 </template>
 
 <script>
-
-// import MyPageMenu from "@/components/MyPageMenu.vue";
-import EmailModal from "@/components/EmailModal.vue";
-
-export default {
-  components: { EmailModal },
-};
-</script>
 import BlogPostVue from "@/components/BlogPost.vue";
 import CardBigVue from "@/components/CardBig.vue";
 import CardMediumVue from "@/components/CardMedium.vue";
 import CardSmallVue from "@/components/CardSmall.vue";
 import WrapAroundVue from "@/components/WrapAround.vue";
+import EmailModalVue from "@/components/EmailModal.vue";
+
 export default {
   components: {
     BlogPostVue,
@@ -72,6 +66,7 @@ export default {
     CardMediumVue,
     CardSmallVue,
     WrapAroundVue,
+    EmailModalVue,
   },
 };
 </script>
