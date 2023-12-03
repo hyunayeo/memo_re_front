@@ -7,6 +7,7 @@ import MyCalender from "@/views/MyCalender";
 import SearchPage from "@/views/SearchPage.vue";
 import BookDetail from "@/views/BookDetail.vue";
 import ArticleDetail from "@/views/ArticleDetail.vue";
+import MyLayout from "@/layouts/MyLayout.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
@@ -26,11 +27,6 @@ const routes = [
     component: SignupPage,
   },
   {
-    path: "/mypage",
-    name: "MyPage",
-    component: MyPage,
-  },
-  {
     path: "/search",
     name: "SearchPage",
     component: SearchPage,
@@ -46,14 +42,27 @@ const routes = [
     component: ArticleDetail,
   },
   {
-    path: "/myrecord",
-    name: "MyRecord",
-    component: MyRecord,
-  },
-  {
-    path: "/mycalender",
-    name: "MyCalender",
-    component: MyCalender,
+    path: "/mypage",
+    name: "MyLayout",
+    component: MyLayout,
+    redirect: "/mypage",
+    children: [
+      {
+        path: "/mypage",
+        name: "MyPage",
+        component: MyPage,
+      },
+      {
+        path: "/mypage/record",
+        name: "MyRecord",
+        component: MyRecord,
+      },
+      {
+        path: "/mypage/calender",
+        name: "MyCalender",
+        component: MyCalender,
+      },
+    ],
   },
 ];
 

@@ -25,7 +25,7 @@
       </li>
       <li>
         <a
-          href="/myrecord"
+          href="/mypage/record"
           class="h4 fst-italic link-body-emphasis text-decoration-none border-top"
           >My Record</a
         >
@@ -33,21 +33,21 @@
 
       <li>
         <a
-          href="#"
+          href="/mypage/library"
           class="h4 fst-italic link-body-emphasis text-decoration-none border-top"
           >My Library</a
         >
       </li>
       <li>
         <a
-          href="#"
+          href="/mypage/wish"
           class="h4 fst-italic link-body-emphasis text-decoration-none border-top"
           >My Wish</a
         >
       </li>
       <li>
         <a
-          href="/mycalender"
+          href="/mypage/calender"
           class="h4 fst-italic link-body-emphasis text-decoration-none border-top"
           >Book Calender</a
         >
