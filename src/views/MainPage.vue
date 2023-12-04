@@ -1,11 +1,6 @@
 <template>
   <div class="row g-5">
     <card-big-vue />
-    <div class="row mb-2">
-      <card-medium-vue />
-      <card-medium-vue />
-    </div>
-
     <wrap-around-vue />
 
     <div class="col-md-8">
@@ -56,14 +51,12 @@
 <script>
 import BlogPostVue from "@/components/BlogPost.vue";
 import CardBigVue from "@/components/CardBig.vue";
-import CardMediumVue from "@/components/CardMedium.vue";
 import CardSmallVue from "@/components/CardSmall.vue";
 import WrapAroundVue from "@/components/WrapAround.vue";
 export default {
   components: {
     BlogPostVue,
     CardBigVue,
-    CardMediumVue,
     CardSmallVue,
     WrapAroundVue,
   },

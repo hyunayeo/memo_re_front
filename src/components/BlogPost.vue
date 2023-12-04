@@ -17,29 +17,23 @@
               <rect width="100%" height="100%" fill="#55595c" />
             </div>
             <div class="col p-4 d-flex flex-column position-static">
-              <h2 class="display-5 link-body-emphasis mb-1">Book Title</h2>
+              <h2 class="display-5 link-body-emphasis mb-1 text-border">
+                돈의 속성 읽어보셨나요?
+              </h2>
               <p class="blog-post-meta">
                 January 1, 2021 by <a href="#">Mark</a>
               </p>
 
-              <p>
-                This blog post shows a few different types of content that’s
-                supported and styled with Bootstrap. Basic typography, lists,
-                tables, images, code, and more are all supported as expected.
-              </p>
+              <h3>돈의 속성</h3>
+              <h5>김승호 저자(글)</h5>
+              <p class="text-secondary">스노우폭스북스 · 2020년 06월 15일</p>
             </div>
           </div>
         </div>
       </div>
 
       <hr />
-      <p>
-        This is some additional paragraph placeholder content. It has been
-        written to fill the available space and show how a longer snippet of
-        text affects the surrounding content. We'll repeat it often to keep the
-        demonstration flowing, so be on the lookout for this exact same string
-        of text.
-      </p>
+      <p>이 책 아주 재미있는 책입니다아~~~~~~~~~~~</p>
     </article>
   </div>
 </template>
