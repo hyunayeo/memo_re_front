@@ -7,6 +7,8 @@ import MyCalender from "@/views/MyCalender";
 import SearchPage from "@/views/SearchPage.vue";
 import LibraryLayout from "@/layouts/LibraryLayout.vue";
 import BookDetail from "@/views/BookDetail.vue";
+import ArticleInsert from "@/views/ArticleInsert.vue";
+import ArticleUpdate from "@/views/ArticleUpdate.vue";
 import BookList from "@/views/BookList.vue";
 import ArticleDetail from "@/views/ArticleDetail.vue";
 import ArticleList from "@/views/ArticleList.vue";
@@ -54,6 +56,16 @@ const routes = [
         component: BookDetail,
       },
     ],
+  },
+  {
+    path: "/articleinsert",
+    name: "ArticleInsert",
+    component: ArticleInsert,
+  },
+  {
+    path: "/articleupdate",
+    name: "ArticleUpdate",
+    component: ArticleUpdate,
   },
   {
     path: "/article",
