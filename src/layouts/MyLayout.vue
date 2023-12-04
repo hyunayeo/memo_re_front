@@ -1,5 +1,5 @@
 <template>
-  <div class="row g-5">
+  <div class="row g-5 mx-5">
     <div class="col-md-3">
       <my-nav-vue />
     </div>

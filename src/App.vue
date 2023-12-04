@@ -5,7 +5,7 @@
         <page-header />
         <nav-bar />
         <router-view></router-view>
-        <page-footer />
+        <page-footer class="mt-3" />
       </div>
     </main>
   </div>
@@ -35,7 +35,7 @@ body {
   margin: 0;
   padding: 0;
 }
-p{
+p {
   font-size: 20px;
 }
 
