@@ -7,6 +7,7 @@ import MyCalender from "@/views/MyCalender";
 import SearchPage from "@/views/SearchPage.vue";
 import BookDetail from "@/views/BookDetail.vue";
 import ArticleInsert from "@/views/ArticleInsert.vue";
+import ArticleUpdate from "@/views/ArticleUpdate.vue";
 import ArticleDetail from "@/views/ArticleDetail.vue";
 import MyLayout from "@/layouts/MyLayout.vue";
 import { createRouter, createWebHistory } from "vue-router";
@@ -41,6 +42,11 @@ const routes = [
     path: "/articleinsert",
     name: "ArticleInsert",
     component: ArticleInsert,
+  },
+  {
+    path: "/articleupdate",
+    name: "ArticleUpdate",
+    component: ArticleUpdate,
   },
   {
     path: "/article",

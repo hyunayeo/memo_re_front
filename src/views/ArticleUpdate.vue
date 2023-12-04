@@ -92,7 +92,7 @@
               <label class="form-check-label" for="isHide"> 비밀글 </label>
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-              <button class="btn btn-primary" type="button">저장</button>
+              <button class="btn btn-primary" type="button">수정하기</button>
             </div>
           </form>
         </div>
