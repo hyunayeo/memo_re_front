@@ -1,15 +1,14 @@
 <template>
   <div class="wrapper px-5">
-    <!-- <h1>Width: {{ window.width }} px</h1> -->
-    <Carousel vi :items-to-show="5" v :wrap-around="true">
-      <!-- <Slide v-for="slide in 10" :key="slide">
-      <div class="carousel__item">{{ slide }}</div>
-    </Slide> -->
-
+    <Carousel vi :items-to-show="CoverNum" v :wrap-around="true">
       <Slide v-for="image in images" :key="image.id">
-        <img :src="image.url" />
+        <div class="position-relative">
+          <img :src="image.url" />
+          <span class="badge badge-pill badge-primary bg_effect">{{
+            image.id
+          }}</span>
+        </div>
       </Slide>
-
       <template #addons>
         <Navigation />
       </template>
@@ -32,6 +31,10 @@ export default defineComponent({
   },
   data() {
     return {
+      CoverNum: 5,
+      windowHeight: window.innerHeight,
+      windowWidth: window.innerWidth,
+
       images: [
         {
           id: 1,
@@ -60,7 +63,50 @@ export default defineComponent({
       ],
     };
   },
+
+  mounted() {
+    this.$nextTick(() => {
+      window.addEventListener("resize", this.onResize);
+    });
+  },
+
+  beforeUnmount() {
+    window.removeEventListener("resize", this.onResize);
+  },
+
+  methods: {
+    onResize() {
+      this.windowHeight = window.innerHeight;
+      this.windowWidth = window.innerWidth;
+      if (this.windowWidth < 900) {
+        this.CoverNum = 2;
+      } else {
+        this.CoverNum = 5;
+      }
+    },
+  },
 });
 </script>
 
-<style></style>
+<style>
+.effect {
+  position: relative;
+  display: inline-block;
+  overflow: hidden; /* 불필요한 부분 가리기 */
+  padding: 1px;
+}
+.bg_effect {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: 20px;
+  /* height: auto; */
+  background: darkgray;
+  content: "New"; /* 보여주는 텍스트 */
+  text-align: center;
+  color: #fff;
+  left: -30px;
+  top: 3px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+</style>
