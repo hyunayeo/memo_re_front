@@ -1,6 +1,9 @@
 <template>
-  게시글 상세 페이지 입니다
   <blog-post />
+  <div class="d-flex justify-content-end align-items-center mb-4">
+    <a class="btn btn-sm btn-outline-secondary mx-1" href="/update">update</a>
+    <a class="btn btn-sm btn-outline-secondary" href="#">delete</a>
+  </div>
 </template>
 <script>
 import BlogPost from "@/components/BlogPost.vue";
