@@ -1,5 +1,9 @@
 <template>
-  <h3 class="pb-4 mb-4 border-bottom">My Profile</h3>
+  <a
+    class="blog-header-logo text-body-emphasis text-decoration-none"
+    href="/mypage"
+    >My Profile</a
+  >
   <div class="profile-userpic">
     <img
       src="@/assets/profile_sample.jpg"
@@ -21,29 +25,29 @@
       </li>
       <li>
         <a
-          href="#"
+          href="/mypage/record"
           class="h4 fst-italic link-body-emphasis text-decoration-none border-top"
-          >My List</a
+          >My Record</a
         >
       </li>
 
       <li>
         <a
-          href="#"
+          href="/mypage/library"
           class="h4 fst-italic link-body-emphasis text-decoration-none border-top"
           >My Library</a
         >
       </li>
       <li>
         <a
-          href="#"
+          href="/mypage/wish"
           class="h4 fst-italic link-body-emphasis text-decoration-none border-top"
           >My Wish</a
         >
       </li>
       <li>
         <a
-          href="#"
+          href="/mypage/calender"
           class="h4 fst-italic link-body-emphasis text-decoration-none border-top"
           >Book Calender</a
         >

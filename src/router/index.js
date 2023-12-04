@@ -2,9 +2,12 @@ import MainPage from "@/views/MainPage.vue";
 import LoginPage from "@/views/LoginPage.vue";
 import SignupPage from "@/views/SignupPage.vue";
 import MyPage from "@/views/MyPage.vue";
+import MyRecord from "@/views/MyRecord.vue";
+import MyCalender from "@/views/MyCalender";
 import SearchPage from "@/views/SearchPage.vue";
 import BookDetail from "@/views/BookDetail.vue";
 import ArticleDetail from "@/views/ArticleDetail.vue";
+import MyLayout from "@/layouts/MyLayout.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
@@ -24,11 +27,6 @@ const routes = [
     component: SignupPage,
   },
   {
-    path: "/mypage",
-    name: "MyPage",
-    component: MyPage,
-  },
-  {
     path: "/search",
     name: "SearchPage",
     component: SearchPage,
@@ -42,6 +40,29 @@ const routes = [
     path: "/article",
     name: "ArticleDetail",
     component: ArticleDetail,
+  },
+  {
+    path: "/mypage",
+    name: "MyLayout",
+    component: MyLayout,
+    redirect: "/mypage",
+    children: [
+      {
+        path: "/mypage",
+        name: "MyPage",
+        component: MyPage,
+      },
+      {
+        path: "/mypage/record",
+        name: "MyRecord",
+        component: MyRecord,
+      },
+      {
+        path: "/mypage/calender",
+        name: "MyCalender",
+        component: MyCalender,
+      },
+    ],
   },
 ];
 
