@@ -4,25 +4,25 @@
       class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
     >
       <div class="col-auto d-none d-lg-block">
-        <img
+        <!-- <img
           class="bd-placeholder-img"
           src="@/assets/book_sample.jpg"
           width="200"
+        /> -->
+        <img
+          class="bd-placeholder-img"
+          :src="article.bookImg"
+          width="200"
         />
+        <p>{{ article.memberName }}</p>
         <title>Placeholder</title>
     
         <rect width="100%" height="100%" fill="#55595c" />
       </div>
       <div class="col p-4 d-flex flex-column position-static">
         <strong class="d-inline-block mb-2 text-primary-emphasis">World</strong>
-        <!-- <h3 class="mb-0">Featured post</h3> -->
         <h3 class="mb-0">{{article.title}}</h3>
-        <!-- <div class="mb-1 text-body-secondary">Nov 12</div> -->
         <div class="mb-1 text-body-secondary">{{article.createdAt}}</div>
-        <!-- <p class="card-text mb-auto">
-          This is a wider card with supporting text below as a natural lead-in
-          to additional content.
-        </p> -->
         <p class="card-text mb-auto">
           {{article.content}}
         </p>
@@ -38,9 +38,11 @@
 <script>
 export default {
   props : {
-    article : Object,
-    book_img : String,
-  }
+    article : Object
+  },
+  mounted() {
+    
+  },
 };
 </script>
 
