@@ -8,6 +8,7 @@ import SearchPage from "@/views/SearchPage.vue";
 import BookDetail from "@/views/BookDetail.vue";
 import ArticleDetail from "@/views/ArticleDetail.vue";
 import MyLayout from "@/layouts/MyLayout.vue";
+import ErrorPage from "@/views/ErrorPage.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
@@ -40,6 +41,11 @@ const routes = [
     path: "/article",
     name: "ArticleDetail",
     component: ArticleDetail,
+  },
+  {
+    path: "/error",
+    name: "ErrorPage",
+    component: ErrorPage,
   },
   {
     path: "/mypage",
