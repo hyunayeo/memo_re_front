@@ -69,7 +69,7 @@
                     >
                     <input
                       type="text"
-                      id="name"
+                      id="ph"
                       class="form-control form-control-lg"
                     />
                   </div>
@@ -87,9 +87,16 @@
 
                   <div class="row justify-content-end">
                     <div class="col-auto">
-                      <p class="text-danger"><a>탈퇴하기</a></p>
+                      <p class="text-danger" @click="showModal = true">
+                        <a>탈퇴하기</a>
+                      </p>
                     </div>
                   </div>
+                  <modal-layout
+                    v-if="showModal"
+                    :option="option"
+                    @close="showModal = false"
+                  />
 
                   <div class="pt-2 mb-4" style="text-align: center">
                     <button type="button" class="btn btn-dark btn-lg py-2 px-5">
@@ -107,10 +114,13 @@
 </template>
 
 <script>
+import ModalLayout from "@/layouts/ModalLayout.vue";
+
 export default {
   data() {
-    return {};
+    return { showModal: false, option: "leave" };
   },
+  components: { ModalLayout },
 };
 </script>
 
