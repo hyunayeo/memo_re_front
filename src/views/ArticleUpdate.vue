@@ -18,8 +18,6 @@
             <card-small-vue />
 
             <div class="mb-3 mt-3">
-              <label for="bookinfo" class="form-label">책 정보</label>
-              <card-small-vue />
               <label for="title" class="form-label">제목</label>
               <input
                 type="text"
@@ -38,13 +36,14 @@
               aria-label="Toolbar with button groups"
             >
               <div
+                @click="toggleActive($event.target)"
                 class="btn-group me-2"
                 role="group"
                 aria-label="First group"
                 id="rating"
               >
                 <button
-                  type="submit"
+                  type="button"
                   class="btn btn-primary"
                   id="rating"
                   value="1"
@@ -147,6 +146,15 @@ import CardSmallVue from "@/components/CardSmall.vue";
 export default {
   components: {
     CardSmallVue,
+  },
+  methods: {
+    toggleActive: function (e) {
+      console.log(e.parentElement.children);
+      Array.from(e.parentElement.children).forEach((btn) => {
+        btn.classList.remove("active");
+      });
+      e.classList.toggle("active");
+    },
   },
 };
 </script>
