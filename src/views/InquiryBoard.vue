@@ -11,9 +11,9 @@
                 </button>
             </div>
 
-            <div class="col-md-4 text-end">
+            <div class="col-md-4 text-end mt-3">
                 <button type="button" class="btn btn-primary btn-lg">
-                    <h1>문의하기</h1>
+                    <h5>문의하기</h5>
                 </button>
             </div>
         </div>
