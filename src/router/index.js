@@ -6,6 +6,17 @@ import MyRecord from "@/views/MyRecord.vue";
 import MyCalender from "@/views/MyCalender";
 import SearchPage from "@/views/SearchPage.vue";
 import TestPage from '@/views/TestPage.vue'
+import LibraryLayout from "@/layouts/LibraryLayout.vue";
+import BookDetail from "@/views/BookDetail.vue";
+import ArticleInsert from "@/views/ArticleInsert.vue";
+import ArticleUpdate from "@/views/ArticleUpdate.vue";
+import BookList from "@/views/BookList.vue";
+import ArticleDetail from "@/views/ArticleDetail.vue";
+import ArticleList from "@/views/ArticleList.vue";
+import MyLayout from "@/layouts/MyLayout.vue";
+import ErrorPage from "@/views/ErrorPage.vue";
+import BoardLayout from "@/layouts/BoardLayout";
+
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
