@@ -4,8 +4,9 @@ import SignupPage from "@/views/SignupPage.vue";
 import MyPage from "@/views/MyPage.vue";
 import MyRecord from "@/views/MyRecord.vue";
 import MyCalender from "@/views/MyCalender";
+import ProfileUpdate from "@/views/ProfileUpdate.vue";
 import SearchPage from "@/views/SearchPage.vue";
-import TestPage from '@/views/TestPage.vue'
+import TestPage from "@/views/TestPage.vue";
 import LibraryLayout from "@/layouts/LibraryLayout.vue";
 import BookDetail from "@/views/BookDetail.vue";
 import ArticleInsert from "@/views/ArticleInsert.vue";
@@ -22,8 +23,8 @@ import { createRouter, createWebHistory } from "vue-router";
 const routes = [
   {
     path: "/testpage",
-    name:"TestPage",
-    component: TestPage
+    name: "TestPage",
+    component: TestPage,
   },
   {
     path: "/",
@@ -64,16 +65,6 @@ const routes = [
     ],
   },
   {
-    path: "/articleinsert",
-    name: "ArticleInsert",
-    component: ArticleInsert,
-  },
-  {
-    path: "/articleupdate",
-    name: "ArticleUpdate",
-    component: ArticleUpdate,
-  },
-  {
     path: "/article",
     name: "BoardLayout",
     component: BoardLayout,
@@ -91,8 +82,13 @@ const routes = [
       },
       {
         path: "/article/update",
-        name: "",
-        component: ArticleDetail,
+        name: "ArticleUpdate",
+        component: ArticleUpdate,
+      },
+      {
+        path: "/article/insert",
+        name: "ArticleInsert",
+        component: ArticleInsert,
       },
     ],
   },
@@ -121,6 +117,11 @@ const routes = [
         path: "/mypage/calender",
         name: "MyCalender",
         component: MyCalender,
+      },
+      {
+        path: "/mypage/update",
+        name: "ProfileUpdate",
+        component: ProfileUpdate,
       },
     ],
   },

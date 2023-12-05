@@ -1,6 +1,13 @@
-<template>책 상세 페이지 입니다</template>
+<template>
+  <card-medium />
+</template>
 <script>
-export default {};
+import CardMedium from "@/components/CardMedium.vue";
+
+export default {
+  name: "BookDetail",
+  components: { CardMedium },
+};
 </script>
 
 <style></style>
