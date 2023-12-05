@@ -4,6 +4,7 @@ import SignupPage from "@/views/SignupPage.vue";
 import MyPage from "@/views/MyPage.vue";
 import MyRecord from "@/views/MyRecord.vue";
 import MyCalender from "@/views/MyCalender";
+import ProfileUpdate from "@/views/ProfileUpdate.vue";
 import SearchPage from "@/views/SearchPage.vue";
 import LibraryLayout from "@/layouts/LibraryLayout.vue";
 import BookDetail from "@/views/BookDetail.vue";
@@ -103,6 +104,11 @@ const routes = [
         path: "/mypage/calender",
         name: "MyCalender",
         component: MyCalender,
+      },
+      {
+        path: "/mypage/update",
+        name: "ProfileUpdate",
+        component: ProfileUpdate,
       },
     ],
   },
