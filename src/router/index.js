@@ -15,13 +15,22 @@ import BookList from "@/views/BookList.vue";
 import ArticleDetail from "@/views/ArticleDetail.vue";
 import ArticleList from "@/views/ArticleList.vue";
 import MyLayout from "@/layouts/MyLayout.vue";
+import MyLibrary from "@/views/MyLibrary.vue";
 import ErrorPage from "@/views/ErrorPage.vue";
 import BoardLayout from "@/layouts/BoardLayout";
 import InquiryBoard from "@/views/InquiryBoard.vue";
 import InquiryCreation from "@/views/InquiryCreation.vue";
 import { createRouter, createWebHistory } from "vue-router";
-
 const routes = [
+  {
+    path: "/:pathMatch(.*)*",
+    redirect: "/error",
+  },
+  {
+    path: "/error",
+    name: "ErrorPage",
+    component: ErrorPage,
+  },
   {
     path: "/testpage",
     name: "TestPage",
@@ -94,11 +103,6 @@ const routes = [
     ],
   },
   {
-    path: "/error",
-    name: "ErrorPage",
-    component: ErrorPage,
-  },
-  {
     path: "/inquiryboard",
     name:"InquiryBoard",
     component: InquiryBoard
@@ -133,6 +137,11 @@ const routes = [
         path: "/mypage/update",
         name: "ProfileUpdate",
         component: ProfileUpdate,
+      },
+      {
+        path: "/mypage/library",
+        name: "MyLibrary",
+        component: MyLibrary,
       },
     ],
   },
