@@ -1,5 +1,7 @@
 <template>
+  <div>
     <VCalendar expanded :rows="2" :attributes="attributes" />
+  </div>
 </template>
 
 <script setup>
