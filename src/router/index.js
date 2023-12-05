@@ -17,6 +17,7 @@ import ArticleList from "@/views/ArticleList.vue";
 import MyLayout from "@/layouts/MyLayout.vue";
 import ErrorPage from "@/views/ErrorPage.vue";
 import BoardLayout from "@/layouts/BoardLayout";
+import InquiryBoard from "@/views/InquiryBoard.vue";
 
 import { createRouter, createWebHistory } from "vue-router";
 
@@ -96,6 +97,11 @@ const routes = [
     path: "/error",
     name: "ErrorPage",
     component: ErrorPage,
+  },
+  {
+    path: "/inquiryboard",
+    name:"InquiryBoard",
+    component: InquiryBoard
   },
   {
     path: "/mypage",
