@@ -18,10 +18,17 @@ import MyLayout from "@/layouts/MyLayout.vue";
 import MyLibrary from "@/views/MyLibrary.vue";
 import ErrorPage from "@/views/ErrorPage.vue";
 import BoardLayout from "@/layouts/BoardLayout";
-
 import { createRouter, createWebHistory } from "vue-router";
-
 const routes = [
+  {
+    path: "/:pathMatch(.*)*",
+    redirect: "/error",
+  },
+  {
+    path: "/error",
+    name: "ErrorPage",
+    component: ErrorPage,
+  },
   {
     path: "/testpage",
     name: "TestPage",
@@ -92,11 +99,6 @@ const routes = [
         component: ArticleInsert,
       },
     ],
-  },
-  {
-    path: "/error",
-    name: "ErrorPage",
-    component: ErrorPage,
   },
   {
     path: "/mypage",
