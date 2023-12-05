@@ -50,7 +50,8 @@
 
 <script>
 export default {
-    name: "",
+    name: "withdrawalModal",
+    
     data() {
         return {
             isModalOpen: false // 나중에 확인 버튼을 누르면 모달창이 보이도록 하기
