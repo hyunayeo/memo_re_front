@@ -58,11 +58,17 @@
                           />
                           아이디 정보 저장
                           <b> &nbsp; / &nbsp; </b>
-                          <a class="text-muted" href="#!">비밀번호 찾기</a>
+                          <a class="text-muted" @click="showModal = true"
+                            >비밀번호 찾기</a
+                          >
                           &nbsp;
                         </label>
                       </div>
                     </div>
+                    <modal-layout-vue
+                      @close="showModal = false"
+                      v-if="showModal"
+                    />
 
                     <p class="mb-5 pb-lg-2" style="text-align: center">
                       Memo.re 회원이 아닌가요?
@@ -80,3 +86,14 @@
     </section>
   </div>
 </template>
+<script>
+import ModalLayoutVue from "@/layouts/ModalLayout.vue";
+export default {
+  data() {
+    return { showModal: false };
+  },
+  components: { ModalLayoutVue },
+};
+</script>
+
+<style></style>
