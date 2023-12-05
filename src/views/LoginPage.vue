@@ -57,17 +57,32 @@
                             id="dropdownCheck"
                           />
                           아이디 정보 저장
+                        </label>
+                        <div class="mt-2">
+                          <a
+                            class="text-muted"
+                            @click="
+                              showModal = true;
+                              option = 'id';
+                            "
+                            >아이디 찾기</a
+                          >
                           <b> &nbsp; / &nbsp; </b>
-                          <a class="text-muted" @click="showModal = true"
+                          <a
+                            class="text-muted"
+                            @click="
+                              showModal = true;
+                              option = 'pw';
+                            "
                             >비밀번호 찾기</a
                           >
-                          &nbsp;
-                        </label>
+                        </div>
                       </div>
                     </div>
                     <modal-layout-vue
                       @close="showModal = false"
                       v-if="showModal"
+                      :option="option"
                     />
 
                     <p class="mb-5 pb-lg-2" style="text-align: center">
@@ -90,7 +105,7 @@
 import ModalLayoutVue from "@/layouts/ModalLayout.vue";
 export default {
   data() {
-    return { showModal: false };
+    return { showModal: false, option: "" };
   },
   components: { ModalLayoutVue },
 };

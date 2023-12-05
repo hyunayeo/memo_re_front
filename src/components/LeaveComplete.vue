@@ -26,30 +26,17 @@
             일주일 뒤 계정이 완전히 삭제됩니다. <br />
             일주일 내로 로그인 할 시, 자동으로 탈퇴가 해제됩니다.
           </p>
-          <button class="btn btn-outline-success">Back Home</button>
+          <button class="btn btn-outline-success" @click="conform">
+            Back Home
+          </button>
         </div>
       </div>
     </div>
   </div>
 </template>
-
 <script>
 export default {
-  name: "withdrawalComplete",
-
-  data() {
-    return {
-      isModalOpen: false, // 나중에 중복확인 버튼을 누르면 모달창이 보이도록 하기
-    };
-  },
-
-  methods: {
-    // 아직 사용 X
-    modalOpen() {
-      this.isModalOpen = !this.isModalOpen;
-    },
-  },
+  name: "LeaveComplete",
 };
 </script>
-
 <style></style>

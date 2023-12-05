@@ -4,20 +4,28 @@
       <div class="d-flex justify-content-end align-items-center mb-4">
         <button class="btn-close" @click="closePage"></button>
       </div>
-      <password-recovery-modal />
+      <find-password v-if="option == 'pw'" />
+      <find-email v-if="option == 'id'" />
+      <leave-check v-if="option == 'leave'" />
     </div>
   </div>
 </template>
 
 <script>
-import PasswordRecoveryModalVue from "@/components/PasswordRecoveryModal.vue";
-import PasswordRecoveryModal from "@/components/PasswordRecoveryModal.vue";
+import FindPassword from "@/components/modal/FindPassword.vue";
+import FindEmail from "@/components/modal/FindEmail.vue";
+import LeaveCheck from "@/components/modal/LeaveCheck.vue";
 
 export default {
-  components: { PasswordRecoveryModal },
+  components: { FindPassword, FindEmail, LeaveCheck },
+  props: {
+    option: String,
+  },
   name: "ModalLayout",
   data() {
-    return { PasswordRecoveryModalVue };
+    return {
+      conform: false,
+    };
   },
   methods: {
     closePage() {
@@ -35,15 +43,6 @@ export default {
   z-index: 10040;
   padding: 20px;
 }
-/* .black-bg {
-  width: 50%;
-  height: 100%;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  padding: 20px;
-} */
 .white-bg {
   width: 100%;
   background: white;

@@ -7,8 +7,8 @@
       <div class="modal-content">
         <div class="modal-header">
           <p class="h2 modal-title mt-4">
-            이메일을 입력하세요. <br />
-            임시 비밀번호를 전송해드립니다.
+            가입시 입력한 번호를 입력하세요. <br />
+            아이디를 알려드립니다.
           </p>
         </div>
 
@@ -60,7 +60,7 @@
 
 <script>
 export default {
-  name:"FindPassword",
+  name:"FindEmail",
   data() {},
 };
 </script>
