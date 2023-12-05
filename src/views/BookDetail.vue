@@ -1,12 +1,16 @@
 <template>
-  <card-medium />
+  <blog-post />
+  <review-card />
+  <review-card />
+  <review-card />
 </template>
 <script>
-import CardMedium from "@/components/CardMedium.vue";
+import ReviewCard from "@/components/ReviewCard.vue";
+import BlogPost from "@/components/BlogPost.vue";
 
 export default {
   name: "BookDetail",
-  components: { CardMedium },
+  components: { ReviewCard, BlogPost },
 };
 </script>
 
