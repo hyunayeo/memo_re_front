@@ -36,13 +36,14 @@
               aria-label="Toolbar with button groups"
             >
               <div
+                @click="toggleActive($event.target)"
                 class="btn-group me-2"
                 role="group"
                 aria-label="First group"
                 id="rating"
               >
                 <button
-                  type="submit"
+                  type="button"
                   class="btn btn-primary"
                   id="rating"
                   value="1"
@@ -131,7 +132,7 @@
               <label class="form-check-label" for="isHide"> 비밀글 </label>
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-              <button class="btn btn-primary" type="button">저장</button>
+              <button class="btn btn-primary" type="button">저장하기</button>
             </div>
           </form>
         </div>
@@ -139,11 +140,22 @@
     </div>
   </div>
 </template>
+
 <script>
 import CardSmallVue from "@/components/CardSmall.vue";
 export default {
+  name: "App",
   components: {
     CardSmallVue,
+  },
+  methods: {
+    toggleActive: function (e) {
+      console.log(e.parentElement.children);
+      Array.from(e.parentElement.children).forEach((btn) => {
+        btn.classList.remove("active");
+      });
+      e.classList.toggle("active");
+    },
   },
 };
 </script>
