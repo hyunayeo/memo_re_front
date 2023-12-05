@@ -144,7 +144,6 @@
 <script>
 import CardSmallVue from "@/components/CardSmall.vue";
 export default {
-  name: "App",
   components: {
     CardSmallVue,
   },
