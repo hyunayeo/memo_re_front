@@ -60,18 +60,7 @@
 
 <script>
 export default {
-  data() {
-    return {
-      isModalOpen: false, // 비밀번호 찾기를 누르면 모달창이 보이도록 하기
-    };
-  },
-
-  methods: {
-    // 아직 사용 X
-    modalOpen() {
-      this.isModalOpen = !this.isModalOpen;
-    },
-  },
+  data() {},
 };
 </script>
 
