@@ -55,7 +55,6 @@
 <script>
 import BlogPostVue from "@/components/BlogPost.vue";
 import CardBigVue from "@/components/CardBig.vue";
-import CardMediumVue from "@/components/CardMedium.vue";
 import CardSmallVue from "@/components/CardSmall.vue";
 import WrapAroundVue from "@/components/WrapAround.vue";
 // import api from "@/api/article.api";
@@ -95,7 +94,6 @@ export default {
   components: {
     BlogPostVue,
     CardBigVue,
-    CardMediumVue,
     CardSmallVue,
     WrapAroundVue,
   }

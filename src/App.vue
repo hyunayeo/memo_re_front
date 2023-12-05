@@ -5,7 +5,7 @@
         <page-header />
         <nav-bar />
         <router-view></router-view>
-        <page-footer />
+        <page-footer class="mt-3" />
       </div>
     </main>
   </div>
@@ -22,7 +22,7 @@ export default {
 </script>
 
 <style>
-/* @font-face {
+@font-face {
   font-family: "Yeongdeok";
   font-weight: 400;
   src: url("@/assets/fonts/Yeongdeok/YeongdeokSea.ttf");
@@ -34,7 +34,10 @@ export default {
 body {
   margin: 0;
   padding: 0;
-} */
+}
+p {
+  font-size: 20px;
+}
 
 .bd-placeholder-img {
   font-size: 1.125rem;
