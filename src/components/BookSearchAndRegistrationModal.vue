@@ -15,7 +15,7 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
-                                <input class="form-control form-control-lg mt-4" type="email" placeholder="도서 검색"
+                                <input class="form-control form-control-lg mt-4" type="text" placeholder="도서 검색"
                                     id="inputLarge">
                             </div>
                         </div>
