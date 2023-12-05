@@ -1,21 +1,23 @@
 <template>
     <div class="container mb-4">
         <div class="row">
-            <div class="col-md-4">
-                <input class="form-control form-control-lg mt-2" type="text" placeholder="문의 검색" id="inputLarge">
+
+            <div class="col">
+                <h1>문의 게시판</h1>
             </div>
 
-            <div class="col-md-4 mt-2">
-                <button type="button" class="btn btn-primary btn-lg px-4">
-                    <h4>검색</h4>
-                </button>
+            <div class="col">
+                <input class="form-control form-control-lg" type="text" placeholder="문의 검색" id="inputLarge">
             </div>
 
-            <div class="col-md-4 text-end mt-3">
-                <button type="button" class="btn btn-primary btn-lg">
-                    <h5>문의하기</h5>
-                </button>
+            <div class="col">
+                <button type="button" class="btn btn-primary btn-lg px-4">검색</button>
             </div>
+
+            <div class="text-end">
+                <button type="button" class="btn btn-primary btn-lg">문의하기</button>
+            </div>
+
         </div>
     </div>
 
