@@ -5,6 +5,7 @@ import MyPage from "@/views/MyPage.vue";
 import MyRecord from "@/views/MyRecord.vue";
 import MyCalender from "@/views/MyCalender";
 import SearchPage from "@/views/SearchPage.vue";
+import TestPage from '@/views/TestPage.vue'
 import LibraryLayout from "@/layouts/LibraryLayout.vue";
 import BookDetail from "@/views/BookDetail.vue";
 import ArticleInsert from "@/views/ArticleInsert.vue";
@@ -19,6 +20,11 @@ import BoardLayout from "@/layouts/BoardLayout";
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
+  {
+    path: "/testpage",
+    name:"TestPage",
+    component: TestPage
+  },
   {
     path: "/",
     name: "MainPage",
