@@ -53,7 +53,7 @@ export default {
         .then((res) => {
           articles = res.data.list;
         });
-    
+        
         await articles.forEach(article => {
           this.getBook(article.bookId).
           then((res) => {
@@ -91,28 +91,26 @@ export default {
         return articles;
     },
     getArticlesWithBookAndMember3: async function (searchDto) {
-        let articles = await this.getArticles(searchDto)
+        let [articles, pagination] = await this.getArticles(searchDto)
         .then((res) => {
-          return res.data.list;
+          return [res.data.list, res.data.pagination];
         });
-    
-        
+
         await articles.forEach(async article => {
           await this.getBook(article.bookId).
           then((res) => {
             let book = res.data;
-            article.bookImg = book.cover;
-            article.bookName = book.name
+            article.book = book;
             article.createdAt = apiUtils.trimDate(article.createdAt);
           })
           await this.getMember(article.bookId).
           then((res) => {
             let member = res.data;
-            article.memberName = member.name;
+            article.member = member;
           })
         })
         
-        return articles;
+        return [articles, pagination];
     },
     // 도서 이미지 있는 게시판만 추출하는 함수
     getArticlesWithBookImageIncludedAndMember: async function (searchDto) {

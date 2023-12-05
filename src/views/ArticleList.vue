@@ -4,6 +4,8 @@
     &nbsp;/&nbsp;
     <a href="#" class="text-body-emphasis text-decoration-none">정확도순</a>
   </div>
+  <p v-if="article">{{article.title}}</p>
+  <img v-if="article" :src="article.book.cover">
   <table class="table align-middle">
     <thead>
       <tr>
@@ -19,39 +21,35 @@
     <tbody>
       <tr @click="goToDetail(article)" v-for="(article, i) in articles" :key="article" class="media position-relative">
         <th scope="row">{{ i }}</th>
-        <td>
+        <td :key="article.book?.cover">
           <img
-            :src="article.bookImg"
+            :src="article.book?.cover"
             class="bd-placeholder-img"
             height="90"
             onerror="@/assets/profile_sample.jpg"
+            :key="article.book?.cover"
           />
         </td>
-        <!-- <td>마흔에 읽는 쇼펜하우어</td> -->
         <td>{{article.title}}</td>
-        <td class="fw-bold" onClick="location.href='#'">
+
+        <td class="fw-bold">
           {{ article.content }}
         </td>
-        <td>{{article.memberName}}</td>
+        <td>{{article.member?.name}}</td>
         <td>{{article.createdAt}}</td>
         <td>{{article.viewCount}}</td>
-        <a
-          href="/article"
-          class="icon-link gap-1 icon-link-hover stretched-link"
-        >
-          <svg class="bi"><use xlink:href="#chevron-right" /></svg>
-        </a>
       </tr>
     </tbody>
   </table>
   <nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
+    <ul @click="fetchData($event.target)" class="pagination justify-content-center">
       <li class="page-item disabled">
         <a class="page-link" href="#" tabindex="-1">Previous</a>
       </li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      
+      <li v-for="i in pagination.totalPageCount" :key="i" class="page-item"><a class="page-link" href="#">{{i}}</a></li>
+      <!-- <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li> -->
       <li class="page-item">
         <a class="page-link" href="#">Next</a>
       </li>
@@ -61,44 +59,34 @@
 
 </template>
 <script>
-import articleApi from "@/api/article.api";
+import {onMounted, reactive, ref, watchEffect} from 'vue';
+import articleApi from '@/api/article.api.js'
+
 
 export default {
-  data() {
-    return {
-      componentKey : 0,
-      articles : [],
-      active : {
-        list : true,
-        detail : false,
-        insert : false,
-        update : false,
-      }
-    }
-  },
-  methods : {
-    goToDetail : function(article) {
-      this.$router.push({
-        name : "ArticleDetail",
-        params : { article }
-      })
-    }
-  },
-  mounted() {
-    articleApi.searchDto.recordSize = 10
-    articleApi.getArticlesWithBookAndMember3()
-    .then((articles) => {
-      this.articles = articles
-      setTimeout(()=>{
-        this.articles = Array.from(this.articles);
-        setTimeout(()=>{
-        this.articles = Array.from(this.articles);
-      }, 1000)
-      }, 500)
-    });
-  }
-};
+  setup() {
+    const articles = ref([])
+    const pagination = ref({})
+    const book = ref({})
 
+    onMounted(async () => {
+      [articles.value, pagination.value] = reactive(await articleApi.getArticlesWithBookAndMember3());
+      console.log(articles.value)
+      console.log(pagination.value)
+    })
+
+    watchEffect(() => {
+      book.value = `${articles.value?.["0"]?.["book"]}`;
+      console.log(book.value)
+    })
+
+    return {
+      articles,
+      book,
+      pagination
+    }
+  }
+}
 </script>
 
 <style></style>
