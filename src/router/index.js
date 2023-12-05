@@ -3,9 +3,15 @@ import LoginPage from "@/views/LoginPage.vue";
 import SignupPage from "@/views/SignupPage.vue";
 import MyPage from "@/views/MyPage.vue";
 import SearchPage from "@/views/SearchPage.vue";
+import TestPage from '@/views/TestPage.vue'
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
+  {
+    path: "/testpage",
+    name:"TestPage",
+    component: TestPage
+  },
   {
     path: "/",
     name: "MainPage",
