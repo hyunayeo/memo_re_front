@@ -6,7 +6,7 @@ import MyRecord from "@/views/MyRecord.vue";
 import MyCalender from "@/views/MyCalender";
 import ProfileUpdate from "@/views/ProfileUpdate.vue";
 import SearchPage from "@/views/SearchPage.vue";
-import TestPage from "@/views/TestPage.vue";
+
 import LibraryLayout from "@/layouts/LibraryLayout.vue";
 import BookDetail from "@/views/BookDetail.vue";
 import ArticleInsert from "@/views/ArticleInsert.vue";
@@ -31,11 +31,7 @@ const routes = [
     name: "ErrorPage",
     component: ErrorPage,
   },
-  {
-    path: "/testpage",
-    name: "TestPage",
-    component: TestPage,
-  },
+
   {
     path: "/",
     name: "MainPage",
@@ -104,13 +100,13 @@ const routes = [
   },
   {
     path: "/inquiryboard",
-    name:"InquiryBoard",
-    component: InquiryBoard
+    name: "InquiryBoard",
+    component: InquiryBoard,
   },
   {
     path: "/inquirycreation",
-    name:"InquiryCreation",
-    component: InquiryCreation
+    name: "InquiryCreation",
+    component: InquiryCreation,
   },
   {
     path: "/mypage",
