@@ -4,9 +4,12 @@
       <h1 class="mt-4">Board</h1>
       <div class="card mb-4">
         <div class="card-body">
-          <form method="post">
+          <form method="get">
             <label for="bookInfo" class="form-label">책 정보</label>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            <div
+              class="d-grid gap-2 d-md-flex justify-content-md-start"
+              @click="showModal = true"
+            >
               <a
                 href="#"
                 class="btn btn-primary"
@@ -15,6 +18,16 @@
                 >책 검색</a
               >
             </div>
+            <modal-layout
+              v-if="showModal"
+              option="searchBook"
+              @close="
+                showModal = false;
+                showRegisterModal = true;
+              "
+            />
+            <modal-layout v-if="showRegisterModal" option="registerBook" />
+
             <card-small-vue />
 
             <div class="mb-3 mt-3">
@@ -143,10 +156,19 @@
 
 <script>
 import CardSmallVue from "@/components/CardSmall.vue";
+import ModalLayout from "@/layouts/ModalLayout.vue";
 export default {
-  name: "App",
+  name: "ArticleInsert",
+  data() {
+    return {
+      showModal: false,
+      showRegisterModal: false,
+      option: "",
+    };
+  },
   components: {
     CardSmallVue,
+    ModalLayout,
   },
   methods: {
     toggleActive: function (e) {
