@@ -9,6 +9,10 @@
 import BlogPost from "@/components/BlogPost.vue";
 export default {
   components: { BlogPost },
+  mounted() {
+    let article = this.$route.params.article;
+    console.log(article);
+  }
 };
 </script>
 

@@ -17,23 +17,24 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(v, i) in 5" :key="v" class="media position-relative">
+      <tr @click="goToDetail(article)" v-for="(article, i) in articles" :key="article" class="media position-relative">
         <th scope="row">{{ i }}</th>
         <td>
           <img
-            src="@/assets/book_sample.jpg"
+            :src="article.bookImg"
             class="bd-placeholder-img"
             height="90"
             onerror="@/assets/profile_sample.jpg"
           />
         </td>
-        <td>마흔에 읽는 쇼펜하우어</td>
+        <!-- <td>마흔에 읽는 쇼펜하우어</td> -->
+        <td>{{article.title}}</td>
         <td class="fw-bold" onClick="location.href='#'">
-          마흔에 읽으려고 묵혀놓는 중
+          {{ article.content }}
         </td>
-        <td>@mdo</td>
-        <td>2023-12-14</td>
-        <td>1000</td>
+        <td>{{article.memberName}}</td>
+        <td>{{article.createdAt}}</td>
+        <td>{{article.viewCount}}</td>
         <a
           href="/article"
           class="icon-link gap-1 icon-link-hover stretched-link"
@@ -56,12 +57,48 @@
       </li>
     </ul>
   </nav>
+  
+
 </template>
 <script>
+import articleApi from "@/api/article.api";
+
 export default {
-  name: "ArticleList",
-  components: {},
+  data() {
+    return {
+      componentKey : 0,
+      articles : [],
+      active : {
+        list : true,
+        detail : false,
+        insert : false,
+        update : false,
+      }
+    }
+  },
+  methods : {
+    goToDetail : function(article) {
+      this.$router.push({
+        name : "ArticleDetail",
+        params : { article }
+      })
+    }
+  },
+  mounted() {
+    articleApi.searchDto.recordSize = 10
+    articleApi.getArticlesWithBookAndMember3()
+    .then((articles) => {
+      this.articles = articles
+      setTimeout(()=>{
+        this.articles = Array.from(this.articles);
+        setTimeout(()=>{
+        this.articles = Array.from(this.articles);
+      }, 1000)
+      }, 500)
+    });
+  }
 };
+
 </script>
 
 <style></style>

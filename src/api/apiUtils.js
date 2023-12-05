@@ -6,4 +6,7 @@ export default {
         url = "/" + url.join("/");
         return url;
     },
+    trimDate(originDate) {
+        return originDate.split('T')[0];
+    }
 }

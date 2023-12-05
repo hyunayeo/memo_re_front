@@ -81,6 +81,7 @@ const routes = [
       {
         path: "/article/detail",
         name: "ArticleDetail",
+        props: true,
         component: ArticleDetail,
       },
       {

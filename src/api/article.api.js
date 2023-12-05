@@ -1,4 +1,5 @@
 import axios from 'axios';
+import apiUtils from './apiUtils.js'
 
 // const BASE_URL = '/api/articles';
 export default {
@@ -95,13 +96,14 @@ export default {
           return res.data.list;
         });
     
+        
         await articles.forEach(async article => {
           await this.getBook(article.bookId).
           then((res) => {
             let book = res.data;
             article.bookImg = book.cover;
-            article.bookName = book.name;
-            
+            article.bookName = book.name
+            article.createdAt = apiUtils.trimDate(article.createdAt);
           })
           await this.getMember(article.bookId).
           then((res) => {
@@ -109,6 +111,7 @@ export default {
             article.memberName = member.name;
           })
         })
+        
         return articles;
     },
     // 도서 이미지 있는 게시판만 추출하는 함수
@@ -118,7 +121,7 @@ export default {
           return res.data.list;
         });
     
-        await articles.forEach(async article => {
+        articles = await articles.forEach(async article => {
           await this.getBook(article.bookId).
           then((res) => {
             let book = res.data;
@@ -145,6 +148,8 @@ export default {
             article.memberName = member.name;
           })
         })
+      
+        console.log(articles);
         return articles;
     },      
     getArticlesByMember : async function(id) {
