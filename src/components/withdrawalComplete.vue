@@ -25,7 +25,8 @@
 
 <script>
 export default {
-    name: "",
+    name: "withdrawalComplete",
+
     data() {
         return {
             isModalOpen: false // 나중에 중복확인 버튼을 누르면 모달창이 보이도록 하기
