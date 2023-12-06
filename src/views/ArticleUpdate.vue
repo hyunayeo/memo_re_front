@@ -15,7 +15,7 @@
                 >책 정보 수정</a
               >
             </div>
-            <card-small-vue />
+            <card-small-vue :article="article"/>
 
             <div class="mb-3 mt-3">
               <label for="title" class="form-label">제목</label>
@@ -25,6 +25,7 @@
                 id="title"
                 name="title"
                 placeholder="제목을 입력해 주세요."
+                :value="article.title"
               />
             </div>
 
@@ -95,6 +96,7 @@
                   class="form-control"
                   name="startDate"
                   id="startDate"
+                  :value="article.startDate"
                 />
               </div>
               <p></p>
@@ -105,6 +107,7 @@
                   class="form-control"
                   name="endDate"
                   id="endDate"
+                  :value="article.endDate"
                 />
               </div>
             </form>
@@ -118,17 +121,18 @@
                 id="content"
                 name="content"
                 rows="3"
+                :value="article.content"
               ></textarea>
             </div>
 
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="isDone" />
-              <label class="form-check-label" for="isDone">
+              <input class="form-check-input" type="checkbox" id="isDone" :checked="article.isDone"/>
+              <label class="form-check-label" for="isDone" >
                 다 읽었어요!
               </label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="isHide" />
+              <input class="form-check-input" type="checkbox" id="isHide" :checked="article.isHide"/>
               <label class="form-check-label" for="isHide"> 비밀글 </label>
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -143,9 +147,21 @@
 
 <script>
 import CardSmallVue from "@/components/CardSmall.vue";
+import articleApi from '@/api/article.api';
+import bookApi from '@/api/book.api';
+import memberApi from '@/api/member.api';
+
 export default {
   components: {
     CardSmallVue,
+  },
+  data() {
+    return {
+      article : {}
+    }
+  },
+  async mounted() {
+    this.fetchArticleById(this.$route.path.split('/').pop())
   },
   methods: {
     toggleActive: function (e) {
@@ -155,6 +171,17 @@ export default {
       });
       e.classList.toggle("active");
     },
+    async fetchArticleById(id) {
+      let res = await articleApi.getArticle(id);
+      this.article = res.data;
+      res = await bookApi.getBook(this.article.bookId);
+      this.article.book = res.data;
+      res = await memberApi.getMember(this.article.memberId);
+      this.article.member = res.data;
+    },
   },
+  computed : {
+    
+  }
 };
 </script>

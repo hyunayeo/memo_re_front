@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="display-5 link-body-emphasis mb-1"></div>
-    <article class="blog-post">
+    <div class="blog-post">
       <div class="row">
         <div class="col-auto">
           <div
@@ -10,7 +10,7 @@
             <div class="col-auto d-none d-lg-block">
               <img
                 class="bd-placeholder-img"
-                src="@/assets/book_sample.jpg"
+                :src="article.book?.cover"
                 width="200"
               />
               <title>Placeholder</title>
@@ -18,19 +18,18 @@
             </div>
             <div class="col p-4 d-flex flex-column position-static">
               <h2 class="display-5 link-body-emphasis mb-1 text-border">
-                돈의 속성 읽어보셨나요?
+                {{article.title}}
               </h2>
               <p class="blog-post-meta">
-                January 1, 2021 by <a href="#">Mark</a>
+                {{ dateEng }} <a href="#">{{article?.member?.name}}</a>
               </p>
-
-              <h3>돈의 속성</h3>
-              <h5>김승호 저자(글)</h5>
-              <p class="text-secondary">스노우폭스북스 · 2020년 06월 15일</p>
+              <h3>{{article.title}}</h3>
+              <h5>{{article.author}}</h5>
+              <p class="text-secondary">{{article.book?.publisher}} · {{dateKor}}</p>
               <div class="star-rating">
                 <span v-for="index in 5" :key="index">
-                  <span class="text-warning" v-if="index <= score">★</span>
-                  <span v-if="index > score">☆</span>
+                  <span class="text-warning" v-if="ratingCheck(index)">★</span>
+                  <span v-else>☆</span>
                 </span>
               </div>
             </div>
@@ -39,19 +38,51 @@
       </div>
 
       <hr />
-      <p>이 책 아주 재미있는 책입니다아~~~~~~~~~~~</p>
-    </article>
+      <p>{{ article.content }}</p>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "BlogPost",
+  props: {
+    article : Object
+  },
   data() {
     return {
       score: 3,
     };
   },
+  methods : {
+    ratingCheck(index) {
+      console.log(this.article)
+      if (index <= this.article.ratingScore) {
+        return true
+      } else {
+        return false;
+      }
+    },
+
+  },
+  computed : {
+    dateKor() {
+      let date = this.article.book?.publishedDate;
+      date = date?.replaceAll('-','- ');
+      date = date?.replace('-','년');
+      date = date?.replace('-','월');
+      date = date?.replace('-','일');
+      
+      return `${date}일`;
+    },
+    dateEng() {
+      // January 1, 2021 by
+      const options = { year: 'numeric', month: 'short', day: 'numeric' };
+      let date = this.article?.createdAt;
+      
+      return `${new Date(date).toLocaleDateString('en-us', options)} by `;
+    }
+  }
 };
 </script>
 

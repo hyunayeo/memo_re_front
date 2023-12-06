@@ -1,35 +1,37 @@
 <template>
-  <blog-post :article="article" v-if="article"/>
+  <blog-post :article="article"/>
   <div class="d-flex justify-content-end align-items-center mb-4">
-    <a class="btn btn-sm btn-outline-secondary mx-1" href="/update">update</a>
+    <a class="btn btn-sm btn-outline-secondary mx-1" @click="goToUpdate()">update</a>
     <a class="btn btn-sm btn-outline-secondary" href="#">delete</a>
   </div>
 </template>
 <script>
 import BlogPost from "@/components/BlogPost.vue";
+import articleApi from '@/api/article.api';
+import bookApi from '@/api/book.api';
+import memberApi from '@/api/member.api';
 
 export default {
+  components: { BlogPost },
   data() {
     return {
       article : {}
     }
   },
-  props : {
-    articles : Array,
-    articleId : Number,
-  },
-  components: { BlogPost },
-  mounted() {
-    setTimeout(()=> {
-      this.article = this.getArticleById();
-    }, 2000)
+  async mounted() {
+    this.fetchArticleById(this.$route.path.split('/').pop())
   },
   methods : {
-    getArticleById() {
-      return this.articles.find((article) => {
-        console.log(article.id)
-        return this.articleId == article.id;
-      })
+    async fetchArticleById(id) {
+      let res = await articleApi.getArticle(id);
+      this.article = res.data;
+      res = await bookApi.getBook(this.article.bookId);
+      this.article.book = res.data;
+      res = await memberApi.getMember(this.article.memberId);
+      this.article.member = res.data;
+    },
+    goToUpdate() {
+      this.$router.push({ path: `/article/update/${this.article.id}` });
     }
   }
 };

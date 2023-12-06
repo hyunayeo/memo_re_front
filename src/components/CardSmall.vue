@@ -4,20 +4,33 @@
     href="#"
   >
     <img
-      src="@/assets/book_sample.jpg"
+      :src="article?.book?.cover"
       class="bd-placeholder-img"
       height="90"
       onerror="@/assets/profile_sample.jpg"
     />
     <div class="col-lg-8">
-      <h6 class="mb-0">Example blog post title</h6>
-      <small class="text-body-secondary">January 15, 2023</small>
+      <h6 class="mb-0">{{article.title}}</h6>
+      <small class="text-body-secondary">{{dateEng}}</small>
     </div>
   </a>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    article : Object
+  },
+  computed : {
+    dateEng() {
+      // January 1, 2021
+      const options = { year: 'numeric', month: 'short', day: 'numeric' };
+      let date = this.article?.createdAt;
+      
+      return `${new Date(date).toLocaleDateString('en-us', options)} `;
+    }
+  }
+};
 </script>
 
 <style></style>
