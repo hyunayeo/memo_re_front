@@ -1,11 +1,7 @@
 import axios from 'axios';
-// import articleApi from './article.api';
 import apiUtils from './apiUtils';
 
 export default {
-    SORT_FIELD_TYPE : {
-        ID : 'id',
-    },
     searchDto : {
         page : 1,
         recordSize : 10,

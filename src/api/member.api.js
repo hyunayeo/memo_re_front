@@ -1,5 +1,4 @@
 import axios from 'axios';
-// import articleApi from './article.api';
 
 export default {
     getMembers: function (searchDto) {
@@ -8,5 +7,4 @@ export default {
     getMember: function(id) {
         return axios.get(`/api/members/${id}`);
     },
-    
 }

@@ -21,7 +21,7 @@
     <tbody>
       <tr @click="goToDetail(article)" v-for="(article, i) in articles" :key="article" class="media position-relative">
         <th scope="row">{{ i }}</th>
-        <td :key="article.book?.cover">
+        <td>
           <img
             :src="article.book?.cover"
             class="bd-placeholder-img"
@@ -33,23 +33,21 @@
         <td>{{article.title}}</td>
 
         <td class="fw-bold">
-          {{ article.content }}
+          {{article.content }}
         </td>
-        <td>{{article.member?.name}}</td>
+        <td>{{article.name}}</td>
         <td>{{article.createdAt}}</td>
         <td>{{article.viewCount}}</td>
       </tr>
     </tbody>
   </table>
   <nav aria-label="Page navigation example">
-    <ul @click="fetchData($event.target)" class="pagination justify-content-center">
+    <ul class="pagination justify-content-center">
       <li class="page-item disabled">
         <a class="page-link" href="#" tabindex="-1">Previous</a>
       </li>
       
       <li v-for="i in pagination.totalPageCount" :key="i" class="page-item"><a class="page-link" href="#">{{i}}</a></li>
-      <!-- <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li> -->
       <li class="page-item">
         <a class="page-link" href="#">Next</a>
       </li>
@@ -59,31 +57,32 @@
 
 </template>
 <script>
-import {onMounted, reactive, ref, watchEffect} from 'vue';
 import articleApi from '@/api/article.api.js'
+import bookApi from '@/api/book.api';
 
 
 export default {
-  setup() {
-    const articles = ref([])
-    const pagination = ref({})
-    const book = ref({})
-
-    onMounted(async () => {
-      [articles.value, pagination.value] = reactive(await articleApi.getArticlesWithBookAndMember3());
-      console.log(articles.value)
-      console.log(pagination.value)
-    })
-
-    watchEffect(() => {
-      book.value = `${articles.value?.["0"]?.["book"]}`;
-      console.log(book.value)
-    })
-
+  data() {
     return {
-      articles,
-      book,
-      pagination
+      articles : [],
+      pagination : {}
+    }
+  },
+  async mounted() {
+    this.fetchArticlesWithBook();
+  },
+  methods : {
+    async fetchArticlesWithBook() {
+      let res = await articleApi.getArticles();
+      this.articles = res.data.list;
+      this.pagination = res.data.pagination
+      console.log(this.articles)
+
+      this.articles.forEach(async (article) => {
+      res = await bookApi.getBook(article.bookId);
+      article.book = res.data;
+      })
+      
     }
   }
 }
