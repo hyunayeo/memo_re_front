@@ -14,6 +14,10 @@
                 <button type="button" class="btn btn-primary btn-lg px-4">검색</button>
             </div>
 
+            <div class="text-end mb-1">
+                <button type="button" class="btn btn-outline-primary btn-lg">문의조회</button>
+            </div>
+
             <div class="text-end">
                 <button type="button" class="btn btn-primary btn-lg">문의하기</button>
             </div>
