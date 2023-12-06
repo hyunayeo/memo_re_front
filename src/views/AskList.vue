@@ -10,7 +10,7 @@
           class="form-control form-control-lg"
           type="text"
           placeholder="문의 검색"
-          id="inquirySearch"
+          id="askSearch"
         />
       </div>
 
@@ -29,15 +29,15 @@
       <tr class="table-dark">
         <th scope="col">No</th>
         <th scope="col">제목</th>
-        <th scope="col">작성시간</th>
+        <th scope="col">작성일</th>
         <th scope="col">확인</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <th scope="row">{{ number }}</th>
-        <td>문의합니다.</td>
-        <td>{{ createdAt }}</td>
+        <td>{{ title }}</td>
+        <td>{{ created_at }}</td>
         <td>{{ complete }}</td>
       </tr>
     </tbody>
@@ -69,8 +69,11 @@
 export default {
   data() {
     return {
-      number: 0,
-      createdAt: "20xx-xx-xx",
+      title: "문의드립니다",
+      number: 1,
+      contents:
+        "타이머 만들어주세요. 진짜 급해요!! 저 빨리 타이머 쓰고 싶다구요!! 빨리 만드세요 개발자!! 일하세요!",
+      created_at: "2023.11.12",
       complete: "답변완료",
     };
   },
