@@ -21,23 +21,22 @@
                     <p>&nbsp;&nbsp;</p>
 
                     <div class="form-outline mb-4">
-                      <label class="form-label" for="form2Example17"
-                        >이메일 주소</label
-                      >
+                      <label class="form-label" for="email">이메일 주소</label>
                       <input
                         type="email"
-                        id="form2Example17"
+                        id="email"
+                        placeholder="memore@example.com"
                         class="form-control form-control-lg"
+                        required
+                        autofocus
                       />
                     </div>
 
                     <div class="form-outline mb-4">
-                      <label class="form-label" for="form2Example27"
-                        >비밀번호</label
-                      >
+                      <label class="form-label" for="password">비밀번호</label>
                       <input
                         type="password"
-                        id="form2Example27"
+                        id="password"
                         class="form-control form-control-lg"
                       />
                     </div>
