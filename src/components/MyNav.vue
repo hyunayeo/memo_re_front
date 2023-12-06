@@ -18,7 +18,7 @@
     <ol class="list-unstyled mb-0">
       <li>
         <a
-          href="#"
+          href="/article/insert"
           class="h2 fst-italic link-body-emphasis text-decoration-none"
           >Go to memo</a
         >
@@ -36,13 +36,6 @@
           href="/mypage/library"
           class="h4 fst-italic link-body-emphasis text-decoration-none border-top"
           >My Library</a
-        >
-      </li>
-      <li>
-        <a
-          href="/mypage/wish"
-          class="h4 fst-italic link-body-emphasis text-decoration-none border-top"
-          >My Wish</a
         >
       </li>
       <li>
