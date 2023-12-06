@@ -18,15 +18,15 @@
                 >책 검색</a
               >
             </div>
-            <modal-layout
+            <BookSearch
               v-if="showModal"
-              option="searchBook"
-              @close="
-                showModal = false;
-                showRegisterModal = true;
-              "
+              @close="showModal = false"
+              @showRegisterBook="(show) => (showRegisterModal = show)"
             />
-            <modal-layout v-if="showRegisterModal" option="registerBook" />
+            <BookRegistration
+              v-if="showRegisterModal"
+              @close="showRegisterModal = false"
+            />
 
             <card-small-vue />
 
@@ -156,7 +156,9 @@
 
 <script>
 import CardSmallVue from "@/components/CardSmall.vue";
-import ModalLayout from "@/layouts/ModalLayout.vue";
+
+import BookSearch from "@/components/modal/BookSearch.vue";
+import BookRegistration from "@/components/modal/BookRegistration.vue";
 export default {
   name: "ArticleInsert",
   data() {
@@ -168,7 +170,8 @@ export default {
   },
   components: {
     CardSmallVue,
-    ModalLayout,
+    BookSearch,
+    BookRegistration,
   },
   methods: {
     toggleActive: function (e) {

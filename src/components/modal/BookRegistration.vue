@@ -1,20 +1,12 @@
 <template>
   <div
-    class="container mb-5"
+    class="container mb-5 black-bg"
     style="max-width: 600px; background: white; border-radius: 1rem"
   >
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog white-bg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <p class="h2 modal-title mt-4">새로운 도서 정보를 입력하세요.</p>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          >
-            <span aria-hidden="true"></span>
-          </button>
         </div>
 
         <div class="modal-body">

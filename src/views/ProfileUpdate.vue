@@ -92,9 +92,8 @@
                       </p>
                     </div>
                   </div>
-                  <modal-layout
+                  <LeaveCheck
                     v-if="showModal"
-                    :option="option"
                     @close="showModal = false"
                   />
 
@@ -114,13 +113,14 @@
 </template>
 
 <script>
-import ModalLayout from "@/layouts/ModalLayout.vue";
+import LeaveCheck from '@/components/modal/LeaveCheck.vue';
+
 
 export default {
   data() {
-    return { showModal: false, option: "leave" };
+    return { showModal: false};
   },
-  components: { ModalLayout },
+  components: { LeaveCheck },
 };
 </script>
 

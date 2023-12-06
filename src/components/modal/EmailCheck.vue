@@ -1,21 +1,16 @@
 <template>
   <!-- 중복확인버튼 이벤트는 회원가입페이지에서 기능만들기 -->
   <div
-    class="container mb-5"
+    class="container mb-5 black-bg"
     style="max-width: 600px; background: white; border-radius: 1rem"
   >
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog white-bg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title mt-5">이메일을 인증하세요.</h1>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          >
-            <span aria-hidden="true"></span>
-          </button>
+          <div class="d-flex justify-content-end align-items-center mb-4">
+            <div class="btn-close" @click="closePage"></div>
+          </div>
         </div>
 
         <div class="modal-body">
@@ -71,6 +66,11 @@
 <script>
 export default {
   name: "EmailCheck",
+  methods: {
+    closePage() {
+      this.$emit("close");
+    },
+  },
 };
 </script>
 

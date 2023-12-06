@@ -11,7 +11,7 @@
             아이디를 알려드립니다.
           </p>
           <div class="d-flex justify-content-end align-items-center mb-4">
-            <button class="btn-close" @click="closePage"></button>
+            <div class="btn-close" @click="closePage"></div>
           </div>
         </div>
         <div class="modal-body">
