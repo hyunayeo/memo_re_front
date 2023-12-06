@@ -18,10 +18,10 @@ import MyLayout from "@/layouts/MyLayout.vue";
 import MyLibrary from "@/views/MyLibrary.vue";
 import ErrorPage from "@/views/ErrorPage.vue";
 import BoardLayout from "@/layouts/BoardLayout";
-import InquiryBoard from "@/views/InquiryBoard.vue";
-import InquiryInsert from "@/views/InquiryInsert.vue";
-import MyInquiry from "@/views/MyInquiry.vue";
-import MyInquiryUpdate from "@/views/MyInquiryUpdate.vue";
+import AskList from "@/views/AskList.vue";
+import AskInsert from "@/views/AskInsert.vue";
+import AskUpdate from "@/views/AskUpdate.vue";
+import AskLayout from "@/layouts/AskLayout";
 import { createRouter, createWebHistory } from "vue-router";
 const routes = [
   {
@@ -101,24 +101,32 @@ const routes = [
     ],
   },
   {
-    path: "/inquiryboard",
-    name: "InquiryBoard",
-    component: InquiryBoard,
-  },
-  {
-    path: "/inquiryinsert",
-    name: "InquiryInsert",
-    component: InquiryInsert,
-  },
-  {
-    path: "/myinquiry",
-    name: "MyInquiry",
-    component: MyInquiry,
-  },
-  {
-    path: "/myinquiryupdate",
-    name: "MyInquiryUpdate",
-    component: MyInquiryUpdate,
+    path: "/ask",
+    name: "AskLayout",
+    component: AskLayout,
+    redirect: "/ask",
+    children: [
+      {
+        path: "/ask",
+        name: "AskList",
+        component: AskList,
+      },
+      // {
+      //   path: "/askdetail",
+      //   name: "AskDetail",
+      //   component: AskDetail,
+      // },
+      {
+        path: "/ask/update",
+        name: "AskUpdate",
+        component: AskUpdate,
+      },
+      {
+        path: "/ask/insert",
+        name: "AskInsert",
+        component: AskInsert,
+      },
+    ],
   },
   {
     path: "/mypage",
