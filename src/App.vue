@@ -39,6 +39,21 @@ p {
   font-size: 20px;
 }
 
+.black-bg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 10px;
+  z-index: 10040;
+  padding: 20px;
+}
+.white-bg {
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  border-style: solid;
+}
 .bd-placeholder-img {
   font-size: 1.125rem;
   text-anchor: middle;
