@@ -21,6 +21,7 @@ import BoardLayout from "@/layouts/BoardLayout";
 import AskList from "@/views/AskList.vue";
 import AskInsert from "@/views/AskInsert.vue";
 import AskUpdate from "@/views/AskUpdate.vue";
+import AskDetail from "@/views/AskDetail.vue";
 import AskLayout from "@/layouts/AskLayout";
 import { createRouter, createWebHistory } from "vue-router";
 const routes = [
@@ -112,11 +113,11 @@ const routes = [
         name: "AskList",
         component: AskList,
       },
-      // {
-      //   path: "/askdetail",
-      //   name: "AskDetail",
-      //   component: AskDetail,
-      // },
+      {
+        path: "/ask/detail",
+        name: "AskDetail",
+        component: AskDetail,
+      },
       {
         path: "/ask/update",
         name: "AskUpdate",
