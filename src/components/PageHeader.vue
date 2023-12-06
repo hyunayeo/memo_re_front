@@ -15,21 +15,16 @@
         <form class="form-inline">
           <div class="input-group">
             <div class="input-group-prepend">
-              <button
-                type="button"
-                class="btn border-secondary dropdown-toggle"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                도서
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">도서명</a></li>
-                <li><a class="dropdown-item" href="#">작가명</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item" href="#">제목</a></li>
-                <li><a class="dropdown-item" href="#">작성자명</a></li>
-              </ul>
+              <select class="form-select" aria-label="Default select example">
+                <optgroup label="도서">
+                  <option selected>도서명</option>
+                  <option>작가명</option>
+                </optgroup>
+                <optgroup label="게시글">
+                  <option>제목</option>
+                  <option>작성자명</option>
+                </optgroup>
+              </select>
             </div>
             <input
               type="text"
@@ -37,7 +32,7 @@
               aria-label="Text input with dropdown button"
             />
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-              V
+              /
             </button>
           </div>
         </form>
