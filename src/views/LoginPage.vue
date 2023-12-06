@@ -57,12 +57,33 @@
                             id="dropdownCheck"
                           />
                           아이디 정보 저장
-                          <b> &nbsp; / &nbsp; </b>
-                          <a class="text-muted" href="#!">비밀번호 찾기</a>
-                          &nbsp;
                         </label>
+                        <div class="mt-2">
+                          <a
+                            class="text-muted"
+                            @click="
+                              showModal = true;
+                              option = 'id';
+                            "
+                            >아이디 찾기</a
+                          >
+                          <b> &nbsp; / &nbsp; </b>
+                          <a
+                            class="text-muted"
+                            @click="
+                              showModal = true;
+                              option = 'pw';
+                            "
+                            >비밀번호 찾기</a
+                          >
+                        </div>
                       </div>
                     </div>
+                    <modal-layout-vue
+                      @close="showModal = false"
+                      v-if="showModal"
+                      :option="option"
+                    />
 
                     <p class="mb-5 pb-lg-2" style="text-align: center">
                       Memo.re 회원이 아닌가요?
@@ -80,3 +101,14 @@
     </section>
   </div>
 </template>
+<script>
+import ModalLayoutVue from "@/layouts/ModalLayout.vue";
+export default {
+  data() {
+    return { showModal: false, option: "" };
+  },
+  components: { ModalLayoutVue },
+};
+</script>
+
+<style></style>

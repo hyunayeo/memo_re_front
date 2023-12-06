@@ -5,7 +5,7 @@
       <div class="row">
         <div class="col-auto">
           <div
-            class="row g-0 rounded overflow-hidden flex-md-row mb-4 h-md-250 position-relative"
+            class="row g-0 rounded overflow-hidden flex-md-row mb-4 h-md-300 position-relative"
           >
             <div class="col-auto d-none d-lg-block">
               <img
@@ -27,6 +27,12 @@
               <h3>돈의 속성</h3>
               <h5>김승호 저자(글)</h5>
               <p class="text-secondary">스노우폭스북스 · 2020년 06월 15일</p>
+              <div class="star-rating">
+                <span v-for="index in 5" :key="index">
+                  <span class="text-warning" v-if="index <= score">★</span>
+                  <span v-if="index > score">☆</span>
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -39,7 +45,19 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: "BlogPost",
+  data() {
+    return {
+      score: 3,
+    };
+  },
+};
 </script>
 
-<style></style>
+<style>
+.star-rating {
+  font-weight: 300;
+  font-size: 20px;
+}
+</style>

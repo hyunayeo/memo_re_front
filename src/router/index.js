@@ -6,7 +6,7 @@ import MyRecord from "@/views/MyRecord.vue";
 import MyCalender from "@/views/MyCalender";
 import ProfileUpdate from "@/views/ProfileUpdate.vue";
 import SearchPage from "@/views/SearchPage.vue";
-import TestPage from "@/views/TestPage.vue";
+
 import LibraryLayout from "@/layouts/LibraryLayout.vue";
 import BookDetail from "@/views/BookDetail.vue";
 import ArticleInsert from "@/views/ArticleInsert.vue";
@@ -15,18 +15,23 @@ import BookList from "@/views/BookList.vue";
 import ArticleDetail from "@/views/ArticleDetail.vue";
 import ArticleList from "@/views/ArticleList.vue";
 import MyLayout from "@/layouts/MyLayout.vue";
+import MyLibrary from "@/views/MyLibrary.vue";
 import ErrorPage from "@/views/ErrorPage.vue";
 import BoardLayout from "@/layouts/BoardLayout";
 import InquiryBoard from "@/views/InquiryBoard.vue";
 import InquiryCreation from "@/views/InquiryCreation.vue";
 import { createRouter, createWebHistory } from "vue-router";
-
 const routes = [
   {
-    path: "/testpage",
-    name: "TestPage",
-    component: TestPage,
+    path: "/:pathMatch(.*)*",
+    redirect: "/error",
   },
+  {
+    path: "/error",
+    name: "ErrorPage",
+    component: ErrorPage,
+  },
+
   {
     path: "/",
     name: "MainPage",
@@ -94,19 +99,14 @@ const routes = [
     ],
   },
   {
-    path: "/error",
-    name: "ErrorPage",
-    component: ErrorPage,
-  },
-  {
     path: "/inquiryboard",
-    name:"InquiryBoard",
-    component: InquiryBoard
+    name: "InquiryBoard",
+    component: InquiryBoard,
   },
   {
     path: "/inquirycreation",
-    name:"InquiryCreation",
-    component: InquiryCreation
+    name: "InquiryCreation",
+    component: InquiryCreation,
   },
   {
     path: "/mypage",
@@ -133,6 +133,11 @@ const routes = [
         path: "/mypage/update",
         name: "ProfileUpdate",
         component: ProfileUpdate,
+      },
+      {
+        path: "/mypage/library",
+        name: "MyLibrary",
+        component: MyLibrary,
       },
     ],
   },
