@@ -33,10 +33,12 @@
                         type="button"
                         class="btn btn-dark btn-lg float-end"
                         id="emailCheck"
+                        @click="showModal = true"
                       >
                         중복확인
                       </button>
                     </div>
+                    <EmailCheck v-if="showModal" @close="showModal = false" />
 
                     <div class="form-outline mb-4">
                       <label class="form-label" for="form2Example27"
@@ -102,16 +104,18 @@
 </template>
 
 <script>
+import EmailCheck from "@/components/modal/EmailCheck.vue";
+
 export default {
   data() {
     return {
-      style: "color: magenta;",
+      showModal: false,
     };
   },
 
   methods: {},
 
-  components: {},
+  components: { EmailCheck },
 };
 </script>
 

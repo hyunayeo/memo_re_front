@@ -59,19 +59,14 @@
                           아이디 정보 저장
                         </label>
                         <div class="mt-2">
-                          <a
-                            class="text-muted"
-                            @click="
-                              showModal = true;
-                              option = 'id';
-                            "
+                          <a class="text-muted" @click="showModalId = true"
                             >아이디 찾기</a
                           >
                           <b> &nbsp; / &nbsp; </b>
                           <a
                             class="text-muted"
                             @click="
-                              showModal = true;
+                              showModalPw = true;
                               option = 'pw';
                             "
                             >비밀번호 찾기</a
@@ -79,10 +74,13 @@
                         </div>
                       </div>
                     </div>
-                    <modal-layout-vue
-                      @close="showModal = false"
-                      v-if="showModal"
-                      :option="option"
+                    <FindEmail
+                      @close="showModalId = false"
+                      v-if="showModalId"
+                    />
+                    <FindPassword
+                      @close="showModalPw = false"
+                      v-if="showModalPw"
                     />
 
                     <p class="mb-5 pb-lg-2" style="text-align: center">
@@ -102,12 +100,14 @@
   </div>
 </template>
 <script>
-import ModalLayoutVue from "@/layouts/ModalLayout.vue";
+import FindEmail from "@/components/modal/FindEmail.vue";
+
+import FindPassword from "@/components/modal/FindPassword.vue";
 export default {
   data() {
-    return { showModal: false, option: "" };
+    return { showModalId: false, showModalPw: false };
   },
-  components: { ModalLayoutVue },
+  components: { FindEmail, FindPassword },
 };
 </script>
 
