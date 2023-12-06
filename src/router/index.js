@@ -19,7 +19,9 @@ import MyLibrary from "@/views/MyLibrary.vue";
 import ErrorPage from "@/views/ErrorPage.vue";
 import BoardLayout from "@/layouts/BoardLayout";
 import InquiryBoard from "@/views/InquiryBoard.vue";
-import InquiryCreation from "@/views/InquiryCreation.vue";
+import InquiryInsert from "@/views/InquiryInsert.vue";
+import MyInquiry from "@/views/MyInquiry.vue";
+import MyInquiryUpdate from "@/views/MyInquiryUpdate.vue";
 import { createRouter, createWebHistory } from "vue-router";
 const routes = [
   {
@@ -104,9 +106,19 @@ const routes = [
     component: InquiryBoard,
   },
   {
-    path: "/inquirycreation",
-    name: "InquiryCreation",
-    component: InquiryCreation,
+    path: "/inquiryinsert",
+    name: "InquiryInsert",
+    component: InquiryInsert,
+  },
+  {
+    path: "/myinquiry",
+    name: "MyInquiry",
+    component: MyInquiry,
+  },
+  {
+    path: "/myinquiryupdate",
+    name: "MyInquiryUpdate",
+    component: MyInquiryUpdate,
   },
   {
     path: "/mypage",
