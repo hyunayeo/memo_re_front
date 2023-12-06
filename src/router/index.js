@@ -76,7 +76,7 @@ const routes = [
     path: "/article",
     name: "BoardLayout",
     component: BoardLayout,
-    redirect: "/article",
+    //redirect: "/article",
     children: [
       {
         path: "/article",
@@ -84,8 +84,9 @@ const routes = [
         component: ArticleList,
       },
       {
-        path: "/article/detail",
+        path: "/article/detail/:articleId",
         name: "ArticleDetail",
+        props: true,
         component: ArticleDetail,
       },
       {

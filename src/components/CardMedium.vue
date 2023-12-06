@@ -4,12 +4,19 @@
       class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
     >
       <div class="col-auto d-none d-lg-block">
-        <img
+        <!-- <img
           class="bd-placeholder-img"
           src="@/assets/book_sample.jpg"
           width="200"
+        /> -->
+        <img
+          class="bd-placeholder-img"
+          :src="article.bookImg"
+          width="200"
         />
+        <p>{{ article.memberName }}</p>
         <title>Placeholder</title>
+    
         <rect width="100%" height="100%" fill="#55595c" />
       </div>
       <div class="col p-4 d-flex flex-column position-static">
@@ -36,6 +43,11 @@
 
 <script>
 export default {
+  props : {
+    article : Object
+  },
+  mounted() {
+  },
   name: "CardMedium",
   data() {
     return {

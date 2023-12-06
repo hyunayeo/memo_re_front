@@ -4,6 +4,8 @@
     &nbsp;/&nbsp;
     <a href="#" class="text-body-emphasis text-decoration-none">인기순</a>
   </div>
+  <p v-if="article">{{article.title}}</p>
+  <img v-if="article" :src="article.book.cover">
   <table class="table align-middle">
     <thead>
       <tr>
@@ -17,29 +19,25 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(v, i) in 5" :key="v" class="media position-relative">
+      <tr @click="goToDetail(article)" v-for="(article, i) in articles" :key="article" class="media position-relative">
         <th scope="row">{{ i }}</th>
         <td>
           <img
-            src="@/assets/book_sample.jpg"
+            :src="article.book?.cover"
             class="bd-placeholder-img"
             height="90"
             onerror="@/assets/profile_sample.jpg"
+            :key="article.book?.cover"
           />
         </td>
-        <td>마흔에 읽는 쇼펜하우어</td>
-        <td class="fw-bold" onClick="location.href='#'">
-          마흔에 읽으려고 묵혀놓는 중
+        <td>{{article.title}}</td>
+
+        <td class="fw-bold">
+          {{article.content }}
         </td>
-        <td>@mdo</td>
-        <td>2023-12-14</td>
-        <td>1000</td>
-        <a
-          href="/article"
-          class="icon-link gap-1 icon-link-hover stretched-link"
-        >
-          <svg class="bi"><use xlink:href="#chevron-right" /></svg>
-        </a>
+        <td>{{article.name}}</td>
+        <td>{{article.createdAt}}</td>
+        <td>{{article.viewCount}}</td>
       </tr>
     </tbody>
   </table>
@@ -48,20 +46,46 @@
       <li class="page-item disabled">
         <a class="page-link" href="#" tabindex="-1">Previous</a>
       </li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      
+      <li v-for="i in pagination.totalPageCount" :key="i" class="page-item"><a class="page-link" href="#">{{i}}</a></li>
       <li class="page-item">
         <a class="page-link" href="#">Next</a>
       </li>
     </ul>
   </nav>
+  
+
 </template>
 <script>
+import articleApi from '@/api/article.api.js'
+import bookApi from '@/api/book.api';
+
+
 export default {
-  name: "ArticleList",
-  components: {},
-};
+  data() {
+    return {
+      articles : [],
+      pagination : {}
+    }
+  },
+  async mounted() {
+    this.fetchArticlesWithBook();
+  },
+  methods : {
+    async fetchArticlesWithBook() {
+      let res = await articleApi.getArticles();
+      this.articles = res.data.list;
+      this.pagination = res.data.pagination
+      console.log(this.articles)
+
+      this.articles.forEach(async (article) => {
+      res = await bookApi.getBook(article.bookId);
+      article.book = res.data;
+      })
+      
+    }
+  }
+}
 </script>
 
 <style></style>
