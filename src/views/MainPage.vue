@@ -1,11 +1,6 @@
 <template>
   <div class="row g-5">
     <card-big-vue />
-    <div class="row mb-2">
-      <card-medium-vue :article="articles[0]" :key="articles"/>
-      <card-medium-vue :article="articles[1]" :key="articles"/>
-    </div>
-
     <wrap-around-vue />
 
     <div class="col-md-8">
@@ -33,6 +28,7 @@
             up to you.!!!!!!!!!!!!!!!!
           </p>
         </div>
+
         <div>
           <h4 class="fst-italic">Recent posts</h4>
           <ul class="list-unstyled">
@@ -57,46 +53,13 @@ import BlogPostVue from "@/components/BlogPost.vue";
 import CardBigVue from "@/components/CardBig.vue";
 import CardSmallVue from "@/components/CardSmall.vue";
 import WrapAroundVue from "@/components/WrapAround.vue";
-// import api from "@/api/article.api";
-import api from "@/api/book.api";
-
-// import axios from "axios";
 export default {
-  data() {
-    return {
-      componentKey : 0,
-      articles : [],
-      start : false
-    }
-  },
-  mounted() {
-
-    api.searchDto.recordSize = 5
-    // api.searchDto.searchKeyword = "19";
-    // api.searchDto.searchType = "book_id";
-
-    // api.getArticlesWithBookAndMember3(api.searchDto)
-    // .then((res) =>{
-    //   this.articles = res;
-    // }).then(()=> {
-    //   setTimeout(()=> {
-    //     this.articles = Array.from(this.articles);
-    //     console.log(this.articles);
-    //   }, 500)
-    // });
-
-    
-    // book 테스트
-    // api.getBookWithArticles(19);
-      api.getBooksByMemberWishes(1);
-
-  },  
   components: {
     BlogPostVue,
     CardBigVue,
     CardSmallVue,
     WrapAroundVue,
-  }
+  },
 };
 </script>
 
