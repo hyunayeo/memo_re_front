@@ -21,23 +21,22 @@
                     <p>&nbsp;&nbsp;</p>
 
                     <div class="form-outline mb-4">
-                      <label class="form-label" for="form2Example17"
-                        >이메일 주소</label
-                      >
+                      <label class="form-label" for="email">이메일 주소</label>
                       <input
                         type="email"
-                        id="form2Example17"
+                        id="email"
+                        placeholder="memore@example.com"
                         class="form-control form-control-lg"
+                        required
+                        autofocus
                       />
                     </div>
 
                     <div class="form-outline mb-4">
-                      <label class="form-label" for="form2Example27"
-                        >비밀번호</label
-                      >
+                      <label class="form-label" for="password">비밀번호</label>
                       <input
                         type="password"
-                        id="form2Example27"
+                        id="password"
                         class="form-control form-control-lg"
                       />
                     </div>
@@ -57,12 +56,31 @@
                             id="dropdownCheck"
                           />
                           아이디 정보 저장
-                          <b> &nbsp; / &nbsp; </b>
-                          <a class="text-muted" href="#!">비밀번호 찾기</a>
-                          &nbsp;
                         </label>
+                        <div class="mt-2">
+                          <a class="text-muted" @click="showModalId = true"
+                            >아이디 찾기</a
+                          >
+                          <b> &nbsp; / &nbsp; </b>
+                          <a
+                            class="text-muted"
+                            @click="
+                              showModalPw = true;
+                              option = 'pw';
+                            "
+                            >비밀번호 찾기</a
+                          >
+                        </div>
                       </div>
                     </div>
+                    <FindEmail
+                      @close="showModalId = false"
+                      v-if="showModalId"
+                    />
+                    <FindPassword
+                      @close="showModalPw = false"
+                      v-if="showModalPw"
+                    />
 
                     <p class="mb-5 pb-lg-2" style="text-align: center">
                       Memo.re 회원이 아닌가요?
@@ -80,3 +98,16 @@
     </section>
   </div>
 </template>
+<script>
+import FindEmail from "@/components/modal/FindEmail.vue";
+
+import FindPassword from "@/components/modal/FindPassword.vue";
+export default {
+  data() {
+    return { showModalId: false, showModalPw: false };
+  },
+  components: { FindEmail, FindPassword },
+};
+</script>
+
+<style></style>

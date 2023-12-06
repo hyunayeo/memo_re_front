@@ -2,7 +2,7 @@
   <div class="d-flex justify-content-end align-items-center mb-4">
     <a href="#" class="text-body-emphasis text-decoration-none">최신순</a>
     &nbsp;/&nbsp;
-    <a href="#" class="text-body-emphasis text-decoration-none">정확도순</a>
+    <a href="#" class="text-body-emphasis text-decoration-none">인기순</a>
   </div>
   <p v-if="article">{{article.title}}</p>
   <img v-if="article" :src="article.book.cover">

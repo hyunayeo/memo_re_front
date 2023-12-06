@@ -4,7 +4,9 @@ import SignupPage from "@/views/SignupPage.vue";
 import MyPage from "@/views/MyPage.vue";
 import MyRecord from "@/views/MyRecord.vue";
 import MyCalender from "@/views/MyCalender";
+import ProfileUpdate from "@/views/ProfileUpdate.vue";
 import SearchPage from "@/views/SearchPage.vue";
+
 import LibraryLayout from "@/layouts/LibraryLayout.vue";
 import BookDetail from "@/views/BookDetail.vue";
 import ArticleInsert from "@/views/ArticleInsert.vue";
@@ -13,12 +15,25 @@ import BookList from "@/views/BookList.vue";
 import ArticleDetail from "@/views/ArticleDetail.vue";
 import ArticleList from "@/views/ArticleList.vue";
 import MyLayout from "@/layouts/MyLayout.vue";
+import MyLibrary from "@/views/MyLibrary.vue";
 import ErrorPage from "@/views/ErrorPage.vue";
 import BoardLayout from "@/layouts/BoardLayout";
-
+import AskList from "@/views/AskList.vue";
+import AskInsert from "@/views/AskInsert.vue";
+import AskUpdate from "@/views/AskUpdate.vue";
+import AskLayout from "@/layouts/AskLayout";
 import { createRouter, createWebHistory } from "vue-router";
-
 const routes = [
+  {
+    path: "/:pathMatch(.*)*",
+    redirect: "/error",
+  },
+  {
+    path: "/error",
+    name: "ErrorPage",
+    component: ErrorPage,
+  },
+
   {
     path: "/",
     name: "MainPage",
@@ -58,16 +73,6 @@ const routes = [
     ],
   },
   {
-    path: "/articleinsert",
-    name: "ArticleInsert",
-    component: ArticleInsert,
-  },
-  {
-    path: "/articleupdate",
-    name: "ArticleUpdate",
-    component: ArticleUpdate,
-  },
-  {
     path: "/article",
     name: "BoardLayout",
     component: BoardLayout,
@@ -86,15 +91,43 @@ const routes = [
       },
       {
         path: "/article/update",
-        name: "",
-        component: ArticleDetail,
+        name: "ArticleUpdate",
+        component: ArticleUpdate,
+      },
+      {
+        path: "/article/insert",
+        name: "ArticleInsert",
+        component: ArticleInsert,
       },
     ],
   },
   {
-    path: "/error",
-    name: "ErrorPage",
-    component: ErrorPage,
+    path: "/ask",
+    name: "AskLayout",
+    component: AskLayout,
+    redirect: "/ask",
+    children: [
+      {
+        path: "/ask",
+        name: "AskList",
+        component: AskList,
+      },
+      // {
+      //   path: "/askdetail",
+      //   name: "AskDetail",
+      //   component: AskDetail,
+      // },
+      {
+        path: "/ask/update",
+        name: "AskUpdate",
+        component: AskUpdate,
+      },
+      {
+        path: "/ask/insert",
+        name: "AskInsert",
+        component: AskInsert,
+      },
+    ],
   },
   {
     path: "/mypage",
@@ -116,6 +149,16 @@ const routes = [
         path: "/mypage/calender",
         name: "MyCalender",
         component: MyCalender,
+      },
+      {
+        path: "/mypage/update",
+        name: "ProfileUpdate",
+        component: ProfileUpdate,
+      },
+      {
+        path: "/mypage/library",
+        name: "MyLibrary",
+        component: MyLibrary,
       },
     ],
   },

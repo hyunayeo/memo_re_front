@@ -14,11 +14,11 @@
       onerror="@/assets/profile_sample.jpg"
     />
   </div>
-  <div class="p-4">
+  <div class="p-4 border-right">
     <ol class="list-unstyled mb-0">
       <li>
         <a
-          href="#"
+          href="/article/insert"
           class="h2 fst-italic link-body-emphasis text-decoration-none"
           >Go to memo</a
         >
@@ -40,13 +40,6 @@
       </li>
       <li>
         <a
-          href="/mypage/wish"
-          class="h4 fst-italic link-body-emphasis text-decoration-none border-top"
-          >My Wish</a
-        >
-      </li>
-      <li>
-        <a
           href="/mypage/calender"
           class="h4 fst-italic link-body-emphasis text-decoration-none border-top"
           >Book Calender</a
@@ -58,7 +51,7 @@
   <div class="p-4">
     <h4 class="fst-italic">ect</h4>
     <ol class="list-unstyled">
-      <li><a href="#">정보수정</a></li>
+      <li><a href="/mypage/update">정보수정</a></li>
       <li><a href="#">문의하기</a></li>
     </ol>
   </div>

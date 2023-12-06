@@ -4,8 +4,32 @@
       <h1 class="mt-4">Board</h1>
       <div class="card mb-4">
         <div class="card-body">
-          <form method="post">
-            <h1>카드 스몰 들어갈 예정</h1>
+          <form method="get">
+            <label for="bookInfo" class="form-label">책 정보</label>
+            <div
+              class="d-grid gap-2 d-md-flex justify-content-md-start"
+              @click="showModal = true"
+            >
+              <a
+                href="#"
+                class="btn btn-primary"
+                role="button"
+                data-bs-toggle="button"
+                >책 검색</a
+              >
+            </div>
+            <BookSearch
+              v-if="showModal"
+              @close="showModal = false"
+              @showRegisterBook="(show) => (showRegisterModal = show)"
+            />
+            <BookRegistration
+              v-if="showRegisterModal"
+              @close="showRegisterModal = false"
+            />
+
+            <card-small-vue />
+
             <div class="mb-3 mt-3">
               <label for="title" class="form-label">제목</label>
               <input
@@ -17,31 +41,60 @@
               />
             </div>
 
-            <div class="col-md-4">
-              <label for="ratingScore" class="form-label">평점</label>
-              <div class="dropdown">
+            <label for="title" class="form-label">평점</label>
+            <br />
+            <div
+              class="btn-toolbar"
+              role="toolbar"
+              aria-label="Toolbar with button groups"
+            >
+              <div
+                @click="toggleActive($event.target)"
+                class="btn-group me-2"
+                role="group"
+                aria-label="First group"
+                id="rating"
+              >
                 <button
-                  class="btn btn-secondary dropdown-toggle"
-                  id="ratingScore"
-                  value="score"
                   type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="true"
+                  class="btn btn-primary"
+                  id="rating"
+                  value="1"
                 >
-                  평점
+                  1
                 </button>
-
-                <ul
-                  id="score"
-                  class="dropdown-menu"
-                  aria-labelledby="dropdownMenuLink"
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  id="rating"
+                  value="2"
                 >
-                  <li><a class="dropdown-item" tabindex="-1" href="#">1</a></li>
-                  <li><a class="dropdown-item" tabindex="-1" href="#">2</a></li>
-                  <li><a class="dropdown-item" tabindex="-1" href="#">3</a></li>
-                  <li><a class="dropdown-item" tabindex="-1" href="#">4</a></li>
-                  <li><a class="dropdown-item" tabindex="-1" href="#">5</a></li>
-                </ul>
+                  2
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  id="rating"
+                  value="3"
+                >
+                  3
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  id="rating"
+                  value="4"
+                >
+                  4
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  id="rating"
+                  value="5"
+                >
+                  5
+                </button>
               </div>
             </div>
 
@@ -57,7 +110,7 @@
                   id="startDate"
                 />
               </div>
-
+              <p></p>
               <div class="col-md-4">
                 <label for="endDate" class="form-label">종료일</label>
                 <input
@@ -92,7 +145,7 @@
               <label class="form-check-label" for="isHide"> 비밀글 </label>
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-              <button class="btn btn-primary" type="button">저장</button>
+              <button class="btn btn-primary" type="button">저장하기</button>
             </div>
           </form>
         </div>
@@ -101,4 +154,33 @@
   </div>
 </template>
 
-<script></script>
+<script>
+import CardSmallVue from "@/components/CardSmall.vue";
+
+import BookSearch from "@/components/modal/BookSearch.vue";
+import BookRegistration from "@/components/modal/BookRegistration.vue";
+export default {
+  name: "ArticleInsert",
+  data() {
+    return {
+      showModal: false,
+      showRegisterModal: false,
+      option: "",
+    };
+  },
+  components: {
+    CardSmallVue,
+    BookSearch,
+    BookRegistration,
+  },
+  methods: {
+    toggleActive: function (e) {
+      console.log(e.parentElement.children);
+      Array.from(e.parentElement.children).forEach((btn) => {
+        btn.classList.remove("active");
+      });
+      e.classList.toggle("active");
+    },
+  },
+};
+</script>

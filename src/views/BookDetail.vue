@@ -1,6 +1,22 @@
-<template>책 상세 페이지 입니다</template>
+<template>
+  <br />
+  <book-info />
+  <p></p>
+  <br />
+  <br />
+
+  <review-card />
+  <review-card />
+  <review-card />
+</template>
 <script>
-export default {};
+import ReviewCard from "@/components/ReviewCard.vue";
+import BookInfo from "@/components/BookInfo.vue";
+
+export default {
+  name: "BookDetail",
+  components: { ReviewCard, BookInfo },
+};
 </script>
 
 <style></style>
