@@ -1,9 +1,10 @@
 <template>
-    <div class="container mb-4">
+    <div class="container">
         <div class="row">
 
             <div class="col">
-                <h1>문의 게시판</h1>
+                <h1>문의내역</h1>
+                <h3>문의하신 결과를 조회할 수 있습니다.</h3>
             </div>
 
             <div class="col">
@@ -14,20 +15,13 @@
                 <button type="button" class="btn btn-primary btn-lg px-4">검색</button>
             </div>
 
-            <div class="text-end mb-1">
-                <button type="button" class="btn btn-outline-primary btn-lg">문의조회</button>
-            </div>
-
-            <div class="text-end">
-                <button type="button" class="btn btn-primary btn-lg">문의하기</button>
-            </div>
-
         </div>
     </div>
 
     <table class="table table-hover">
         <thead>
             <tr class="table-dark">
+                <th scope="col">문의하기 > 문의조회</th>
                 <th scope="col">#</th>
                 <th scope="col">문의</th>
                 <th scope="col">작성자</th>
@@ -37,37 +31,10 @@
         </thead>
         <tbody>
             <tr>
-                <th scope="row">{{ number }}</th>
+                <th scope="row"></th>
+                <td>{{ number }}</td>
                 <td>문의합니다.</td>
                 <td>키트리01</td>
-                <td>{{ date }}</td>
-                <td>{{ status }}</td>
-            </tr>
-            <tr>
-                <th scope="row">{{ number }}</th>
-                <td>문의합니다.22</td>
-                <td>키트리02</td>
-                <td>{{ date }}</td>
-                <td>{{ status }}</td>
-            </tr>
-            <tr>
-                <th scope="row">{{ number }}</th>
-                <td>문의합니다.33</td>
-                <td>키트리03</td>
-                <td>{{ date }}</td>
-                <td>{{ status }}</td>
-            </tr>
-            <tr>
-                <th scope="row">{{ number }}</th>
-                <td>문의합니다.44</td>
-                <td>키트리04</td>
-                <td>{{ date }}</td>
-                <td>{{ status }}</td>
-            </tr>
-            <tr>
-                <th scope="row">{{ number }}</th>
-                <td>문의합니다.55</td>
-                <td>키트리05</td>
                 <td>{{ date }}</td>
                 <td>{{ status }}</td>
             </tr>
@@ -108,10 +75,10 @@ export default {
             // 추후 동적으로 바뀌어야할 값 POST
             number: 0,
             date: "20xx-xx-xx",
-            status: false,
-        };
+            status: "접수",
+        }
     },
-};
+}
 </script>
 
 <style></style>
