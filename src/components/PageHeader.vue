@@ -37,14 +37,10 @@
           </div>
         </form>
         <div>
-          <div>
-            <a class="btn btn-sm btn-outline-secondary mx-1" href="/login"
-              >Login</a
-            >
-            <a class="btn btn-sm btn-outline-secondary" href="/signup"
-              >Sign up</a
-            >
-          </div>
+          <a class="btn btn-sm btn-outline-secondary mx-1" href="/login"
+            >Login</a
+          >
+          <a class="btn btn-sm btn-outline-secondary" href="/signup">Sign up</a>
         </div>
       </div>
     </div>
