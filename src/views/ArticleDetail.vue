@@ -1,8 +1,8 @@
 <template>
   <blog-post :article="article"/>
   <div class="d-flex justify-content-end align-items-center mb-4">
-    <a class="btn btn-sm btn-outline-secondary mx-1" @click="goToUpdate()">update</a>
-    <a class="btn btn-sm btn-outline-secondary" href="#">delete</a>
+    <a class="btn btn-sm btn-outline-secondary mx-1" @click="goToUpdate">update</a>
+    <a class="btn btn-sm btn-outline-secondary" @click="deleteArticle">delete</a>
   </div>
 </template>
 <script>
@@ -32,6 +32,10 @@ export default {
     },
     goToUpdate() {
       this.$router.push({ path: `/article/update/${this.article.id}` });
+    },
+    deleteArticle() {
+      articleApi.deleteArticle(this.article.id);
+      this.$router.back();
     }
   }
 };

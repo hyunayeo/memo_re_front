@@ -25,7 +25,7 @@
                 id="title"
                 name="title"
                 placeholder="제목을 입력해 주세요."
-                :value="article.title"
+                v-model="article.title"
               />
             </div>
 
@@ -96,7 +96,7 @@
                   class="form-control"
                   name="startDate"
                   id="startDate"
-                  :value="article.startDate"
+                  v-model="article.startDate"
                 />
               </div>
               <p></p>
@@ -107,7 +107,7 @@
                   class="form-control"
                   name="endDate"
                   id="endDate"
-                  :value="article.endDate"
+                  v-model="article.endDate"
                 />
               </div>
             </form>
@@ -121,22 +121,22 @@
                 id="content"
                 name="content"
                 rows="3"
-                :value="article.content"
+                v-model="article.content"
               ></textarea>
             </div>
 
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="isDone" :checked="article.isDone"/>
+              <input class="form-check-input" type="checkbox" id="isDone" v-model="article.isDone"/>
               <label class="form-check-label" for="isDone" >
                 다 읽었어요!
               </label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="isHide" :checked="article.isHide"/>
+              <input class="form-check-input" type="checkbox" id="isHide" v-model="article.isHide"/>
               <label class="form-check-label" for="isHide"> 비밀글 </label>
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-              <button class="btn btn-primary" type="button">수정하기</button>
+              <button @click="updateArticle()" class="btn btn-primary" type="button">수정하기</button>
             </div>
           </form>
         </div>
@@ -170,6 +170,7 @@ export default {
         btn.classList.remove("active");
       });
       e.classList.toggle("active");
+      this.article.ratingScore = e.value;
     },
     async fetchArticleById(id) {
       let res = await articleApi.getArticle(id);
@@ -179,6 +180,23 @@ export default {
       res = await memberApi.getMember(this.article.memberId);
       this.article.member = res.data;
     },
+    async updateArticle() {
+      let articleUpdateInfo = {
+        memberId : this.article.memberId,
+        title : this.article.title,
+        content : this.article?.content,
+        bookId : this.article?.book.id,
+        startDate : this.article.startDate,
+        endDate : this.article.endDate,
+        ratingScore : this.article?.ratingScore,
+        isDone : this.article?.isDone || false,
+        isHide : this.article?.isHide || false,
+      }
+
+      await articleApi.updateArticle(this.article.id, articleUpdateInfo);      
+
+      this.$router.back();
+    }
   },
   computed : {
     
