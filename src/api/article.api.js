@@ -16,6 +16,12 @@ export default {
             body: body,
         });
     },
+    updateArticle: async function(id, article) {
+      await axios.put(`/api/articles/${id}`, article);
+    },   
+    deleteArticle: async function(id) {
+      await axios.delete(`/api/articles/${id}`);
+    },
     getBooks: function (searchDto) {
         return axios.get(`/api/books?${new URLSearchParams(searchDto).toString()}`);
     },
