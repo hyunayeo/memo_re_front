@@ -10,7 +10,7 @@
       onerror="@/assets/profile_sample.jpg"
     />
     <div class="col-lg-8">
-      <h6 class="mb-0">{{article.title}}</h6>
+      <h6 class="mb-0">{{article?.book?.title}}</h6>
       <small class="text-body-secondary">{{dateEng}}</small>
     </div>
   </a>
