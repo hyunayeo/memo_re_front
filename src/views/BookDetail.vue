@@ -1,13 +1,11 @@
 <template>
-  <br />
+  <!-- <br />
   <book-info />
   <p></p>
   <br />
   <br />
-
-  <review-card />
-  <review-card />
-  <review-card />
+  <review-card /> -->
+  <h1>{{ book.title }}</h1>
 </template>
 <script>
 import ReviewCard from "@/components/ReviewCard.vue";
