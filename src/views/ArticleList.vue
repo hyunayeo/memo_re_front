@@ -4,8 +4,8 @@
     &nbsp;/&nbsp;
     <a href="#" class="text-body-emphasis text-decoration-none">인기순</a>
   </div>
-  <p v-if="article">{{article.title}}</p>
-  <img v-if="article" :src="article.book.cover">
+  <p v-if="article">{{ article.title }}</p>
+  <img v-if="article" :src="article.book.cover" />
   <table class="table align-middle">
     <thead>
       <tr>
@@ -19,7 +19,12 @@
       </tr>
     </thead>
     <tbody>
-      <tr @click="goToDetail(article)" v-for="(article, i) in articles" :key="article" class="media position-relative">
+      <tr
+        @click="goToDetail(article)"
+        v-for="(article, i) in articles"
+        :key="article"
+        class="media position-relative"
+      >
         <th scope="row">{{ i }}</th>
         <td>
           <img
@@ -30,14 +35,14 @@
             :key="article.book?.cover"
           />
         </td>
-        <td>{{article.title}}</td>
+        <td>{{ article.title }}</td>
 
         <td class="fw-bold">
-          {{article.content }}
+          {{ article.content }}
         </td>
-        <td>{{article.name}}</td>
-        <td>{{article.createdAt}}</td>
-        <td>{{article.viewCount}}</td>
+        <td>{{ article.name }}</td>
+        <td>{{ article.createdAt }}</td>
+        <td>{{ article.viewCount }}</td>
       </tr>
     </tbody>
   </table>
@@ -46,46 +51,67 @@
       <li class="page-item disabled">
         <a class="page-link" href="#" tabindex="-1">Previous</a>
       </li>
-      
-      <li v-for="i in pagination.totalPageCount" :key="i" class="page-item"><a class="page-link" href="#">{{i}}</a></li>
+
+      <li v-for="i in pagination.totalPageCount" :key="i" class="page-item">
+        <a class="page-link" href="#">{{ i }}</a>
+      </li>
       <li class="page-item">
         <a class="page-link" href="#">Next</a>
       </li>
     </ul>
   </nav>
-  
 
+  <a href="/article/insert" class="write_btn">
+    <img src="/images/icons8-pencil-30.png"
+  /></a>
 </template>
 <script>
-import articleApi from '@/api/article.api.js'
-import bookApi from '@/api/book.api';
-
+import articleApi from "@/api/article.api.js";
+import bookApi from "@/api/book.api";
 
 export default {
   data() {
     return {
-      articles : [],
-      pagination : {}
-    }
+      articles: [],
+      pagination: {},
+    };
   },
   async mounted() {
     this.fetchArticlesWithBook();
   },
-  methods : {
+  methods: {
     async fetchArticlesWithBook() {
       let res = await articleApi.getArticles();
       this.articles = res.data.list;
-      this.pagination = res.data.pagination
-      console.log(this.articles)
+      this.pagination = res.data.pagination;
+      console.log(this.articles);
 
       this.articles.forEach(async (article) => {
-      res = await bookApi.getBook(article.bookId);
-      article.book = res.data;
-      })
-      
-    }
-  }
-}
+        res = await bookApi.getBook(article.bookId);
+        article.book = res.data;
+      });
+    },
+  },
+};
 </script>
 
-<style></style>
+<style scoped>
+.write_btn {
+  position: fixed;
+  bottom: 50px;
+  right: 100px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #d3bff1;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.05);
+  display: inline-block;
+}
+
+.write_btn img {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+</style>
