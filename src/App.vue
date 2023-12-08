@@ -9,6 +9,9 @@
       </div>
     </main>
   </div>
+  <a href="/article/insert" class="write_btn">
+    <img src="/images/icons8-pencil-30.png"
+  /></a>
 </template>
 
 <script>
@@ -180,5 +183,24 @@ h6 {
 .blog-post-meta {
   margin-bottom: 1.25rem;
   color: #727272;
+}
+
+.write_btn {
+  position: fixed;
+  bottom: 50px;
+  right: 100px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #d3bff1;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.05);
+  display: inline-block;
+}
+
+.write_btn img {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>
