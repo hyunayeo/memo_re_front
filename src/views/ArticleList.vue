@@ -4,9 +4,9 @@
       <button @click="goToWrite" class="btn-link">게시글 쓰러가기</button>
     </div>
     <div class="d-flex justify-content-end align-items-center mb-4">
-      <a href="#" class="text-body-emphasis text-decoration-none">최신순</a>
+      <a @click="fetchAsLatest" class="text-body-emphasis text-decoration-none latest">최신순</a>
       &nbsp;/&nbsp;
-      <a href="#" class="text-body-emphasis text-decoration-none">인기순</a>
+      <a @click="fetchAsPopularity" class="text-body-emphasis text-decoration-none popular">인기순</a>
     </div>
   </div>
   <p v-if="article">{{article.title}}</p>
@@ -63,8 +63,6 @@
 </template>
 <script>
 import articleApi from '@/api/article.api.js'
-import bookApi from '@/api/book.api';
-import memberApi from '@/api/member.api';
 import { ref } from 'vue';
 
 export default {
@@ -99,22 +97,27 @@ export default {
       let res = await articleApi.getArticles(searchDto);
       this.articles = res.data.list;
       this.pagination = res.data.pagination
-      
-      this.articles.forEach(async (article) => {
-        res = await bookApi.getBook(article.bookId);
-        article.book = res.data;
-      })
-
-      this.articles.forEach(async (article) => {
-        res = await memberApi.getMember(article.memberId);
-        article.member = res.data;
-      })
     },
     fetchByPage(i) {
       this.searchDto.page = i;
-      console.log('page : ' + this.searchDto.page);
       this.fetchArticlesWithBookAndMember(this.searchDto);
     },
+    fetchAsLatest() {
+      if (this.searchDto.sortType != "created_at") {
+        this.searchDto.sortType = "created_at";
+      } else {
+        this.searchDto.sortType = "id";
+      }
+      this.fetchArticlesWithBookAndMember(this.searchDto);
+    },  
+    fetchAsPopularity() {
+      if (this.searchDto.sortType != "view_count") {
+        this.searchDto.sortType = "view_count";
+      } else {
+        this.searchDto.sortType = "id";
+      }
+      this.fetchArticlesWithBookAndMember(this.searchDto);
+    }, 
     nextPage() {
       this.fetchByPage(this.pagination.endPage + 1);
     },
