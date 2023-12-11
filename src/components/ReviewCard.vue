@@ -25,14 +25,6 @@
             @click="goToDetail(article)"
             >go to read</a
           >
-          <!-- <a
-            @click="goToDetail(article)"
-            v-for="article in articles"
-            :key="article"
-            class="media position-relative"
-          >
-            go to read</a
-          > -->
         </div>
       </div>
     </div>
