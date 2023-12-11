@@ -81,12 +81,16 @@ export default {
       searchDto : {
         page : 1,
         recordSize : 5,
-        pageSize: 5,
+        pageSize : 5,
       },
       currentEndPage : 5
     }
   },
   async mounted() {
+    if (this.$route.fullPath.split('?')?.[1]) {
+      this.searchDto.filter = "category",
+      this.searchDto.filterKeyword = this.$route.fullPath.split('?')?.[1];
+    }
     this.fetchArticlesWithBookAndMember(this.searchDto);
   },
   updated() {

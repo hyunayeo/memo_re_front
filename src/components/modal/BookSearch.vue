@@ -135,6 +135,7 @@ export default {
     },
     pickBook(book) {
       this.pickedBook = book;
+      this.$emit("picked", this.pickedBook)
       this.closePage();
     }
   },

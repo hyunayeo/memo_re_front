@@ -6,16 +6,31 @@
         <div class="card-body">
           <form method="post">
             <label for="bookInfo" class="form-label">책 정보</label>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            <div
+                class="d-grid gap-2 d-md-flex justify-content-md-start"     
+                @click="showModal = true"
+            >
               <a
                 href="#"
                 class="btn btn-primary"
                 role="button"
                 data-bs-toggle="button"
-                >책 정보 수정</a
-              >
+                >책 정보 수정
+              </a>
             </div>
-            <card-small-vue :article="article"/>
+            <!-- <card-small-vue :article="article"/> -->
+            <BookSearch
+              v-if="showModal"
+              @close="showModal = false"
+              @showRegisterBook="(show) => (showRegisterModal = show)"
+              @picked="pickBook"
+            />
+            <BookRegistration
+              v-if="showRegisterModal"
+              @close="showRegisterModal = false"
+            />
+
+            <book-small-vue :book="article.book"/>
 
             <div class="mb-3 mt-3">
               <label for="title" class="form-label">제목</label>
@@ -146,17 +161,23 @@
 </template>
 
 <script>
-import CardSmallVue from "@/components/CardSmall.vue";
+import BookSearch from "@/components/modal/BookSearch.vue";
+import BookRegistration from "@/components/modal/BookRegistration.vue";
+import BookSmallVue from '@/components/BookSmall.vue';
 import articleApi from '@/api/article.api';
 import bookApi from '@/api/book.api';
-import memberApi from '@/api/member.api';
 
 export default {
   components: {
-    CardSmallVue,
+    BookSmallVue,
+    BookSearch,
+    BookRegistration,
   },
   data() {
     return {
+      showModal: false,
+      showRegisterModal: false,
+      option: "",
       article : {}
     }
   },
@@ -175,10 +196,10 @@ export default {
     async fetchArticleById(id) {
       let res = await articleApi.getArticle(id);
       this.article = res.data;
-      res = await bookApi.getBook(this.article.bookId);
+    },
+    async pickBook(book) {
+      let res = await bookApi.getBookByIsbn(book.isbn13);
       this.article.book = res.data;
-      res = await memberApi.getMember(this.article.memberId);
-      this.article.member = res.data;
     },
     async updateArticle() {
       let articleUpdateInfo = {
