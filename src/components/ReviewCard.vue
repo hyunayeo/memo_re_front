@@ -20,7 +20,11 @@
         <p class="card-text mb-auto">{{ this.article.content }}</p>
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-          <!-- <a class="btn btn-sm btn-outline-secondary" href="#"></a> -->
+          <a
+            class="btn btn-sm btn-outline-secondary"
+            @click="goToDetail(article)"
+            >go to read</a
+          >
           <!-- <a
             @click="goToDetail(article)"
             v-for="article in articles"
@@ -40,10 +44,11 @@ export default {
   name: "ReviewCard",
 
   props: ["article"],
-  // methods: {
-  //   goToDetail(article) {
-  //     this.$router.push({ path: `/article/detail/${article.id}` });
-  //   },
-  // },
+  methods: {
+    goToDetail(article) {
+      console.log(article.id);
+      this.$router.push({ path: `/article/detail/${article.id}` });
+    },
+  },
 };
 </script>
