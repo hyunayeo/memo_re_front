@@ -8,8 +8,6 @@
 <script>
 import BlogPost from "@/components/BlogPost.vue";
 import articleApi from '@/api/article.api';
-import bookApi from '@/api/book.api';
-import memberApi from '@/api/member.api';
 
 export default {
   components: { BlogPost },
@@ -25,16 +23,13 @@ export default {
     async fetchArticleById(id) {
       let res = await articleApi.getArticle(id);
       this.article = res.data;
-      res = await bookApi.getBook(this.article.bookId);
-      this.article.book = res.data;
-      res = await memberApi.getMember(this.article.memberId);
-      this.article.member = res.data;
     },
     goToUpdate() {
       this.$router.push({ path: `/article/update/${this.article.id}` });
     },
     deleteArticle() {
       articleApi.deleteArticle(this.article.id);
+      
       this.$router.back();
     }
   }
