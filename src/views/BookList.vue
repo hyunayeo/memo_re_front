@@ -16,16 +16,8 @@
         <tr>
           <th scope="row">1</th>
           <td>
-            <card-medium />
+            <card-medium v-bind:book-list="bookList"/>
           </td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <card-medium />
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <card-medium />
         </tr>
       </tbody>
     </table>
@@ -46,10 +38,36 @@
 </template>
 <script>
 import CardMedium from "@/components/CardMedium.vue";
+// import bookApi from "@/api/book.api";
+import axios from 'axios';
 
 export default {
   name: "BookList",
   components: { CardMedium },
+
+  data() {
+    return {
+      bookList: [],
+    }
+  },
+
+  mounted() {
+    this.fetchBookData();
+  },
+
+  methods: {
+    async fetchBookData() {
+      await axios.get('http://localhost:8080/api/books')
+        .then((response) => {
+          console.log("getBookList", response);
+          this.bookList = response.data.list;
+          return this.bookList;
+        })
+        .catch((error) => {
+          console.error('API 호출 중 오류:', error);
+        })
+    },
+  },
 };
 </script>
 
