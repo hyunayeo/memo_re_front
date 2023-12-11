@@ -9,12 +9,8 @@ export default {
     getArticle: function (id) {
         return axios.get(`/api/articles/${id}`);
     },
-    postArticle: function (userId, title, body) {
-        return axios.post(`/api/articles`, {
-            userId: userId,
-            title: title,
-            body: body,
-        });
+    postArticle: function (article) {
+        return axios.post(`/api/articles`, article);
     },
     updateArticle: async function(id, article) {
       await axios.put(`/api/articles/${id}`, article);

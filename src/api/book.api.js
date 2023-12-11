@@ -15,6 +15,9 @@ export default {
     getBooks: function(searchDto) {
         return axios.get(`/api/books?${new URLSearchParams(searchDto).toString()}`);
     },
+    getBookByIsbn: function(isbn) {
+        return axios.get(`/api/books/${isbn}?searchType=isbn`);
+    },
     getBook: function(id) {
         return axios.get(`/api/books/${id}`);
     },
@@ -52,15 +55,7 @@ export default {
             article.member = member;
         });
 
-        // let members = await axios.get( apiUtils.exractURL(book, "members"));
-        // let articles = await axios.get("/api/articles?searchType=book_id&searchKeyword=19");
-        // articleApi.searchDto.searchType = "book_id";
-        // articleApi.searchDto.searchKeyword = id;
-        // let articles = await articleApi.getArticles(this.searchDto);
-        
         console.log(book);
-        // console.log(articles);
-        // console.log(members);
         return book;
     },
     // 찜 목록에서 가져온 도서 리스트
