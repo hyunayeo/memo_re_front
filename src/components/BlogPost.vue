@@ -8,11 +8,11 @@
             class="row g-0 rounded overflow-hidden flex-md-row mb-4 h-md-300 position-relative"
           >
             <div class="col-auto d-none d-lg-block">
-              <!-- <img
+              <img
                 class="bd-placeholder-img"
                 :src="article?.book?.cover"
                 width="200"
-              /> -->
+              />
               <title>Placeholder</title>
               <rect width="100%" height="100%" fill="#55595c" />
             </div>
