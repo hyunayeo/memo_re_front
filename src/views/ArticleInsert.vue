@@ -203,7 +203,8 @@ export default {
     },
     async pickBook(book) {
       this.pickedBook = book;
-      let res = await bookApi.getBookByIsbn(book.isbn13);
+      console.log(book);
+      let res = await bookApi.getBookByIsbn(book.isbn);
       this.pickedBook = res.data;
       this.articleInfo.bookId = this.pickedBook.id;
       console.log(this.pickedBook)
@@ -212,7 +213,7 @@ export default {
       console.log(this.articleInfo)
       await articleApi.postArticle(this.articleInfo)
       
-      this.$router.back();
+      this.$router.replace("/article");
     }
   },
 };

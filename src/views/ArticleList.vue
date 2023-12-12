@@ -88,6 +88,7 @@ export default {
   },
   async mounted() {
     if (this.$route.fullPath.split('?')?.[1]) {
+          console.log(this.$route.fullPath.split('?')?.[1])
       this.searchDto.filter = "category",
       this.searchDto.filterKeyword = this.$route.fullPath.split('?')?.[1];
     }
@@ -153,12 +154,12 @@ export default {
   computed : {
     pages() {
 
-      if (!this.pagination.existNextPage) {
+      if (!this.pagination?.existNextPage) {
         this.pageElem?.lastChild.classList.add('disabled')
       } else {
         this.pageElem?.lastChild.classList.remove('disabled')
       }
-      if (!this.pagination.existPrevPage) {
+      if (!this.pagination?.existPrevPage) {
         this.pageElem?.firstChild.classList.add('disabled')
       } else {
         this.pageElem?.firstChild.classList.remove('disabled')
