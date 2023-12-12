@@ -20,12 +20,13 @@
                   class="form-control form-control-lg mt-4"
                   placeholder="도서 검색"
                   id="inputLarge"
+                  v-model="this.searchDto.searchKeyword"
                 />
               </div>
             </div>
 
             <div class="col-md-4 mt-4">
-              <button type="button" class="btn btn-primary btn-lg px-4">
+              <button @click="searchBooks" type="button" class="btn btn-primary btn-lg px-4">
                 <h4>검색</h4>
               </button>
             </div>
@@ -34,47 +35,17 @@
 
         <div class="cards mt-5">
           <div class="row row-cols-1 row-cols-md-2 g-4">
-            <div class="col-md-4">
+            <div @click="pickBook(book)" class="col-md-4" v-for="(book) in books" :key="book">
               <div class="card">
                 <img
-                  src="@/assets/book_sample.jpg"
+                  :src="book?.cover"
                   class="card-img-top"
                   alt="book"
                 />
                 <div class="card-body">
-                  <h5 class="card-title text-center">{{ title }}</h5>
+                  <h5 class="card-title text-center">{{ book?.title }}</h5>
                   <div class="card-footer">
-                    <h6 class="text-muted">저자 : {{ author }}</h6>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card">
-                <img
-                  src="@/assets/book_sample.jpg"
-                  class="card-img-top"
-                  alt="book"
-                />
-                <div class="card-body">
-                  <h5 class="card-title text-center">{{ title }}</h5>
-                  <div class="card-footer">
-                    <h6 class="text-muted">저자 : {{ author }}</h6>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card">
-                <img
-                  src="@/assets/book_sample.jpg"
-                  class="card-img-top"
-                  alt="book"
-                />
-                <div class="card-body">
-                  <h5 class="card-title text-center">{{ title }}</h5>
-                  <div class="card-footer">
-                    <h6 class="text-muted">저자 : {{ author }}</h6>
+                    <h6 class="text-muted">저자 : {{ book?.author }}</h6>
                   </div>
                 </div>
               </div>
@@ -130,11 +101,22 @@
 </template>
 
 <script>
+import bookApi from '@/api/book.api';
 export default {
   data() {
     return {
+      books : [],
+      pagination : {},
+      searchDto : {
+        page : 1,
+        recordSize : 3,
+        pageSize : 5,
+        searchType : "title",
+        searchKeyword : ""
+      },
       title: "KITRI",
       author: "kitri",
+      pickedBook : {}
     };
   },
 
@@ -147,6 +129,15 @@ export default {
       this.$emit("close");
       this.$emit("showRegisterBook", true);
     },
+    async searchBooks() {
+      let res = await bookApi.getBooks(this.searchDto);
+      this.books = res.data.list;
+    },
+    pickBook(book) {
+      this.pickedBook = book;
+      this.$emit("picked", this.pickedBook)
+      this.closePage();
+    }
   },
 };
 </script>

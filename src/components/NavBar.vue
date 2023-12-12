@@ -3,16 +3,16 @@
     <nav class="nav nav-underline justify-content-between">
       <a class="nav-item nav-link link-body-emphasis active" href="/mypage">MyPage</a>
 
-      <a class="nav-item nav-link link-body-emphasis" href="#">Social</a>
-      <a class="nav-item nav-link link-body-emphasis" href="#">Science</a>
-      <a class="nav-item nav-link link-body-emphasis" href="#">Novel</a>
-      <a class="nav-item nav-link link-body-emphasis" href="#">Culture</a>
-      <a class="nav-item nav-link link-body-emphasis" href="#">Technology</a>
-      <a class="nav-item nav-link link-body-emphasis" href="#">Comics</a>
-      <a class="nav-item nav-link link-body-emphasis" href="#">Science</a>
-      <a class="nav-item nav-link link-body-emphasis" href="#">Health</a>
-      <a class="nav-item nav-link link-body-emphasis" href="#">Travel</a>
-      <a class="nav-item nav-link link-body-emphasis" href="#">Opinion</a>
+      <a class="nav-item nav-link link-body-emphasis" href="/article">전체</a>
+      <a class="nav-item nav-link link-body-emphasis" href="/article?기술과학">기술과학</a>
+      <a class="nav-item nav-link link-body-emphasis" href="/article?문학">문학</a>
+      <a class="nav-item nav-link link-body-emphasis" href="/article?사회과학">사회과학</a>
+      <a class="nav-item nav-link link-body-emphasis" href="/article?언어">언어</a>
+      <a class="nav-item nav-link link-body-emphasis" href="/article?역사">역사</a>
+      <a class="nav-item nav-link link-body-emphasis" href="/article?예술">예술</a>
+      <a class="nav-item nav-link link-body-emphasis" href="/article?자연과학">자연과학</a>
+      <a class="nav-item nav-link link-body-emphasis" href="/article?종교">종교</a>
+      <a class="nav-item nav-link link-body-emphasis" href="/article?기타">기타</a>
     </nav>
   </div>
 </template>
