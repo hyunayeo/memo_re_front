@@ -1,5 +1,5 @@
-import axios from 'axios';
-import apiUtils from './apiUtils';
+import axios from "axios";
+import apiUtils from "./apiUtils";
 
 export default {
     searchDto : {
@@ -29,31 +29,30 @@ export default {
         articles = articles.data.list;
         console.log(articles);
 
-        book.articles = articles;
+    let articles = await axios.get(apiUtils.extractURL(book, "articles"));
+    articles = articles.data.list;
+    console.log(articles);
 
-        return book;
-    },
-    // 도서 상세 페이지 보기
-    getBookWithArticlesAndMembers : async function(id) {
-        let book = await this.getBook(id);
-        book = await book.data;
+    book.articles = articles;
 
+    return book;
+  },
+  // 도서 상세 페이지 보기
+  getBookWithArticlesAndMembers: async function (id) {
+    let book = await this.getBook(id);
+    book = await book.data;
 
-        console.log(book);
+    console.log(book);
 
-        // let articles = await axios.get(book._links.articles.href);
-        
-        let articles = await axios.get( apiUtils.extractURL(book, "articles"));
-        articles = articles.data.list;
-        console.log(articles);
+    // let articles = await axios.get(book._links.articles.href);
 
-        book.articles = articles;
-        articles.forEach(async (article) => {
-            
-            let member = await axios.get(`/api/members/${article.memberId}`);
+    let articles = await axios.get(apiUtils.extractURL(book, "articles"));
+    articles = articles.data.list;
+    console.log(articles);
 
-            article.member = member;
-        });
+    book.articles = articles;
+    articles.forEach(async (article) => {
+      let member = await axios.get(`/api/members/${article.memberId}`);
 
         console.log(book);
         return book;
@@ -64,21 +63,37 @@ export default {
         this.searchDto.searchKeyword = memberId;
         console.log()
 
-        let wishes = await axios.get(`/api/wishes?${new URLSearchParams(this.searchDto).toString()}`);
-        wishes = wishes.data.list;
-        // console.log(wishes);
+    // let members = await axios.get( apiUtils.exractURL(book, "members"));
+    // let articles = await axios.get("/api/articles?searchType=book_id&searchKeyword=19");
+    // articleApi.searchDto.searchType = "book_id";
+    // articleApi.searchDto.searchKeyword = id;
+    // let articles = await articleApi.getArticles(this.searchDto);
 
-        let books = [];
-        wishes.forEach(async (wish) => {
-            let book = await axios.get(`/api/books/${wish.bookId}`);
-            books.push(book.data);
-        });
+    console.log(book);
+    // console.log(articles);
+    // console.log(members);
+    return book;
+  },
+  // 찜 목록에서 가져온 도서 리스트
+  getBooksByMemberWishes: async function (memberId) {
+    this.searchDto.searchType = "member_id";
+    this.searchDto.searchKeyword = memberId;
+    console.log();
 
-        console.log(books);
-    },
-    // 특정 회원이 등록한 도서 리스트
-    getBooksByMemberRegister : async function() {
+    let wishes = await axios.get(
+      `/api/wishes?${new URLSearchParams(this.searchDto).toString()}`
+    );
+    wishes = wishes.data.list;
+    // console.log(wishes);
 
-    },
+    let books = [];
+    wishes.forEach(async (wish) => {
+      let book = await axios.get(`/api/books/${wish.bookId}`);
+      books.push(book.data);
+    });
 
-}
+    console.log(books);
+  },
+  // 특정 회원이 등록한 도서 리스트
+  getBooksByMemberRegister: async function () {},
+};

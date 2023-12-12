@@ -9,8 +9,8 @@
       <a @click="fetchAsPopularity" class="text-body-emphasis text-decoration-none popular">인기순</a>
     </div>
   </div>
-  <p v-if="article">{{article.title}}</p>
-  <img v-if="article" :src="article.book.cover">
+  <p v-if="article">{{ article.title }}</p>
+  <img v-if="article" :src="article.book.cover" />
   <table class="table align-middle">
     <thead>
       <tr>
@@ -35,10 +35,10 @@
             :key="article.book?.cover"
           />
         </td>
-        <td>{{article.title}}</td>
+        <td>{{ article.title }}</td>
 
         <td class="fw-bold">
-          {{article.content }}
+          {{ article.content }}
         </td>
         <td>{{article.member?.name}}</td>
         <td>{{dateShort(`${article.createdAt}`)}}</td>
@@ -54,11 +54,9 @@
       <li @:click="fetchByPage(i)"  v-for="i in pages" :key="i" class="page-item">
         <a class="page-link page-number">{{i}}</a>
       </li>
-      <li class="page-item">
-        <a @click="nextPage" class="page-link">Next</a>
+      <li v-for="i in pagination.totalPageCount" :key="i" class="page-item">
+        <a class="page-link" href="#">{{ i }}</a>
       </li>
-    </ul>
-  </nav>
   
 </template>
 <script>
