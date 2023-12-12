@@ -27,7 +27,12 @@
           </div>
         </div>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-          <a class="btn btn-sm btn-outline-secondary" href="#">wish ♥</a>
+          <a
+            class="btn btn-sm btn-outline-secondary"
+            id="wish"
+            @click="postWish()"
+            >wish ♡</a
+          >
         </div>
       </div>
 
@@ -41,9 +46,28 @@
 </template>
 
 <script>
+import wishApi from "@/api/wish.api";
+
 export default {
   name: "BookInfo",
   props: ["book"],
+  methods: {
+    postWish: function () {
+      const wish = document.getElementById("wish");
+      const hasClass = wish.classList.contains("active");
+      if (!hasClass) {
+        // 임시 memberId : 6
+        wishApi.postWish(6, this.book?.id);
+        console.log("잘 들어감...");
+        wish.classList.add("active");
+      } else {
+        //임시 memberId : 6
+        wishApi.deleteWish(this.book?.id, 6);
+        wish.classList.remove("active");
+        console.log("잘 지움...");
+      }
+    },
+  },
 };
 </script>
 
