@@ -1,6 +1,7 @@
 <template>
   <br />
   <book-info v-bind:book="book" />
+
   <p></p>
   <br />
   <br />
@@ -21,7 +22,6 @@ export default {
   data() {
     return {
       book: Object,
-      article: Array,
     };
   },
   async mounted() {
