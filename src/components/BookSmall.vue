@@ -4,13 +4,13 @@
     href="#"
   >
     <img
-      :src="article?.book?.cover"
+      :src="book?.cover"
       class="bd-placeholder-img"
       height="90"
       onerror="@/assets/profile_sample.jpg"
     />
     <div class="col-lg-8">
-      <h6 class="mb-0">{{article?.book?.title}}</h6>
+      <h6 class="mb-0">{{book?.title}}</h6>
       <small class="text-body-secondary">{{dateEng}}</small>
     </div>
   </a>
@@ -19,13 +19,13 @@
 <script>
 export default {
   props: {
-    article : Object
+    book : Object
   },
   computed : {
     dateEng() {
       // January 1, 2021
       const options = { year: 'numeric', month: 'short', day: 'numeric' };
-      let date = this.article?.createdAt;
+      let date = this.book?.createdAt;
       
       return `${new Date(date).toLocaleDateString('en-us', options)} `;
     }
