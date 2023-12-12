@@ -10,4 +10,8 @@ export default {
   getWish: function (id) {
     return axios.get(`/api/wishes/${id}`);
   },
+
+  deleteWish: function (bookId, memberId) {
+    return axios.delete(`/api/wishes/${bookId}?memberId=${memberId}`);
+  },
 };

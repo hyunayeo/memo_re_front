@@ -29,7 +29,8 @@
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
           <a
             class="btn btn-sm btn-outline-secondary"
-            @click="[postWish(), toggleActive($event.target)]"
+            id="wish"
+            @click="postWish()"
             >wish ♡</a
           >
         </div>
@@ -50,33 +51,24 @@ import wishApi from "@/api/wish.api";
 export default {
   name: "BookInfo",
   props: ["book"],
-  addWish: true,
-
   methods: {
-    postWish: function (e) {
-      if (this.addWish == true) {
-        // 임시 memberId : 5
-        wishApi.postWish(2, this.book?.id);
+    postWish: function () {
+      const wish = document.getElementById("wish");
+      const hasClass = wish.classList.contains("active");
+      if (!hasClass) {
+        // 임시 memberId : 6
+        wishApi.postWish(6, this.book?.id);
         console.log("잘 들어감...");
-
-        e.classList.toggle("active");
+        wish.classList.add("active");
       } else {
-        wishApi.deleteWish(2, this.book?.id);
-        console.log("잘 들어감...");
+        //임시 memberId : 6
+        wishApi.deleteWish(this.book?.id, 6);
+        wish.classList.remove("active");
+        console.log("잘 지움...");
       }
-    },
-
-    toggleActive: function (e) {
-      console.log(e);
-      e.classList.toggle("active");
     },
   },
 };
 </script>
 
-<style>
-/* .changeHeart {
-  font-weight: 300;
-  font-size: 20px;
-} */
-</style>
+<style></style>
