@@ -1,11 +1,11 @@
 <template>
   <div class="wrapper px-5">
     <Carousel vi :items-to-show="CoverNum" v :wrap-around="true">
-      <Slide v-for="image in images" :key="image.id">
-        <div class="position-relative">
-          <img :src="image.url" />
+      <Slide v-for="(book, i) in books" :key="book">
+        <div class="position-relative" @click="goToDetail(book)">
+          <img :src="book?.cover" />
           <span class="badge badge-pill badge-primary bg_effect">{{
-            image.id
+            i+1
           }}</span>
         </div>
       </Slide>
@@ -19,6 +19,7 @@
 <script>
 import { defineComponent } from "vue";
 import { Carousel, Navigation, Slide } from "vue3-carousel";
+import bookApi from '@/api/book.api';
 
 import "vue3-carousel/dist/carousel.css";
 
@@ -29,41 +30,19 @@ export default defineComponent({
     Slide,
     Navigation,
   },
+  props : {
+    books : Array
+  },
   data() {
     return {
       CoverNum: 5,
       windowHeight: window.innerHeight,
       windowWidth: window.innerWidth,
-
-      images: [
-        {
-          id: 1,
-          url: "https://image.aladin.co.kr/product/32969/37/cover/8920048789_1.jpg",
-        },
-        {
-          id: 2,
-          url: "https://image.aladin.co.kr/product/32969/37/cover/8920048789_1.jpg",
-        },
-        {
-          id: 3,
-          url: "https://image.aladin.co.kr/product/32969/37/cover/8920048789_1.jpg",
-        },
-        {
-          id: 4,
-          url: "https://image.aladin.co.kr/product/32969/37/cover/8920048789_1.jpg",
-        },
-        {
-          id: 5,
-          url: "https://image.aladin.co.kr/product/32969/37/cover/8920048789_1.jpg",
-        },
-        {
-          id: 6,
-          url: "https://image.aladin.co.kr/product/32969/37/cover/8920048789_1.jpg",
-        },
-      ],
     };
   },
-
+  updated() {
+    console.log(this.books);
+  },
   mounted() {
     this.$nextTick(() => {
       window.addEventListener("resize", this.onResize);
@@ -84,6 +63,13 @@ export default defineComponent({
         this.CoverNum = 5;
       }
     },
+    async goToDetail(isbn) {
+      
+      console.log(isbn)
+      // let res = await bookApi.getBookByIsbn(isbn);
+      // console.log(res);
+      // this.$router.push({ path: `/book/detail/${res.data.id}`});
+    }
   },
 });
 </script>
