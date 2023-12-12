@@ -12,21 +12,21 @@
           </div>
         </div>
 
-        <div class="modal-body">
+        <div class="modal-body" @keydown.enter.prevent>
           <div class="row">
             <div class="col-md-8">
               <div class="form-group">
                 <input
-                  class="form-control form-control-lg mt-4"
-                  placeholder="도서 검색"
-                  id="inputLarge"
                   v-model="this.searchDto.searchKeyword"
+                  class="form-control form-control-lg mt-4 "
+                  placeholder="도서 검색"
+                  @keydown.enter="fetchBooks"
                 />
               </div>
             </div>
 
             <div class="col-md-4 mt-4">
-              <button  @click="fetchBooks" type="button" class="btn btn-primary btn-lg px-4">
+              <button type="button" class="btn btn-primary btn-lg px-4" @click="fetchBooks()">
                 <h4>검색</h4>
               </button>
             </div>
@@ -67,7 +67,7 @@
         </nav>
 
         <div class="d-grid gap-2 col-5 mx-auto mt-4">
-          <button class="btn btn-primary btn-lg py-3" @click="registerBook" @keydown.prevent>
+          <button class="btn btn-primary btn-lg py-3" @click="registerBook()">
             + 검색에 나오지 않은 도서 등록
           </button>
         </div>
