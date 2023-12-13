@@ -56,7 +56,8 @@ export default {
 
         console.log(book);
         return book;
-    })},
+})},
+
 
     // 찜 목록에서 가져온 도서 리스트
 //     getBooksByMemberWishes : async function(memberId) {
