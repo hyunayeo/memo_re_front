@@ -11,7 +11,13 @@
 
 <script>
 import MyNavVue from "@/components/MyNav.vue";
-export default { components: { MyNavVue } };
+import memberApi from "@/api/member.api";
+export default {
+  components: { MyNavVue },
+  mounted() {
+    memberApi.checkLogin();
+  },
+};
 </script>
 
 <style></style>

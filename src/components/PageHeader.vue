@@ -37,10 +37,17 @@
           </div>
         </form>
         <div>
-          <a class="btn btn-sm btn-outline-secondary mx-1" href="/login"
-            >Login</a
+          <span v-if="memberId == null">
+            <a class="btn btn-sm btn-outline-secondary mx-1" href="/login"
+              >Login</a
+            >
+            <a class="btn btn-sm btn-outline-secondary" href="/signup"
+              >Sign up</a
+            >
+          </span>
+          <span v-else class="btn btn-sm btn-outline-secondary" @click="logout"
+            >logout</span
           >
-          <a class="btn btn-sm btn-outline-secondary" href="/signup">Sign up</a>
         </div>
       </div>
     </div>
@@ -48,8 +55,23 @@
 </template>
 
 <script>
+import memberApi from "@/api/member.api";
 export default {
   name: "PageHeader",
+  data() {
+    return {
+      memberId: null,
+    };
+  },
+  methods: {
+    logout: function () {
+      memberApi.logout();
+    },
+  },
+  mounted() {
+    this.memberId = memberApi.getMemberId();
+    console.log(this.memberId);
+  },
 };
 </script>
 

@@ -46,6 +46,30 @@
                         로그인
                       </button>
                     </div>
+                    <div class="pt-2 mb-4" style="text-align: center">
+                      <span class="m-2">
+                        <img
+                          src="@/assets/google_logo.png"
+                          class="rounded-circle"
+                          width="50"
+                          height="50"
+                          alt="profile_image"
+                          onerror="@/assets/profile_sample.jpg"
+                          @click="onClickGoogle()"
+                        />
+                      </span>
+                      <span class="m-2">
+                        <img
+                          src="@/assets/naver_logo.png"
+                          class="rounded-circle"
+                          width="50"
+                          height="50"
+                          alt="profile_image"
+                          onerror="@/assets/profile_sample.jpg"
+                          @click="onClickNaver"
+                        />
+                      </span>
+                    </div>
 
                     <div class="mb-3">
                       <div class="form-check" style="text-align: center">
@@ -107,6 +131,15 @@ export default {
     return { showModalId: false, showModalPw: false };
   },
   components: { FindEmail, FindPassword },
+  methods: {
+    onClickGoogle: function () {
+      window.location.href =
+        "http://localhost:8080/oauth2/authorization/google";
+    },
+    onClickNaver: function () {
+      window.location.href = "http://localhost:8080/oauth2/authorization/naver";
+    },
+  },
 };
 </script>
 
