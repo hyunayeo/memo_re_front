@@ -56,7 +56,7 @@ export default {
 
   methods: {
     async fetchBookData() {
-      await axios.get('http://localhost:8080/api/books')
+      await axios.get('/api/books')
         .then((response) => {
           console.log("getBookList", response);
           this.bookList = response.data.list;
