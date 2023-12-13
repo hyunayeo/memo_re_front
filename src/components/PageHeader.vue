@@ -62,39 +62,27 @@ export default {
   name: "PageHeader",
   data() {
     return {
-<<<<<<< HEAD
       memberId: null,
+      keyword : "",
+      type : "도서명",
     };
   },
   methods: {
     logout: function () {
       memberApi.logout();
     },
-  },
-  mounted() {
-    this.memberId = memberApi.getMemberId();
-    console.log(this.memberId);
-  },
-=======
-      keyword : "",
-      type : "도서명",
-    }
-  },
-  methods : {
     searchByKeyword() {
-      // if (this.type == "도서명" || this.type == "작가명") {
-      //   this.$router.push({ name : 'BookList', query : {keyword : this.keyword, type : this.type} });
-      // } else {
-      //   this.$router.push({ name : 'ArticleList', query : {keyword : this.keyword, type : this.type} });
-      // }      
       if (this.type == "도서명" || this.type == "작가명") {
         location.href=`/book?keyword=${this.keyword}&type=${this.type}`;
       } else {
         location.href=`/article?keyword=${this.keyword}&type=${this.type}`;
       }      
     }
+  },
+  mounted() {
+    this.memberId = memberApi.getMemberId();
+    console.log(this.memberId);
   }
->>>>>>> feature/#54-article-page-additional-functions
 };
 </script>
 
