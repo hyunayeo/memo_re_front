@@ -1,9 +1,7 @@
 <template>
   <header class="border-bottom lh-1 py-3">
     <div class="row flex-nowrap justify-content-between align-items-center">
-      <div class="col-4 pt-1">
-        <a class="link-secondary" href="#">Subscribe</a>
-      </div>
+      <div class="col-4 pt-1"></div>
       <div class="col-4 text-center">
         <a
           class="blog-header-logo text-body-emphasis text-decoration-none"
@@ -15,7 +13,11 @@
         <form class="form-inline">
           <div class="input-group">
             <div class="input-group-prepend">
-              <select v-model="type" class="form-select" aria-label="Default select example">
+              <select
+                v-model="type"
+                class="form-select"
+                aria-label="Default select example"
+              >
                 <optgroup label="도서">
                   <option selected>도서명</option>
                   <option>작가명</option>
@@ -33,7 +35,10 @@
               aria-label="Text input with dropdown button"
               @keydown.enter.prevent
             />
-            <a @click="searchByKeyword" class="btn btn-outline-success my-2 my-sm-0">
+            <a
+              @click="searchByKeyword"
+              class="btn btn-outline-success my-2 my-sm-0"
+            >
               /
             </a>
           </div>
@@ -63,8 +68,8 @@ export default {
   data() {
     return {
       memberId: null,
-      keyword : "",
-      type : "도서명",
+      keyword: "",
+      type: "도서명",
     };
   },
   methods: {
@@ -73,16 +78,16 @@ export default {
     },
     searchByKeyword() {
       if (this.type == "도서명" || this.type == "작가명") {
-        location.href=`/book?keyword=${this.keyword}&type=${this.type}`;
+        location.href = `/book?keyword=${this.keyword}&type=${this.type}`;
       } else {
-        location.href=`/article?keyword=${this.keyword}&type=${this.type}`;
-      }      
-    }
+        location.href = `/article?keyword=${this.keyword}&type=${this.type}`;
+      }
+    },
   },
   mounted() {
     this.memberId = memberApi.getMemberId();
     console.log(this.memberId);
-  }
+  },
 };
 </script>
 
