@@ -64,7 +64,6 @@
 import MyWish from "@/components/MyWish.vue";
 import MyDone from "@/components/MyDone.vue";
 import MyReading from "@/components/MyReading.vue";
-import BookList from "./BookList.vue";
 import wishApi from "@/api/wish.api";
 export default {
   name: "MyLibrary",
@@ -73,10 +72,9 @@ export default {
       isLibrary: true,
       activeIdx: 0,
       wishes: [],
-      // wishList: Array,
     };
   },
-  components: { MyReading, MyDone, ArticleList, BookList },
+  components: { MyReading, MyDone, MyWish},
   async mounted() {
     //memberId = 10
     this.fetchWishWithBook(10);
