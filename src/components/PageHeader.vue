@@ -37,10 +37,20 @@
           </div>
         </form>
         <div>
-          <a class="btn btn-sm btn-outline-secondary mx-1" href="/login"
-            >Login</a
+          <span v-if="memberId == null">
+            <a class="btn btn-sm btn-outline-secondary mx-1" href="/login"
+              >Login</a
+            >
+            <a class="btn btn-sm btn-outline-secondary" href="/signup"
+              >Sign up</a
+            >
+          </span>
+          <span
+            v-else
+            class="btn btn-sm btn-outline-secondary"
+            @click="logout()"
+            >logout</span
           >
-          <a class="btn btn-sm btn-outline-secondary" href="/signup">Sign up</a>
         </div>
       </div>
     </div>
@@ -48,8 +58,36 @@
 </template>
 
 <script>
+import axios from "axios";
+import VueCookies from "vue-cookies";
+
 export default {
   name: "PageHeader",
+  data() {
+    return {
+      memberId: null,
+    };
+  },
+  methods: {
+    logout: function () {
+      axios.get("/api/logout").then((response) => {
+        console.log(response);
+        if (response.status == 200) {
+          VueCookies.remove("userId");
+          alert("로그아웃되었습니다.");
+        } else {
+          alert("로그아웃에 실패하였습니다.");
+        }
+      });
+    },
+    loginCheck: function () {
+      this.memberId = VueCookies.get("userId");
+      console.log(this.memberId);
+    },
+  },
+  mounted() {
+    this.loginCheck();
+  },
 };
 </script>
 
