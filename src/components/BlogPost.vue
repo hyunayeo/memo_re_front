@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="display-5 link-body-emphasis mb-1"></div>
-    <div class="blog-post">
+    <div @click="goToDetail" class="blog-post" >
       <div class="row">
         <div class="col-auto">
           <div
@@ -56,14 +56,16 @@ export default {
   },
   methods : {
     ratingCheck(index) {
-      console.log(this.article)
+
       if (index <= this.article?.ratingScore) {
         return true
       } else {
         return false;
       }
     },
-
+    goToDetail() {
+      this.$router.push({ path: `/article/detail/${this.article.id}`});
+    }
   },
   computed : {
     dateKor() {

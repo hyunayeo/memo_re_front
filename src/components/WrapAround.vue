@@ -1,6 +1,6 @@
 <template>
-  <div class="wrapper px-5">
-    <Carousel vi :items-to-show="CoverNum" v :wrap-around="true">
+  <div class="wrapper">
+    <Carousel snapAlign="start" :autoplay="4000" vi :items-to-show="CoverNum" v :wrap-around="true">
       <Slide v-for="(book, i) in books" :key="book">
         <div class="position-relative" @click="goToDetail(book)">
           <img :src="book?.cover" />
@@ -41,7 +41,7 @@ export default defineComponent({
     };
   },
   updated() {
-    console.log(this.books);
+
   },
   mounted() {
     this.$nextTick(() => {
@@ -63,12 +63,9 @@ export default defineComponent({
         this.CoverNum = 5;
       }
     },
-    async goToDetail(isbn) {
-      
-      console.log(isbn)
-      // let res = await bookApi.getBookByIsbn(isbn);
-      // console.log(res);
-      // this.$router.push({ path: `/book/detail/${res.data.id}`});
+    async goToDetail(book) {
+      let res = await bookApi.getBookByIsbn(book.isbn);
+      this.$router.push({ path: `/book/detail/${res.data.id}`});
     }
   },
 });

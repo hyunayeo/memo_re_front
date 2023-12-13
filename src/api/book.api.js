@@ -2,16 +2,6 @@ import axios from "axios";
 import apiUtils from "./apiUtils";
 
 export default {
-    searchDto : {
-        page : 1,
-        recordSize : 10,
-        pageSize : 10,
-        domainType : 'article',
-        sortFieldType : 'id',
-        sortAs : 'desc',
-        searchKeyword : '',
-        searchType : '',
-    },
     getBooks: function(searchDto) {
         return axios.get(`/api/books?${new URLSearchParams(searchDto).toString()}`);
     },
@@ -27,11 +17,9 @@ export default {
         
         let articles = await axios.get( apiUtils.extractURL(book, "articles"));
         articles = articles.data.list;
-        console.log(articles);
 
     articles = await axios.get(apiUtils.extractURL(book, "articles"));
     articles = articles.data.list;
-    console.log(articles);
 
     book.articles = articles;
 

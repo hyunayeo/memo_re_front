@@ -2,21 +2,25 @@
   <div class="row g-5">
     <card-big-vue />
     <h4 class="m-0">베스트셀러</h4>
-    <wrap-around-vue :books="books"/>
+    <wrap-around-vue class="cursor" :books="books"/>
 
     <div class="col-md-8">
       <h3 class="pb-4 mb-4 fst-italic border-bottom">From the Firehose</h3>
       <nav class="blog-pagination" aria-label="Pagination">
-        <a class="btn btn-outline-primary rounded-pill" href="#">최신순</a>
+        <a @click="fetchArticlesAsPopularity"
+           :class="['btn btn-outline-primary rounded-pill', {active : activeIdx == 1}]"
+        >
+        인기순</a>
         <a
-          class="btn btn-outline-secondary rounded-pill disabled"
+          @click="fetchArticlesAsLatest"
+          :class="['btn btn-outline-primary rounded-pill', {active : activeIdx == 2}]"
           aria-disabled="true"
-          >인기순</a
+          >최신순</a
         >
       </nav>
-      <blog-post-vue v-if="articles[0]" :article="articles[0]"/>
-      <blog-post-vue v-if="articles[1]" :article="articles[1]"/>
-      <blog-post-vue v-if="articles[2]" :article="articles[2]"/>
+      
+      <blog-post-vue class="cursor" :article="article" v-for="article in articles" :key="article"/>
+     
     </div>
 
     <div class="col-md-4">
@@ -33,14 +37,8 @@
         <div>
           <h4 class="fst-italic">Recent posts</h4>
           <ul class="list-unstyled">
-            <li>
-              <card-small-vue v-if="myArticles[0]" :article="myArticles[0]"/>
-            </li>
-            <li>
-              <card-small-vue v-if="myArticles[1]" :article="myArticles[1]"/>
-            </li>
-            <li>
-              <card-small-vue v-if="myArticles[2]" :article="myArticles[2]"/>
+            <li :article="article" v-for="article in myArticles" :key="article">
+              <card-small-vue class="cursor" :article="article"/>
             </li>
           </ul>
         </div>
@@ -65,14 +63,10 @@ export default {
   },
   data() {
     return {
-      searchDto : {
-        page : 1,
-        recordSize : 5,
-        pageSize : 1,
-      },
       books : [],
       articles : [],
       myArticles : [],
+      activeIdx : 1
     }
   },
   async mounted() {
@@ -82,32 +76,32 @@ export default {
   },
   methods : {
     async fetchArticlesAsPopularity() {
-      this.searchDto.searchType="id";
-      this.searchDto.sortType="view_count";
-      this.searchDto.recordSize = 3;
-      let res = await articleApi.getArticles(this.searchDto);
-      this.articles = res.data.list;
+      let res = await articleApi.getArticles({searchType : "id", sortType : "view_count", recordSize : 3});
+      this.articles = await res.data.list;
+      this.activeIdx = 1;
+    },
+    async fetchArticlesAsLatest() {
+      let res = await articleApi.getArticles({searchType : "id", sortType : "created_at", recordSize : 3});
+      this.articles = await res.data.list;
+      this.activeIdx = 2;
     },
     async fetchBestSellers() {
-      this.searchDto.searchType="Bestseller";
-      this.searchDto.recordSize = 10;
-      let res = await bookApi.getBooks(this.searchDto);
+      let res = await bookApi.getBooks({searchType : "Bestseller", recordSize : 10});
       this.books = res.data.list;
     },
     async fetchMyArticlesAsLatest() {
-      this.searchDto.searchType="member_id";
-      this.searchDto.searchKeyword="3";
-      this.searchDto.sortType="created_at";
-      this.searchDto.recordSize = 3;
-      let res = await articleApi.getArticles(this.searchDto);
+      let res = await articleApi.getArticles({searchType : "member_id", searchKeyword : 3, sortType : "created_at", recordSize : 3});
       this.myArticles = res.data.list;
+
     }
   },
-
-
 };
 
 
 </script>
 
-<style></style>
+<style>
+.cursor {
+  cursor : pointer;
+}
+</style>

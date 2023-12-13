@@ -10,7 +10,7 @@
             <div class="col-auto d-none d-lg-block">
               <img
                 class="bd-placeholder-img"
-                src="@/assets/book_sample.jpg"
+                :src="this.book?.cover"
                 width="200"
               />
               <title>Placeholder</title>
