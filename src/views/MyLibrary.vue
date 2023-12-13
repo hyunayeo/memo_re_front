@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <h1>My Library</h1>
-
     <div class="d-flex justify-content-end align-items-center">
       <ul class="nav nav-pills">
         <li class="nav-item">
@@ -24,9 +23,10 @@
     </div>
 
     <div v-if="isLibrary">
-      <wrap-around />
-      <wrap-around />
-      <wrap-around />
+      <p></p>
+      <MyDone />
+      <MyReading />
+      <MyWish v-bind:wishes="wishes" />
     </div>
     <div v-else>
       <div class="d-flex justify-content-end align-items-center">
@@ -61,19 +61,35 @@
 </template>
 
 <script>
-import WrapAround from "@/components/WrapAround.vue";
-import ArticleList from "./ArticleList.vue";
+import MyWish from "@/components/MyWish.vue";
+import MyDone from "@/components/MyDone.vue";
+import MyReading from "@/components/MyReading.vue";
 import BookList from "./BookList.vue";
+import wishApi from "@/api/wish.api";
 export default {
   name: "MyLibrary",
   data() {
     return {
       isLibrary: true,
       activeIdx: 0,
+      wishes: [],
+      // wishList: Array,
     };
   },
-  components: { WrapAround, ArticleList, BookList },
+  components: { MyReading, MyDone, ArticleList, BookList },
+  async mounted() {
+    //memberId = 10
+    this.fetchWishWithBook(10);
+  },
+  methods: {
+    async fetchWishWithBook(id) {
+      let res = await wishApi.getWishesByMemberId(id);
+      this.wishes = res.data.list;
+      console.log("getWishes", this.wishes[0]);
+    },
+  },
 };
+``;
 </script>
 
 <style></style>
