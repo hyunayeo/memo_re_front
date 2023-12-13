@@ -45,10 +45,7 @@
               >Sign up</a
             >
           </span>
-          <span
-            v-else
-            class="btn btn-sm btn-outline-secondary"
-            @click="logout()"
+          <span v-else class="btn btn-sm btn-outline-secondary" @click="logout"
             >logout</span
           >
         </div>
@@ -58,9 +55,7 @@
 </template>
 
 <script>
-import axios from "axios";
-import VueCookies from "vue-cookies";
-
+import memberApi from "@/api/member.api";
 export default {
   name: "PageHeader",
   data() {
@@ -70,23 +65,12 @@ export default {
   },
   methods: {
     logout: function () {
-      axios.get("/api/logout").then((response) => {
-        console.log(response);
-        if (response.status == 200) {
-          VueCookies.remove("userId");
-          alert("로그아웃되었습니다.");
-        } else {
-          alert("로그아웃에 실패하였습니다.");
-        }
-      });
-    },
-    loginCheck: function () {
-      this.memberId = VueCookies.get("userId");
-      console.log(this.memberId);
+      memberApi.logout();
     },
   },
   mounted() {
-    this.loginCheck();
+    this.memberId = memberApi.getMemberId();
+    console.log(this.memberId);
   },
 };
 </script>
