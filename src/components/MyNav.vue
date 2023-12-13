@@ -6,10 +6,10 @@
   >
   <div class="profile-userpic">
     <img
-      src="@/assets/profile_sample.jpg"
+      :src="this.picture"
       class="rounded-circle"
-      width="240"
-      height="240"
+      width="200"
+      height="200"
       alt="profile_image"
       onerror="@/assets/profile_sample.jpg"
     />
@@ -58,7 +58,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: { picture: String },
+};
 </script>
 
 <style></style>
