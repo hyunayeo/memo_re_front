@@ -52,13 +52,19 @@
     <h4 class="fst-italic">ect</h4>
     <ol class="list-unstyled">
       <li><a href="/mypage/update">정보수정</a></li>
-      <li><a href="#">문의하기</a></li>
+      <li><a @click="goToAskList" href="#">문의하기</a></li>
     </ol>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    goToAskList() {
+      this.$router.push(`/ask`);
+    }
+  }
+};
 </script>
 
 <style></style>
