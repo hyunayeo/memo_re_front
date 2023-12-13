@@ -1,7 +1,7 @@
 <template>
   <div class="row g-5 mx-5">
     <div class="col-md-3">
-      <my-nav-vue :picture="picture"/>
+      <my-nav-vue :picture="picture" />
     </div>
     <div class="col-md-9">
       <router-view></router-view>
@@ -17,7 +17,6 @@ export default {
   data() {
     return {
       memberId: null,
-      res: Object,
       picture: null,
     };
   },
@@ -25,8 +24,8 @@ export default {
   methods: {
     getProfileImage: async function () {
       this.memberId = memberApi.getMemberId();
-      this.res = await memberApi.getMember(this.memberId);
-      this.picture = this.res.data.picture;
+      let res = await memberApi.getMember(this.memberId);
+      this.picture = res.data.picture;
     },
   },
   mounted() {

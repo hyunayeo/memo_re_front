@@ -25,7 +25,7 @@
       </li>
       <li>
         <a
-          href="/mypage/record"
+          @click="this.$router.push({ path: `/mypage/record` })"
           class="h4 fst-italic link-body-emphasis text-decoration-none border-top"
           >My Record</a
         >
@@ -33,14 +33,14 @@
 
       <li>
         <a
-          href="/mypage/library"
+          @click="this.$router.push({ path: `/mypage/library` })"
           class="h4 fst-italic link-body-emphasis text-decoration-none border-top"
           >My Library</a
         >
       </li>
       <li>
         <a
-          href="/mypage/calender"
+          @click="this.$router.push({ path: `/mypage/calender` })"
           class="h4 fst-italic link-body-emphasis text-decoration-none border-top"
           >Book Calender</a
         >
