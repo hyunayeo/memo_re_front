@@ -58,7 +58,7 @@
               <a @click="prevPage" class="page-link" ref="previous" tabindex="-1">&laquo;</a>
             </li>
             <li @:click="fetchByPage(i)"  v-for="i in pages" :key="i" class="page-item">
-              <a class="page-link page-number">{{i}}</a>
+              <a :class="['page-link page-number', {active : this.searchDto.page == i}]">{{i}}</a>
             </li>
             <li class="page-item disabled">
               <a @click="nextPage" class="page-link" ref="next" tabindex="-1">&raquo;</a>
@@ -106,9 +106,6 @@ export default {
       pickedBook : {}
     };
   },
-  updated() {
-    this.colorPage()
-  },
   methods: {
     closePage() {
       this.$emit("close");
@@ -138,17 +135,6 @@ export default {
     },
     prevPage() {
       this.fetchByPage(this.searchDto.page - 5);
-    },
-    colorPage() {
-      let pages = document.querySelectorAll('.page-number');
-      pages.forEach((page) => {
-        if (page.innerHTML == this.searchDto.page) {
-          console.log(page.parentElement)
-          page.classList.add("active");
-        } else {
-          page.classList.remove("active");
-        }
-      })
     },
   },
   computed : {
