@@ -165,6 +165,7 @@ import BookRegistration from "@/components/modal/BookRegistration.vue";
 import BookSmallVue from '@/components/BookSmall.vue';
 import bookApi from '@/api/book.api';
 import articleApi from '@/api/article.api';
+import memberApi from "@/api/member.api";
 
 export default {
   name: "ArticleInsert",
@@ -191,6 +192,10 @@ export default {
     BookSmallVue,
     BookSearch,
     BookRegistration,
+  },
+  mounted() {
+    memberApi.checkLogin();
+    this.articleInfo.memberId = memberApi.getMemberId();
   },
   methods: {
     toggleActive: function (e) {
