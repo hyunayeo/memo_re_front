@@ -6,10 +6,10 @@
   >
   <div class="profile-userpic">
     <img
-      src="@/assets/profile_sample.jpg"
+      :src="this.picture"
       class="rounded-circle"
-      width="240"
-      height="240"
+      width="200"
+      height="200"
       alt="profile_image"
       onerror="@/assets/profile_sample.jpg"
     />
@@ -25,7 +25,7 @@
       </li>
       <li>
         <a
-          href="/mypage/record"
+          @click="this.$router.push({ path: `/mypage/record` })"
           class="h4 fst-italic link-body-emphasis text-decoration-none border-top"
           >My Record</a
         >
@@ -33,14 +33,14 @@
 
       <li>
         <a
-          href="/mypage/library"
+          @click="this.$router.push({ path: `/mypage/library` })"
           class="h4 fst-italic link-body-emphasis text-decoration-none border-top"
           >My Library</a
         >
       </li>
       <li>
         <a
-          href="/mypage/calender"
+          @click="this.$router.push({ path: `/mypage/calender` })"
           class="h4 fst-italic link-body-emphasis text-decoration-none border-top"
           >Book Calender</a
         >
@@ -52,13 +52,20 @@
     <h4 class="fst-italic">ect</h4>
     <ol class="list-unstyled">
       <li><a href="/mypage/update">정보수정</a></li>
-      <li><a href="#">문의하기</a></li>
+      <li><a @click="goToAskList">문의하기</a></li>
     </ol>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: { picture: String },
+  methods: {
+    goToAskList() {
+      this.$router.push(`/ask`);
+    }
+  }
+};
 </script>
 
 <style></style>

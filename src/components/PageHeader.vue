@@ -15,7 +15,7 @@
         <form class="form-inline">
           <div class="input-group">
             <div class="input-group-prepend">
-              <select class="form-select" aria-label="Default select example">
+              <select v-model="type" class="form-select" aria-label="Default select example">
                 <optgroup label="도서">
                   <option selected>도서명</option>
                   <option>작가명</option>
@@ -27,20 +27,29 @@
               </select>
             </div>
             <input
+              v-model="keyword"
               type="text"
               class="form-control"
               aria-label="Text input with dropdown button"
+              @keydown.enter.prevent
             />
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+            <a @click="searchByKeyword" class="btn btn-outline-success my-2 my-sm-0">
               /
-            </button>
+            </a>
           </div>
         </form>
         <div>
-          <a class="btn btn-sm btn-outline-secondary mx-1" href="/login"
-            >Login</a
+          <span v-if="memberId == null">
+            <a class="btn btn-sm btn-outline-secondary mx-1" href="/login"
+              >Login</a
+            >
+            <a class="btn btn-sm btn-outline-secondary" href="/signup"
+              >Sign up</a
+            >
+          </span>
+          <span v-else class="btn btn-sm btn-outline-secondary" @click="logout"
+            >logout</span
           >
-          <a class="btn btn-sm btn-outline-secondary" href="/signup">Sign up</a>
         </div>
       </div>
     </div>
@@ -48,8 +57,32 @@
 </template>
 
 <script>
+import memberApi from "@/api/member.api";
 export default {
   name: "PageHeader",
+  data() {
+    return {
+      memberId: null,
+      keyword : "",
+      type : "도서명",
+    };
+  },
+  methods: {
+    logout: function () {
+      memberApi.logout();
+    },
+    searchByKeyword() {
+      if (this.type == "도서명" || this.type == "작가명") {
+        location.href=`/book?keyword=${this.keyword}&type=${this.type}`;
+      } else {
+        location.href=`/article?keyword=${this.keyword}&type=${this.type}`;
+      }      
+    }
+  },
+  mounted() {
+    this.memberId = memberApi.getMemberId();
+    console.log(this.memberId);
+  }
 };
 </script>
 

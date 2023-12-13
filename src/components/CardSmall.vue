@@ -1,7 +1,7 @@
 <template>
   <a
+    @click="goToDetail"
     class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"
-    href="#"
   >
     <img
       :src="article?.book?.cover"
@@ -21,6 +21,11 @@ export default {
   props: {
     article : Object
   },
+  methods : {
+    goToDetail() {
+      this.$router.push({ path: `/article/detail/${this.article.id}`});
+    }
+  },
   computed : {
     dateEng() {
       // January 1, 2021
@@ -33,4 +38,5 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+</style>

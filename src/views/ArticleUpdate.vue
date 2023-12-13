@@ -198,7 +198,7 @@ export default {
       this.article = res.data;
     },
     async pickBook(book) {
-      let res = await bookApi.getBookByIsbn(book.isbn13);
+      let res = await bookApi.getBookByIsbn(book.isbn);
       this.article.book = res.data;
     },
     async updateArticle() {

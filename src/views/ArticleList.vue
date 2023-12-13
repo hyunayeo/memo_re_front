@@ -1,16 +1,13 @@
 <template>
   <div class="d-flex justify-content-end align-items-center">
-    <div class="w-50 mb-4">
-      <button @click="goToWrite" class="btn-link">게시글 쓰러가기</button>
-    </div>
     <div class="d-flex justify-content-end align-items-center mb-4">
       <a @click="fetchAsLatest" class="text-body-emphasis text-decoration-none latest">최신순</a>
       &nbsp;/&nbsp;
       <a @click="fetchAsPopularity" class="text-body-emphasis text-decoration-none popular">인기순</a>
     </div>
   </div>
-  <p v-if="article">{{ article.title }}</p>
-  <img v-if="article" :src="article.book.cover" />
+  <p v-if="article">{{ article?.title }}</p>
+  <img v-if="article" :src="article?.book?.cover" />
   <table class="table align-middle">
     <thead>
       <tr>
@@ -25,24 +22,24 @@
     </thead>
     <tbody>
       <tr @click="goToDetail(article)" v-for="(article) in articles" :key="article" class="media position-relative">
-        <td scope="row">{{ article.id }}</td>
+        <td scope="row">{{ article?.id }}</td>
         <td>
           <img
-            :src="article.book?.cover"
+            :src="article?.book?.cover"
             class="bd-placeholder-img"
             height="90"
             onerror="@/assets/profile_sample.jpg"
-            :key="article.book?.cover"
+            :key="article?.book?.cover"
           />
         </td>
-        <td>{{ article.title }}</td>
+        <td>{{ article?.title }}</td>
 
         <td class="fw-bold">
-          {{ article.content }}
+          {{ article?.content }}
         </td>
-        <td>{{article.member?.name}}</td>
-        <td>{{dateShort(`${article.createdAt}`)}}</td>
-        <td>{{article.viewCount}}</td>
+        <td>{{article?.member?.name}}</td>
+        <td>{{dateShort(`${article?.createdAt}`)}}</td>
+        <td>{{article?.viewCount}}</td>
       </tr>
     </tbody>
   </table>
@@ -52,12 +49,13 @@
         <a @click="prevPage" class="page-link" ref="previous" tabindex="-1">Previous</a>
       </li>
       <li @:click="fetchByPage(i)"  v-for="i in pages" :key="i" class="page-item">
-        <a class="page-link page-number">{{i}}</a>
+        <a :class="['page-link page-number', {active : this.searchDto.page == i}]" >{{i}}</a>
       </li>
-      <li v-for="i in pagination.totalPageCount" :key="i" class="page-item">
-        <a class="page-link" href="#">{{ i }}</a>
+      <li class="page-item disabled">
+        <a @click="nextPage" class="page-link" ref="next" tabindex="-1">next</a>
       </li>
-  
+    </ul>
+  </nav>
 </template>
 <script>
 import articleApi from '@/api/article.api.js'
@@ -69,7 +67,7 @@ export default {
     return {
       pageElem,
       previous,
-      pageNumber
+      pageNumber,
     }
   },
   data() {
@@ -85,21 +83,26 @@ export default {
     }
   },
   async mounted() {
-    if (this.$route.fullPath.split('?')?.[1]) {
-          console.log(this.$route.fullPath.split('?')?.[1])
-      this.searchDto.filter = "category",
-      this.searchDto.filterKeyword = this.$route.fullPath.split('?')?.[1];
-    }
+    this.pathCheck();
     this.fetchArticlesWithBookAndMember(this.searchDto);
   },
-  updated() {
-    this.colorPage()
-  },
   methods : {
+    pathCheck() {
+      if (this.$route.query?.type == "제목") {
+        this.searchDto.searchType = "title";
+        this.searchDto.searchKeyword = this.$route.query.keyword;
+      } else if (this.$route.query?.type == "작성자명"){
+        this.searchDto.searchType = "writer";
+        this.searchDto.searchKeyword = this.$route.query.keyword;
+      } else if (this.$route.query?.type == "category"){
+        this.searchDto.filter = "category",
+        this.searchDto.filterKeyword = this.$route.query.keyword;
+      }
+    },
     async fetchArticlesWithBookAndMember(searchDto) {
       let res = await articleApi.getArticles(searchDto);
-      this.articles = res.data.list;
-      this.pagination = res.data.pagination
+      this.articles = await res.data.list;
+      this.pagination = await res.data.pagination;
     },
     fetchByPage(i) {
       this.searchDto.page = i;
@@ -127,18 +130,6 @@ export default {
     prevPage() {
       this.fetchByPage(this.searchDto.page - 5);
     },
-    colorPage() {
-
-      let pages = document.querySelectorAll('.page-number');
-      pages.forEach((page) => {
-        if (page.innerHTML == this.searchDto.page) {
-          console.log(page.parentElement)
-          page.classList.add("active");
-        } else {
-          page.classList.remove("active");
-        }
-      })
-    },
     goToDetail(article) {
       this.$router.push({ path: `/article/detail/${article.id}` });
     },
@@ -153,22 +144,21 @@ export default {
     pages() {
 
       if (!this.pagination?.existNextPage) {
-        this.pageElem?.lastChild.classList.add('disabled')
+        this.pageElem?.lastChild.classList?.add('disabled')
       } else {
-        this.pageElem?.lastChild.classList.remove('disabled')
+        this.pageElem?.lastChild.classList?.remove('disabled')
       }
       if (!this.pagination?.existPrevPage) {
-        this.pageElem?.firstChild.classList.add('disabled')
+        this.pageElem?.firstChild.classList?.add('disabled')
       } else {
-        this.pageElem?.firstChild.classList.remove('disabled')
+        this.pageElem?.firstChild.classList?.remove('disabled')
       }
 
       let end = this.pagination?.endPage;
       let start = this.pagination?.startPage;
 
       let pages = Array.from({length: end}, (_, index) => index + 1);
-
-
+      
       return pages?.slice(start-1);
     }
   }

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="display-5 link-body-emphasis mb-1"></div>
-    <div class="blog-post">
+    <div @click="goToDetail" class="blog-post" >
       <div class="row">
         <div class="col-auto">
           <div
@@ -10,7 +10,7 @@
             <div class="col-auto d-none d-lg-block">
               <img
                 class="bd-placeholder-img"
-                :src="article.book?.cover"
+                :src="article?.book?.cover"
                 width="200"
               />
               <title>Placeholder</title>
@@ -18,14 +18,14 @@
             </div>
             <div class="col p-4 d-flex flex-column position-static">
               <h2 class="display-5 link-body-emphasis mb-1 text-border">
-                {{article.title}}
+                {{article?.title}}
               </h2>
               <p class="blog-post-meta">
                 {{ dateEng }} <a href="#">{{article?.member?.name}}</a>
               </p>
-              <h3>{{article.title}}</h3>
-              <h5>{{article.author}}</h5>
-              <p class="text-secondary">{{article.book?.publisher}} · {{dateKor}}</p>
+              <h3>{{article?.title}}</h3>
+              <h5>{{article?.author}}</h5>
+              <p class="text-secondary">{{article?.book?.publisher}} · {{dateKor}}</p>
               <div class="star-rating">
                 <span v-for="index in 5" :key="index">
                   <span class="text-warning" v-if="ratingCheck(index)">★</span>
@@ -38,7 +38,7 @@
       </div>
 
       <hr />
-      <p>{{ article.content }}</p>
+      <p>{{ article?.content }}</p>
     </div>
   </div>
 </template>
@@ -56,18 +56,20 @@ export default {
   },
   methods : {
     ratingCheck(index) {
-      console.log(this.article)
-      if (index <= this.article.ratingScore) {
+
+      if (index <= this.article?.ratingScore) {
         return true
       } else {
         return false;
       }
     },
-
+    goToDetail() {
+      this.$router.push({ path: `/article/detail/${this.article.id}`});
+    }
   },
   computed : {
     dateKor() {
-      let date = this.article.book?.publishedDate;
+      let date = this.article?.book?.publishedDate;
       date = date?.replaceAll('-','- ');
       date = date?.replace('-','년');
       date = date?.replace('-','월');

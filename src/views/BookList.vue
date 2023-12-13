@@ -8,24 +8,15 @@
     <table class="table justify-content-center">
       <thead>
         <tr>
-          <th scope="col">#</th>
           <th scope="col">book</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <th scope="row">1</th>
           <td>
-            <card-medium />
+            <!-- @click="goToDetail($event.target, book.id)" -->
+            <card-medium v-for="(book, i) in bookList" :key="i" v-bind:book="book"/>
           </td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <card-medium />
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <card-medium />
         </tr>
       </tbody>
     </table>
@@ -46,10 +37,36 @@
 </template>
 <script>
 import CardMedium from "@/components/CardMedium.vue";
+// import bookApi from "@/api/book.api";
+import axios from 'axios';
 
 export default {
   name: "BookList",
   components: { CardMedium },
+
+  data() {
+    return {
+      bookList: [],
+    }
+  },
+
+  mounted() {
+    this.fetchBookData();
+  },
+
+  methods: {
+    async fetchBookData() {
+      await axios.get('/api/books')
+        .then((response) => {
+          console.log("getBookList", response);
+          this.bookList = response.data.list;
+          return this.bookList;
+        })
+        .catch((error) => {
+          console.error('API 호출 중 오류:', error);
+        })
+    },
+  },
 };
 </script>
 
