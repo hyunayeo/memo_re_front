@@ -19,7 +19,7 @@
       </div>
 
       <div class="text-end">
-        <button type="button" class="btn btn-primary btn-lg">문의하기</button>
+        <button @click="goToAskInsert" type="button" class="btn btn-primary btn-lg">문의하기</button>
       </div>
     </div>
   </div>
@@ -77,6 +77,12 @@ export default {
       complete: "답변완료",
     };
   },
+
+  methods: {
+    goToAskInsert() {
+      this.$router.push(`/ask/insert`);
+    }
+  }
 };
 </script>
 
