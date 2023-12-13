@@ -12,21 +12,21 @@
           </div>
         </div>
 
-        <div class="modal-body">
+        <div class="modal-body" @keydown.enter.prevent>
           <div class="row">
             <div class="col-md-8">
               <div class="form-group">
                 <input
-                  class="form-control form-control-lg mt-4"
-                  placeholder="도서 검색"
-                  id="inputLarge"
                   v-model="this.searchDto.searchKeyword"
+                  class="form-control form-control-lg mt-4 "
+                  placeholder="도서 검색"
+                  @keydown.enter="fetchBooks"
                 />
               </div>
             </div>
 
             <div class="col-md-4 mt-4">
-              <button @click="searchBooks" type="button" class="btn btn-primary btn-lg px-4">
+              <button type="button" class="btn btn-primary btn-lg px-4" @click="fetchBooks()">
                 <h4>검색</h4>
               </button>
             </div>
@@ -52,48 +52,24 @@
             </div>
           </div>
         </div>
-
-        <div class="d-flex justify-content-center">
-          <ul class="pagination pagination-lg mt-2">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center" ref="pageElem">
             <li class="page-item disabled">
-              <a class="page-link" href="#">&laquo;</a>
+              <a @click="prevPage" class="page-link" ref="previous" tabindex="-1">&laquo;</a>
             </li>
-            <li class="page-item active">
-              <a class="page-link" href="#">1</a>
+            <li @:click="fetchByPage(i)"  v-for="i in pages" :key="i" class="page-item">
+              <a :class="['page-link page-number', {active : this.searchDto.page == i}]">{{i}}</a>
             </li>
-            <li class="page-item">
-              <a class="page-link" href="#">2</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">3</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">4</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">5</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">&raquo;</a>
+            <li class="page-item disabled">
+              <a @click="nextPage" class="page-link" ref="next" tabindex="-1">&raquo;</a>
             </li>
           </ul>
-        </div>
+        </nav>
 
         <div class="d-grid gap-2 col-5 mx-auto mt-4">
-          <button class="btn btn-primary btn-lg py-3" @click="registerBook">
+          <button class="btn btn-primary btn-lg py-3" @click="registerBook()">
             + 검색에 나오지 않은 도서 등록
           </button>
-        </div>
-
-        <div class="text-center">
-          <div class="col-md-3 pt-4 mx-auto my-3">
-            <button type="button" class="btn btn-outline-primary btn-lg px-5">
-              등록
-            </button>
-            <button type="button" class="btn btn-outline-primary btn-lg px-5">
-              취소
-            </button>
-          </div>
         </div>
       </div>
     </div>
@@ -102,7 +78,17 @@
 
 <script>
 import bookApi from '@/api/book.api';
+import { ref } from 'vue';
+
 export default {
+  setup() {
+    const pageElem = ref(null), previous = ref(null), pageNumber = ref(null);
+    return {
+      pageElem,
+      previous,
+      pageNumber
+    }
+  },
   data() {
     return {
       books : [],
@@ -114,12 +100,12 @@ export default {
         searchType : "title",
         searchKeyword : ""
       },
-      title: "KITRI",
-      author: "kitri",
+      currentEndPage : 5,
+      // title: "KITRI",
+      // author: "kitri",
       pickedBook : {}
     };
   },
-
   methods: {
     closePage() {
       this.$emit("close");
@@ -129,16 +115,49 @@ export default {
       this.$emit("close");
       this.$emit("showRegisterBook", true);
     },
-    async searchBooks() {
+    fetchByPage(i) {
+      this.searchDto.page = i;
+      this.fetchBooks(this.searchDto);
+    },
+    async fetchBooks() {
       let res = await bookApi.getBooks(this.searchDto);
       this.books = res.data.list;
+      this.pagination = res.data.pagination;
     },
     pickBook(book) {
+      console.log(book)
       this.pickedBook = book;
       this.$emit("picked", this.pickedBook)
       this.closePage();
-    }
+    },
+    nextPage() {
+      this.fetchByPage(this.pagination.endPage + 1);
+    },
+    prevPage() {
+      this.fetchByPage(this.searchDto.page - 5);
+    },
   },
+  computed : {
+    pages() {
+      if (!this.pagination?.existNextPage) {
+        this.pageElem?.lastChild.classList?.add('disabled')
+      } else {
+        this.pageElem?.lastChild.classList?.remove('disabled')
+      }
+      if (!this.pagination?.existPrevPage) {
+        this.pageElem?.firstChild.classList?.add('disabled')
+      } else {
+        this.pageElem?.firstChild.classList?.remove('disabled')
+      }
+
+      let end = this.pagination?.endPage;
+      let start = this.pagination?.startPage;
+
+      let pages = Array.from({length: end}, (_, index) => index + 1);
+
+      return pages?.slice(start-1);
+    }
+  }
 };
 </script>
 

@@ -15,7 +15,7 @@
         <form class="form-inline">
           <div class="input-group">
             <div class="input-group-prepend">
-              <select class="form-select" aria-label="Default select example">
+              <select v-model="type" class="form-select" aria-label="Default select example">
                 <optgroup label="도서">
                   <option selected>도서명</option>
                   <option>작가명</option>
@@ -27,13 +27,15 @@
               </select>
             </div>
             <input
+              v-model="keyword"
               type="text"
               class="form-control"
               aria-label="Text input with dropdown button"
+              @keydown.enter.prevent
             />
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+            <a @click="searchByKeyword" class="btn btn-outline-success my-2 my-sm-0">
               /
-            </button>
+            </a>
           </div>
         </form>
         <div>
@@ -60,6 +62,7 @@ export default {
   name: "PageHeader",
   data() {
     return {
+<<<<<<< HEAD
       memberId: null,
     };
   },
@@ -72,6 +75,26 @@ export default {
     this.memberId = memberApi.getMemberId();
     console.log(this.memberId);
   },
+=======
+      keyword : "",
+      type : "도서명",
+    }
+  },
+  methods : {
+    searchByKeyword() {
+      // if (this.type == "도서명" || this.type == "작가명") {
+      //   this.$router.push({ name : 'BookList', query : {keyword : this.keyword, type : this.type} });
+      // } else {
+      //   this.$router.push({ name : 'ArticleList', query : {keyword : this.keyword, type : this.type} });
+      // }      
+      if (this.type == "도서명" || this.type == "작가명") {
+        location.href=`/book?keyword=${this.keyword}&type=${this.type}`;
+      } else {
+        location.href=`/article?keyword=${this.keyword}&type=${this.type}`;
+      }      
+    }
+  }
+>>>>>>> feature/#54-article-page-additional-functions
 };
 </script>
 

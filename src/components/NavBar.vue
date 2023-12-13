@@ -4,15 +4,15 @@
       <a class="nav-item nav-link link-body-emphasis active" href="/mypage">MyPage</a>
 
       <a class="nav-item nav-link link-body-emphasis" href="/article">전체</a>
-      <a class="nav-item nav-link link-body-emphasis" href="/article?기술과학">기술과학</a>
-      <a class="nav-item nav-link link-body-emphasis" href="/article?문학">문학</a>
-      <a class="nav-item nav-link link-body-emphasis" href="/article?사회과학">사회과학</a>
-      <a class="nav-item nav-link link-body-emphasis" href="/article?언어">언어</a>
-      <a class="nav-item nav-link link-body-emphasis" href="/article?역사">역사</a>
-      <a class="nav-item nav-link link-body-emphasis" href="/article?예술">예술</a>
-      <a class="nav-item nav-link link-body-emphasis" href="/article?자연과학">자연과학</a>
-      <a class="nav-item nav-link link-body-emphasis" href="/article?종교">종교</a>
-      <a class="nav-item nav-link link-body-emphasis" href="/article?기타">기타</a>
+      <a class="nav-item nav-link link-body-emphasis" href="/article?type=category&keyword=기술과학">기술과학</a>
+      <a class="nav-item nav-link link-body-emphasis" href="/article?type=category&keyword=문학">문학</a>
+      <a class="nav-item nav-link link-body-emphasis" href="/article?type=category&keyword=사회과학">사회과학</a>
+      <a class="nav-item nav-link link-body-emphasis" href="/article?type=category&keyword=언어">언어</a>
+      <a class="nav-item nav-link link-body-emphasis" href="/article?type=category&keyword=역사">역사</a>
+      <a class="nav-item nav-link link-body-emphasis" href="/article?type=category&keyword=예술">예술</a>
+      <a class="nav-item nav-link link-body-emphasis" href="/article?type=category&keyword=자연과학">자연과학</a>
+      <a class="nav-item nav-link link-body-emphasis" href="/article?type=category&keyword=종교">종교</a>
+      <a class="nav-item nav-link link-body-emphasis" href="/article?type=category&keyword=기타">기타</a>
     </nav>
   </div>
 </template>

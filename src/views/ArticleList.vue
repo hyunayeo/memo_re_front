@@ -49,7 +49,7 @@
         <a @click="prevPage" class="page-link" ref="previous" tabindex="-1">Previous</a>
       </li>
       <li @:click="fetchByPage(i)"  v-for="i in pages" :key="i" class="page-item">
-        <a class="page-link page-number">{{i}}</a>
+        <a :class="['page-link page-number', {active : this.searchDto.page == i}]" >{{i}}</a>
       </li>
       <li class="page-item disabled">
         <a @click="nextPage" class="page-link" ref="next" tabindex="-1">next</a>
@@ -67,7 +67,7 @@ export default {
     return {
       pageElem,
       previous,
-      pageNumber
+      pageNumber,
     }
   },
   data() {
@@ -83,21 +83,26 @@ export default {
     }
   },
   async mounted() {
-    if (this.$route.fullPath.split('?')?.[1]) {
-          console.log(this.$route.fullPath.split('?')?.[1])
-      this.searchDto.filter = "category",
-      this.searchDto.filterKeyword = this.$route.fullPath.split('?')?.[1];
-    }
+    this.pathCheck();
     this.fetchArticlesWithBookAndMember(this.searchDto);
   },
-  updated() {
-    this.colorPage()
-  },
   methods : {
+    pathCheck() {
+      if (this.$route.query?.type == "제목") {
+        this.searchDto.searchType = "title";
+        this.searchDto.searchKeyword = this.$route.query.keyword;
+      } else if (this.$route.query?.type == "작성자명"){
+        this.searchDto.searchType = "writer";
+        this.searchDto.searchKeyword = this.$route.query.keyword;
+      } else if (this.$route.query?.type == "category"){
+        this.searchDto.filter = "category",
+        this.searchDto.filterKeyword = this.$route.query.keyword;
+      }
+    },
     async fetchArticlesWithBookAndMember(searchDto) {
       let res = await articleApi.getArticles(searchDto);
-      this.articles = res.data.list;
-      this.pagination = res.data.pagination
+      this.articles = await res.data.list;
+      this.pagination = await res.data.pagination;
     },
     fetchByPage(i) {
       this.searchDto.page = i;
@@ -124,18 +129,6 @@ export default {
     },
     prevPage() {
       this.fetchByPage(this.searchDto.page - 5);
-    },
-    colorPage() {
-
-      let pages = document.querySelectorAll('.page-number');
-      pages.forEach((page) => {
-        if (page.innerHTML == this.searchDto.page) {
-          console.log(page.parentElement)
-          page.classList.add("active");
-        } else {
-          page.classList.remove("active");
-        }
-      })
     },
     goToDetail(article) {
       this.$router.push({ path: `/article/detail/${article.id}` });
@@ -165,8 +158,7 @@ export default {
       let start = this.pagination?.startPage;
 
       let pages = Array.from({length: end}, (_, index) => index + 1);
-
-
+      
       return pages?.slice(start-1);
     }
   }

@@ -7,6 +7,9 @@
       <div class="modal-content">
         <div class="modal-header">
           <p class="h2 modal-title mt-4">새로운 도서 정보를 입력하세요.</p>
+          <div class="d-flex justify-content-end align-items-center mb-4">
+            <div class="btn-close" @click="closePage"></div>
+          </div>
         </div>
 
         <div class="modal-body">
