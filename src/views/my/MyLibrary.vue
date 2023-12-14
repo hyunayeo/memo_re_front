@@ -78,7 +78,7 @@ import articleApi from '@/api/article.api';
 
 export default {
   name: "MyLibrary",
-  components: { MyReading, MyDone, MyWish},
+  components: { MyReading, MyDone, MyWish, BookList, ArticleList },
   data() {
     return {
       isLibrary: true,
@@ -90,11 +90,9 @@ export default {
       booksFromWishes: [],
     };
   },
-  components: { MyReading, MyDone, MyWish, BookList, ArticleList },
   async mounted() {
     this.fetchArticlesAndClassify();
     this.fetchWishWithBook();
-
   },
   methods: {
     async fetchWishWithBook() {

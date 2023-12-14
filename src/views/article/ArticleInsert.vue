@@ -4,21 +4,20 @@
       <h1 class="mt-4">Board</h1>
       <div class="card mb-4">
         <div class="card-body">
-          <form method="post">
+          <form method="get">
             <label for="bookInfo" class="form-label">책 정보</label>
             <div
-                class="d-grid gap-2 d-md-flex justify-content-md-start"     
-                @click="showModal = true"
+              class="d-grid gap-2 d-md-flex justify-content-md-start"
+              @click="showModal = true"
             >
               <a
                 href="#"
                 class="btn btn-primary"
                 role="button"
                 data-bs-toggle="button"
-                >책 정보 수정
-              </a>
+                >책 검색</a
+              >
             </div>
-            <!-- <card-small-vue :article="article"/> -->
             <BookSearch
               v-if="showModal"
               @close="showModal = false"
@@ -30,7 +29,7 @@
               @close="showRegisterModal = false"
             />
 
-            <book-small-vue :book="article.book"/>
+            <book-small-vue :book="pickedBook" />
 
             <div class="mb-3 mt-3">
               <label for="title" class="form-label">제목</label>
@@ -40,7 +39,7 @@
                 id="title"
                 name="title"
                 placeholder="제목을 입력해 주세요."
-                v-model="article.title"
+                v-model="articleInfo.title"
               />
             </div>
 
@@ -111,7 +110,7 @@
                   class="form-control"
                   name="startDate"
                   id="startDate"
-                  v-model="article.startDate"
+                  v-model="articleInfo.startDate"
                 />
               </div>
               <p></p>
@@ -122,7 +121,7 @@
                   class="form-control"
                   name="endDate"
                   id="endDate"
-                  v-model="article.endDate"
+                  v-model="articleInfo.endDate"
                 />
               </div>
             </form>
@@ -136,22 +135,38 @@
                 id="content"
                 name="content"
                 rows="3"
-                v-model="article.content"
+                v-model="articleInfo.content"
               ></textarea>
             </div>
 
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="isDone" v-model="article.isDone"/>
-              <label class="form-check-label" for="isDone" >
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="isDone"
+                v-model="articleInfo.isDone"
+              />
+              <label class="form-check-label" for="isDone">
                 다 읽었어요!
               </label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="isHide" v-model="article.isHide"/>
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="isHide"
+                v-model="articleInfo.isHide"
+              />
               <label class="form-check-label" for="isHide"> 비밀글 </label>
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-              <button @click="updateArticle()" class="btn btn-primary" type="button">수정하기</button>
+              <button
+                @click="insertArticle"
+                class="btn btn-primary"
+                type="button"
+              >
+                저장하기
+              </button>
             </div>
           </form>
         </div>
@@ -163,26 +178,40 @@
 <script>
 import BookSearch from "@/components/modal/BookSearch.vue";
 import BookRegistration from "@/components/modal/BookRegistration.vue";
-import BookSmallVue from '@/components/BookSmall.vue';
-import articleApi from '@/api/article.api';
-import bookApi from '@/api/book.api';
+import BookSmallVue from "@/components/book/BookSmall.vue";
+import bookApi from "@/api/book.api";
+import articleApi from "@/api/article.api";
+import memberApi from "@/api/member.api";
 
 export default {
+  name: "ArticleInsert",
+  data() {
+    return {
+      pickedBook: {},
+      showModal: false,
+      showRegisterModal: false,
+      option: "",
+      articleInfo: {
+        memberId: 0,
+        title: "",
+        content: "",
+        bookId: 0,
+        startDate: "",
+        endDate: "",
+        ratingScore: 0,
+        isDone: false,
+        isHide: false,
+      },
+    };
+  },
   components: {
     BookSmallVue,
     BookSearch,
     BookRegistration,
   },
-  data() {
-    return {
-      showModal: false,
-      showRegisterModal: false,
-      option: "",
-      article : {}
-    }
-  },
-  async mounted() {
-    this.fetchArticleById(this.$route.path.split('/').pop())
+  mounted() {
+    memberApi.checkLogin();
+    this.articleInfo.memberId = memberApi.getMemberId();
   },
   methods: {
     toggleActive: function (e) {
@@ -191,36 +220,22 @@ export default {
         btn.classList.remove("active");
       });
       e.classList.toggle("active");
-      this.article.ratingScore = e.value;
-    },
-    async fetchArticleById(id) {
-      let res = await articleApi.getArticle(id);
-      this.article = res.data;
+      this.articleInfo.ratingScore = e.value;
     },
     async pickBook(book) {
+      this.pickedBook = book;
+      console.log(book);
       let res = await bookApi.getBookByIsbn(book.isbn);
-      this.article.book = res.data;
+      this.pickedBook = res.data;
+      this.articleInfo.bookId = this.pickedBook.id;
+      console.log(this.pickedBook);
     },
-    async updateArticle() {
-      let articleUpdateInfo = {
-        memberId : this.article.memberId,
-        title : this.article.title,
-        content : this.article?.content,
-        bookId : this.article?.book.id,
-        startDate : this.article.startDate,
-        endDate : this.article.endDate,
-        ratingScore : this.article?.ratingScore,
-        isDone : this.article?.isDone || false,
-        isHide : this.article?.isHide || false,
-      }
+    async insertArticle() {
+      console.log(this.articleInfo);
+      await articleApi.postArticle(this.articleInfo);
 
-      await articleApi.updateArticle(this.article.id, articleUpdateInfo);      
-
-      this.$router.back();
-    }
+      this.$router.replace("/article");
+    },
   },
-  computed : {
-    
-  }
 };
 </script>

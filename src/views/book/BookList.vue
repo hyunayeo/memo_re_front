@@ -36,7 +36,7 @@
   </div>
 </template>
 <script>
-import CardMedium from "@/components/CardMedium.vue";
+import CardMedium from "@/components/book/BookMedium.vue";
 // import bookApi from "@/api/book.api";
 import axios from 'axios';
 
