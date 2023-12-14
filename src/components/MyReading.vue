@@ -7,8 +7,9 @@
           <div class="card card-cover overflow-hidden rounded-3 shadow-lg">
             <img
               class="card-img img-fluid"
-              src="@/assets/book_sample.jpg"
+              :src="articles[0]?.book.cover"
               width="200"
+              @click="this.$router.push({path : `/article/detail/${this.articles[0]?.id}`})"
             />
           </div>
         </div>
@@ -16,17 +17,19 @@
           <div class="card card-cover overflow-hidden rounded-3 shadow-lg">
             <img
               class="card-img img-fluid"
-              src="@/assets/book_sample.jpg"
+              :src="articles[1]?.book.cover"
               width="200"
+              @click="this.$router.push({path : `/article/detail/${this.articles[1]?.id}`})"
             />
           </div>
         </div>
-        <div class="col">
+        <div class="col ">
           <div class="card card-cover overflow-hidden rounded-3 shadow-lg">
             <img
               class="card-img img-fluid"
-              src="@/assets/book_sample.jpg"
+              :src="articles[2]?.book.cover"
               width="200"
+              @click="this.$router.push({path : `/article/detail/${this.articles[2]?.id}`})"
             />
           </div>
         </div>
@@ -34,3 +37,10 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  props: {
+    articles : Array
+  }
+};
+</script>

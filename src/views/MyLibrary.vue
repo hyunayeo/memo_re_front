@@ -24,9 +24,9 @@
 
     <div v-if="isLibrary">
       <p></p>
-      <MyDone />
-      <MyReading />
-      <MyWish v-bind:wishes="wishes" />
+      <MyDone :articles="doneArticles"/>
+      <MyReading :articles="readingArticles"/>
+      <MyWish :wishes="wishes" />
     </div>
     <div v-else>
       <div class="d-flex justify-content-end align-items-center">
@@ -54,17 +54,28 @@
           </li>
         </ul>
       </div>
-      <BookList v-if="activeIdx == 2" />
-      <ArticleList v-else />
+      <div v-if="activeIdx == 2">
+        <BookList :book="book" :key="book"/>
+      </div>      
+      <div v-if="activeIdx == 0">
+        <ArticleList :isDone="false"/>
+      </div>  
+      <div v-if="activeIdx == 1">
+        <ArticleList :isDone="true"/>
+      </div>  
     </div>
   </div>
 </template>
 
 <script>
-import MyWish from "@/components/MyWish.vue";
-import MyDone from "@/components/MyDone.vue";
-import MyReading from "@/components/MyReading.vue";
+import MyWish from "@/components/my/MyWish.vue";
+import MyDone from "@/components/my/MyDone.vue";
+import MyReading from "@/components/my/MyReading.vue";
+import ArticleList from "@/views/article/ArticleList.vue"
+import BookList from "@/views/book/BookList.vue"
 import wishApi from "@/api/wish.api";
+import articleApi from '@/api/article.api';
+
 export default {
   name: "MyLibrary",
   components: { MyReading, MyDone, MyWish},
@@ -72,19 +83,42 @@ export default {
     return {
       isLibrary: true,
       activeIdx: 0,
+      articles: [],
+      doneArticles: [],
+      readingArticles: [],
       wishes: [],
+      booksFromWishes: [],
     };
   },
+  components: { MyReading, MyDone, MyWish, BookList, ArticleList },
   async mounted() {
-    //memberId = 10
-    this.fetchWishWithBook(10);
+    this.fetchArticlesAndClassify();
+    this.fetchWishWithBook();
+
   },
   methods: {
-    async fetchWishWithBook(id) {
-      let res = await wishApi.getWishesByMemberId(id);
+    async fetchWishWithBook() {
+      let res = await wishApi.getWishesByMemberId();
       this.wishes = res.data.list;
-      console.log("getWishes", this.wishes[0]);
+      console.log("getWishes", this.wishes);
+      this.wishes.forEach((wish) => {
+        this.booksFromWishes.push(wish.book);
+      })
     },
+    async fetchArticlesAndClassify() {
+      let res = await articleApi.getArticlesByMember();
+      this.articles = res.data.list;
+      this.classifyArticles();
+    },
+    classifyArticles() {
+      this.articles.forEach(article => {
+        if (article.isDone == true) {
+          this.doneArticles.push(article);
+        } else {
+          this.readingArticles.push(article);
+        }
+      })
+    }
   },
 };
 </script>
