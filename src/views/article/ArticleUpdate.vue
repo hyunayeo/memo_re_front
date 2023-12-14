@@ -145,7 +145,7 @@
                 class="form-check-input"
                 type="checkbox"
                 id="isDone"
-                v-model="article.isDone"
+                v-model="article.done"
               />
               <label class="form-check-label" for="isDone">
                 다 읽었어요!
@@ -156,7 +156,7 @@
                 class="form-check-input"
                 type="checkbox"
                 id="isHide"
-                v-model="article.isHide"
+                v-model="article.hide"
               />
               <label class="form-check-label" for="isHide"> 비밀글 </label>
             </div>
@@ -182,7 +182,7 @@ import BookRegistration from "@/components/modal/BookRegistration.vue";
 import BookSmallVue from "@/components/book/BookSmall.vue";
 import articleApi from "@/api/article.api";
 import bookApi from "@/api/book.api";
-
+import memberApi from "@/api/member.api";
 export default {
   components: {
     BookSmallVue,
@@ -198,7 +198,11 @@ export default {
     };
   },
   async mounted() {
+    memberApi.checkLogin();
     this.fetchArticleById(this.$route.path.split("/").pop());
+  },
+  updated() {
+    this.article.memberId = memberApi.getMemberId();
   },
   methods: {
     toggleActive: function (e) {
@@ -226,8 +230,8 @@ export default {
         startDate: this.article.startDate,
         endDate: this.article.endDate,
         ratingScore: this.article?.ratingScore,
-        isDone: this.article?.isDone || false,
-        isHide: this.article?.isHide || false,
+        done: this.article?.done,
+        hide: this.article?.hide,
       };
 
       await articleApi.updateArticle(this.article.id, articleUpdateInfo);

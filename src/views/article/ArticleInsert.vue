@@ -144,7 +144,7 @@
                 class="form-check-input"
                 type="checkbox"
                 id="isDone"
-                v-model="articleInfo.isDone"
+                v-model="articleInfo.done"
               />
               <label class="form-check-label" for="isDone">
                 다 읽었어요!
@@ -155,7 +155,7 @@
                 class="form-check-input"
                 type="checkbox"
                 id="isHide"
-                v-model="articleInfo.isHide"
+                v-model="articleInfo.hide"
               />
               <label class="form-check-label" for="isHide"> 비밀글 </label>
             </div>
@@ -199,8 +199,8 @@ export default {
         startDate: "",
         endDate: "",
         ratingScore: 0,
-        isDone: false,
-        isHide: false,
+        done: false,
+        hide: false,
       },
     };
   },
