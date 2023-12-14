@@ -60,6 +60,7 @@
 <script>
 import articleApi from '@/api/article.api.js'
 import { ref } from 'vue';
+import memberApi from '@/api/member.api';
 
 export default {
   setup() {
@@ -70,6 +71,9 @@ export default {
       pageNumber,
     }
   },
+  props : {
+    isDone : Boolean
+  },
   data() {
     return {
       articles : [],
@@ -79,7 +83,8 @@ export default {
         recordSize : 5,
         pageSize : 5,
       },
-      currentEndPage : 5
+      currentEndPage : 5,
+      isFromMyPage : false
     }
   },
   async mounted() {
@@ -88,6 +93,9 @@ export default {
   },
   methods : {
     pathCheck() {
+      if (this.$router.options.history.state.back) {
+        this.isFromMyPage = true;
+      }
       if (this.$route.query?.type == "제목") {
         this.searchDto.searchType = "title";
         this.searchDto.searchKeyword = this.$route.query.keyword;
@@ -100,9 +108,37 @@ export default {
       }
     },
     async fetchArticlesWithBookAndMember(searchDto) {
-      let res = await articleApi.getArticles(searchDto);
-      this.articles = await res.data.list;
-      this.pagination = await res.data.pagination;
+      let res;
+      // if (this.isFromMyPage == true) {
+      //     res = await articleApi.getArticlesByMember();
+      //     this.articles = await res.data.list;
+      //   if (this.isDone == true) {
+      //     this.articles = this.articles.filter((article) => {
+      //       return article.isDone == true;
+      //     })
+      //   } else {
+      //     this.articles = this.articles.filter((article) => {
+      //       return article.isDone == false;
+      //     })
+      //   }
+      // } else {
+        
+      // }
+      if (this.isFromMyPage == true) {
+        this.searchDto.searchType = "member_id"
+        this.searchDto.searchKeyword = memberApi.getMemberId();
+        if (this.isDone == true) {
+          this.searchDto.searchType2 = "is_done"
+          this.searchDto.searchKeyword2 = true;
+        } else {
+          this.searchDto.searchType2 = "is_done"
+          this.searchDto.searchKeyword2 = false;
+        }
+      }
+        res = await articleApi.getArticles(searchDto);
+        this.articles = await res.data.list;
+        this.pagination = await res.data.pagination;
+
     },
     fetchByPage(i) {
       this.searchDto.page = i;
