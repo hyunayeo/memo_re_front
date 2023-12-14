@@ -7,8 +7,8 @@ export default {
       bookId: bookId,
     });
   },
-  getWish: function (id) {
-    return axios.get(`/api/wishes/${id}`);
+  getWishByBookId: function (bookId, memberId) {
+    return axios.get(`/api/wishes/${bookId}?memberId=${memberId}`);
   },
   getWishesByMemberId: function (memberId) {
     return axios.get(
