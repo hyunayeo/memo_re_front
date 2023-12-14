@@ -1,7 +1,7 @@
 <template>
   <div class="album bg-light">
     <div class="container px-5 py-5" id="custom-cards">
-      <h2 class="pb-2 border-bottom">Reading</h2>
+      <h2 class="pb-2 border-bottom">Done</h2>
       <div class="row">
         <div class="col">
           <div class="card card-cover overflow-hidden rounded-3 shadow-lg">
@@ -34,3 +34,9 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {};
+</script>
+
+<style></style>

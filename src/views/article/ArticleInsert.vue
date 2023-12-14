@@ -29,7 +29,7 @@
               @close="showRegisterModal = false"
             />
 
-            <book-small-vue :book="pickedBook"/>
+            <book-small-vue :book="pickedBook" />
 
             <div class="mb-3 mt-3">
               <label for="title" class="form-label">제목</label>
@@ -140,17 +140,33 @@
             </div>
 
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="isDone" v-model="articleInfo.isDone"/>
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="isDone"
+                v-model="articleInfo.isDone"
+              />
               <label class="form-check-label" for="isDone">
                 다 읽었어요!
               </label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="isHide" v-model="articleInfo.isHide" />
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="isHide"
+                v-model="articleInfo.isHide"
+              />
               <label class="form-check-label" for="isHide"> 비밀글 </label>
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-              <button @click="insertArticle" class="btn btn-primary" type="button">저장하기</button>
+              <button
+                @click="insertArticle"
+                class="btn btn-primary"
+                type="button"
+              >
+                저장하기
+              </button>
             </div>
           </form>
         </div>
@@ -162,29 +178,29 @@
 <script>
 import BookSearch from "@/components/modal/BookSearch.vue";
 import BookRegistration from "@/components/modal/BookRegistration.vue";
-import BookSmallVue from '@/components/BookSmall.vue';
-import bookApi from '@/api/book.api';
-import articleApi from '@/api/article.api';
+import BookSmallVue from "@/components/book/BookSmall.vue";
+import bookApi from "@/api/book.api";
+import articleApi from "@/api/article.api";
 
 export default {
   name: "ArticleInsert",
   data() {
     return {
-      pickedBook : {},
+      pickedBook: {},
       showModal: false,
       showRegisterModal: false,
       option: "",
-      articleInfo : {
-        memberId : 5,
-        title : "",
-        content : "",
-        bookId : 0,
-        startDate : "",
-        endDate : "",
-        ratingScore : 0,
-        isDone : false,
-        isHide : false,
-      }
+      articleInfo: {
+        memberId: 5,
+        title: "",
+        content: "",
+        bookId: 0,
+        startDate: "",
+        endDate: "",
+        ratingScore: 0,
+        isDone: false,
+        isHide: false,
+      },
     };
   },
   components: {
@@ -207,14 +223,14 @@ export default {
       let res = await bookApi.getBookByIsbn(book.isbn);
       this.pickedBook = res.data;
       this.articleInfo.bookId = this.pickedBook.id;
-      console.log(this.pickedBook)
+      console.log(this.pickedBook);
     },
     async insertArticle() {
-      console.log(this.articleInfo)
-      await articleApi.postArticle(this.articleInfo)
-      
+      console.log(this.articleInfo);
+      await articleApi.postArticle(this.articleInfo);
+
       this.$router.replace("/article");
-    }
+    },
   },
 };
 </script>

@@ -6,7 +6,7 @@
   </div>
 </template>
 <script>
-import BlogPost from "@/components/BlogPost.vue";
+import BlogPost from "@/components/article/BlogPost.vue";
 import articleApi from '@/api/article.api';
 
 export default {

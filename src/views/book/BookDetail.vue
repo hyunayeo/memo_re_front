@@ -12,8 +12,8 @@
   />
 </template>
 <script>
-import ReviewCard from "@/components/ReviewCard.vue";
-import BookInfo from "@/components/BookInfo.vue";
+import ReviewCard from "@/components/article/ReviewCard.vue";
+import BookInfo from "@/components/book/BookInfo.vue";
 import bookApi from "@/api/book.api";
 
 export default {
