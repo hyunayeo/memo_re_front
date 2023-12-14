@@ -1,20 +1,10 @@
 <template>
   <div @click="goToDetail" class="col-md-12">
     <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-      <div class="col-auto d-none d-lg-block">
-        <!-- <img
-          class="bd-placeholder-img"
-          src="@/assets/book_sample.jpg"
-          width="200"
-        /> -->
-        <!-- <img
-          class="bd-placeholder-img"
-          :src="article.bookImg"
-          width="200"
-        /> -->
-        <!-- <p>{{ article.memberName }}</p> -->
-        <title>Placeholder</title>
 
+      <div class="col-auto d-none d-lg-block">
+        <img class="bd-placeholder-img" :src="book.cover" width="200" />
+        <title>Placeholder</title>
         <rect width="100%" height="100%" fill="#55595c" />
       </div>
       <div class="col p-4 d-flex flex-column position-static">
@@ -25,9 +15,10 @@
         </div>
         <p class="card-text mb-auto">{{ book.description }}</p>
         <div @click.stop="clickWish" class="d-flex justify-content-end align-items-center mb-4">
-          <a id="wish" class="btn btn-sm btn-outline-secondary mx-1" href="#">wish ♡</a>
+          <a id="wish" class="btn btn-sm btn-outline-secondary mx-1">wish ♡</a>
         </div>
       </div>
+
     </div>
   </div>
 </template>
@@ -36,7 +27,7 @@
 import wishApi from '@/api/wish.api';
 
 export default {
-  name: "CardMedium",
+  name: "BookMedium",
 
   props: ["book"],
 
@@ -56,9 +47,8 @@ export default {
         wish.classList.remove("active");
         console.log("잘 지움...");
       }
-
-
     },
+    
     goToDetail() {
       console.log(this.book.id);
       this.$router.push(`/book/detail/${this.book.id}`);
