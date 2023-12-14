@@ -9,6 +9,7 @@
               :src="this.wishes[0]?.book.cover"
               class="card-img img-fluid"
               width="200"
+              @click="this.$router.push({path : `/book/detail/${this.wishes[0]?.book.id}`})"
             />
           </div>
         </div>
@@ -18,6 +19,7 @@
               class="card-img img-fluid"
               :src="this.wishes[1]?.book.cover"
               width="200"
+              @click="this.$router.push({path : `/book/detail/${this.wishes[1]?.book.id}`})"
             />
           </div>
         </div>
@@ -27,6 +29,7 @@
               class="this.card-img img-fluid"
               :src="wishes[2]?.book.cover"
               width="200"
+              @click="this.$router.push({path : `/book/detail/${this.wishes[2]?.book.id}`})"
             />
           </div>
         </div>
