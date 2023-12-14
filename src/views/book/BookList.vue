@@ -15,38 +15,43 @@
         <tr>
           <td>
             <!-- @click="goToDetail($event.target, book.id)" -->
-            <card-medium v-for="(book, i) in bookList" :key="i" v-bind:book="book"/>
+            <book-medium v-for="(book, i) in books" :key="i" v-bind:book="book" />
           </td>
         </tr>
       </tbody>
     </table>
+
     <nav aria-label="Page navigation example">
       <ul class="pagination justify-content-center">
-        <li class="page-item disabled">
-          <a class="page-link" href="#" tabindex="-1">Previous</a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
         <li class="page-item">
-          <a class="page-link" href="#">Next</a>
+          <a @click="prevPage" class="page-link" id="previous" tabindex="-1">Previous</a>
+        </li>
+        <li class="page-item" v-for="pageNumber in pageCount" :key="pageNumber">
+          <a @click="goToPage(pageNumber)" class="page-link">{{ pageNumber }}</a>
+        </li>
+        <li class="page-item">
+          <a @click="nextPage" class="page-link" id="next">Next</a>
         </li>
       </ul>
     </nav>
+
   </div>
 </template>
 <script>
-import CardMedium from "@/components/book/BookMedium.vue";
-// import bookApi from "@/api/book.api";
-import axios from 'axios';
+import BookMedium from '@/components/book/BookMedium.vue';
+import bookApi from '@/api/book.api';
 
 export default {
   name: "BookList",
-  components: { CardMedium },
+  components: { BookMedium },
 
   data() {
     return {
       bookList: [],
+      pagination: {},
+
+      currentPage: 1,
+      itemsPerPage: 5,
     }
   },
 
@@ -56,18 +61,62 @@ export default {
 
   methods: {
     async fetchBookData() {
-      await axios.get('/api/books')
-        .then((response) => {
-          console.log("getBookList", response);
-          this.bookList = response.data.list;
-          return this.bookList;
-        })
-        .catch((error) => {
-          console.error('API 호출 중 오류:', error);
-        })
+      let res = await bookApi.getBooks({ recordSize: 100 });
+      this.bookList = res.data.list;
+      console.log("getBookList", res);
+      // await axios.get('/api/books')
+      //   .then((response) => {
+      //     console.log("getBookList", response);
+      //     this.bookList = response.data.list;
+      //     return this.bookList;
+      //   })
+      //   .catch((error) => {
+      //     console.error('API 호출 중 오류:', error);
+      //   })
+    },
+
+    nextPage() {
+      if (this.currentPage < this.pageCount) {
+        console.log("다음...");
+        this.currentPage ++;
+        // this.currentPage += 5;
+      }
+    },
+    prevPage() {
+      if (this.currentPage > 1) {
+        console.log("이전...");
+        this.currentPage --;
+        // this.currentPage -= 5;
+      }
+    },
+    goToPage(pageNumber) {
+      this.currentPage = pageNumber;
+      // const pageItem = document.querySelector(".page-link");
     },
   },
+
+  computed: {
+    books() {
+      const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+      const endIndex = startIndex + this.itemsPerPage;
+      return this.bookList.slice(startIndex, endIndex);
+    },
+    // 전체 페이지 수 계산
+    pageCount() {
+      return Math.ceil(this.bookList.length / this.itemsPerPage);
+    },
+    // 페이지를 5의 배수까지 나오게
+    showPage() {
+      return Math.ceil(this.pageNumber / this.itemsPerPage);
+    }
+  }
 };
 </script>
 
-<style></style>
+<style>
+.pagination>*:hover,
+tbody>tr:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+</style>
