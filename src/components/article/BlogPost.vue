@@ -38,7 +38,7 @@
           </div>
         </div>
       </div>
-      <div v-if="isMine" class="row">
+      <div v-if="isMine" class="row" @click.stop>
         <div class="col">
           <div>독서 계획 : {{ datePlan }}</div>
           <div>완독 여부 : {{ isDone }}</div>
