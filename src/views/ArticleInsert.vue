@@ -162,9 +162,9 @@
 <script>
 import BookSearch from "@/components/modal/BookSearch.vue";
 import BookRegistration from "@/components/modal/BookRegistration.vue";
-import BookSmallVue from '@/components/BookSmall.vue';
-import bookApi from '@/api/book.api';
-import articleApi from '@/api/article.api';
+import BookSmallVue from "@/components/book/BookSmall.vue";
+import bookApi from "@/api/book.api";
+import articleApi from "@/api/article.api";
 import memberApi from "@/api/member.api";
 
 export default {
@@ -175,17 +175,17 @@ export default {
       showModal: false,
       showRegisterModal: false,
       option: "",
-      articleInfo : {
-        memberId : 5,
-        title : "",
-        content : "",
-        bookId : 0,
-        startDate : "",
-        endDate : "",
-        ratingScore : 0,
-        isDone : false,
-        isHide : false,
-      }
+      articleInfo: {
+        memberId: 0,
+        title: "",
+        content: "",
+        bookId: 0,
+        startDate: "",
+        endDate: "",
+        ratingScore: 0,
+        isDone: false,
+        isHide: false,
+      },
     };
   },
   components: {
