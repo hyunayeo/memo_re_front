@@ -61,9 +61,9 @@
 </template>
 
 <script>
-import MyWish from "@/components/MyWish.vue";
-import MyDone from "@/components/MyDone.vue";
-import MyReading from "@/components/MyReading.vue";
+import MyWish from "@/components/my/MyWish.vue";
+import MyDone from "@/components/my/MyDone.vue";
+import MyReading from "@/components/my/MyReading.vue";
 import wishApi from "@/api/wish.api";
 export default {
   name: "MyLibrary",
@@ -74,7 +74,7 @@ export default {
       wishes: [],
     };
   },
-  components: { MyReading, MyDone, MyWish},
+  components: { MyReading, MyDone, MyWish },
   async mounted() {
     //memberId = 10
     this.fetchWishWithBook(10);

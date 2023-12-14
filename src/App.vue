@@ -15,9 +15,9 @@
 </template>
 
 <script>
-import PageHeader from "@/components/PageHeader.vue";
-import NavBar from "@/components/NavBar.vue";
-import PageFooter from "@/components/PageFooter.vue";
+import PageHeader from "@/components/main/PageHeader.vue";
+import NavBar from "@/components/main/NavBar.vue";
+import PageFooter from "@/components/main/PageFooter.vue";
 
 export default {
   components: { NavBar, PageHeader, PageFooter },

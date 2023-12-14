@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import MyNavVue from "@/components/MyNav.vue";
+import MyNavVue from "@/components/my/MyNav.vue";
 import memberApi from "@/api/member.api";
 
 export default {

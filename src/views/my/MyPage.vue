@@ -13,13 +13,13 @@
       <h4 class="fst-italic">Recent posts</h4>
       <ul class="list-unstyled">
         <li>
-          <card-small-vue />
+          <PostSmall />
         </li>
         <li>
-          <card-small-vue />
+          <PostSmall />
         </li>
         <li>
-          <card-small-vue />
+          <PostSmall />
         </li>
       </ul>
     </div>
@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import CardSmallVue from "@/components/CardSmall.vue";
-export default { components: { CardSmallVue } };
+import PostSmall from "@/components/article/PostSmall.vue";
+export default { components: { PostSmall } };
 </script>
 
 <style></style>
