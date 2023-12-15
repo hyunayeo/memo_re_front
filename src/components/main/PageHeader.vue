@@ -33,7 +33,7 @@
               type="text"
               class="form-control"
               aria-label="Text input with dropdown button"
-              @keypress="searchByKeyword"
+              @keypress.enter="searchByKeyword"
             />
             <a
               @click="searchByKeyword"
