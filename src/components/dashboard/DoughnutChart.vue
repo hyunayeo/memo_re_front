@@ -13,14 +13,29 @@ export default {
   components: {
     Doughnut,
   },
+  props : {
+    categories : Array
+  },
+  updated() {
+    console.log(this.categories[0]);
+    this.filterCategoryNames();
+  },
+  methods : {
+    filterCategoryNames() {
+      let labels = this.categories.map((category) => {
+        return category?.name;
+      });
+      return labels;
+    },
+  },
   data() {
     return {
       data: {
-        labels: ["VueJs", "EmberJs", "ReactJs", "AngularJs"],
+        labels: this.filterCategoryNames(),
         datasets: [
           {
             backgroundColor: ["#41B883", "#E46651", "#00D8FF", "#DD1B16"],
-            data: [40, 20, 80, 10],
+            data: [40, 20, 80, 10, 20],
           },
         ],
       },
