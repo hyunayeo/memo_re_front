@@ -6,31 +6,45 @@
 
 <script setup>
 import { ref, computed } from "vue";
+import articleApi from "@/api/article.api";
+import memberApi from "@/api/member.api";
+const memberId = ref(null);
+const myStartDate = ref([]);
+
+const updateMemberId = () => {
+  memberId.value = memberApi.getMemberId();
+  memberId.value = 5; // 이거 빼면 내 로그인 값 나옴
+};
+updateMemberId();
+console.log("멤버아이디", memberId.value);
+
+const fetchArticleById = async () => {
+  let res = await articleApi.getArticles({
+    searchType: "member_id",
+    searchKeyword: memberId.value,
+  });
+  const myArticles = res.data.list;
+
+  myArticles.forEach((myArticle) => {
+    myStartDate.value.push(myArticle.startDate);
+  });
+
+  let dates = myStartDate.value.map((startDate) => {
+    return new Date(startDate);
+  });
+  console.log(todos.value[0].dates);
+  todos.value[0].dates = dates;
+
+  return dates;
+};
+fetchArticleById();
 
 const todos = ref([
   {
-    //다 읽은 책은 핑크점, Done 기준
+    //다 읽은 책은 핑크점, endDate 기준
     description: "Take Noah to basketball practice.",
-    isComplete: false,
-    dates: [
-      new Date(2018, 0, 1), // Jan 1st
-      new Date(2018, 0, 10),
-    ],
+    dates: [],
     color: "pink",
-  },
-  {
-    // 읽는 중은 회색점, createdAt 기준,
-    description: "Test code 입니다.",
-    isComplete: false,
-    dates: [
-      new Date(2018, 1, 1), // Jan 1st
-
-      {
-        start: new Date(2018, 0, 1), // Jan 1st
-        end: new Date(2018, 0, 4),
-      },
-    ],
-    color: "gray",
   },
 ]);
 const plans = ref([
@@ -49,22 +63,6 @@ const plans = ref([
   },
 ]);
 
-const plans2 = ref([
-  {
-    //계획2는 그린 하이라이트(line), stratDate,endDate 기준
-    description: "Take Noah to basketball practice.",
-    isComplete: false,
-    dates: [
-      new Date(2018, 1, 5), // Jan 1st
-
-      {
-        start: new Date(2018, 0, 2), // Jan 1st
-        end: new Date(2018, 0, 3),
-      },
-    ],
-    color: "green",
-  },
-]);
 const attributes = computed(() => [
   // Attributes for todos
   ...todos.value.map((todo) => ({
@@ -89,19 +87,8 @@ const attributes = computed(() => [
       label: plan.description,
     },
   })),
-  // Attributes for plans
-  ...plans2.value.map((plan2) => ({
-    dates: plan2.dates,
-    highlight: {
-      color: plan2.color,
-
-      ...(plan2.isComplete && { class: "opacity-75" }),
-    },
-    popover: {
-      label: plan2.description,
-    },
-  })),
 ]);
 </script>
 
+//
 <style></style>
