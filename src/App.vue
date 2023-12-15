@@ -21,6 +21,13 @@ import PageFooter from "@/components/main/PageFooter.vue";
 
 export default {
   components: { NavBar, PageHeader, PageFooter },
+  setup() {
+    window.addEventListener("error", (event) => {
+      alert("error");
+      console.log(event);
+      history.back();
+    });
+  },
 };
 </script>
 

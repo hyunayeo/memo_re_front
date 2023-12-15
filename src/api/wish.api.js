@@ -1,4 +1,5 @@
 import axios from "axios";
+import VueCookies from "vue-cookies";
 
 export default {
   postWish: function (memberId, bookId) {
@@ -10,7 +11,8 @@ export default {
   getWishByBookId: function (bookId, memberId) {
     return axios.get(`/api/wishes/${bookId}?memberId=${memberId}`);
   },
-  getWishesByMemberId: function (memberId) {
+  getWishesByMemberId: function () {
+    let memberId = VueCookies.get("memberId");
     return axios.get(
       `/api/wishes?searchType=member_id&searchKeyword=${memberId}`
     );

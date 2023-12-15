@@ -1,5 +1,6 @@
 import axios from 'axios';
 import apiUtils from './apiUtils.js'
+import VueCookies from "vue-cookies";
 
 // const BASE_URL = '/api/articles';
 export default {
@@ -143,11 +144,12 @@ export default {
         console.log(articles);
         return articles;
     },      
-    getArticlesByMember : async function(id) {
-      this.searchDto.searchType = "member_id";
-      this.searchDto.searchKeyword = id;
+    getArticlesByMember : async function() {
+      // this.searchDto.searchType = "member_id";
+      // // this.searchDto.searchKeyword = id;
+      // this.searchDto.searchKeyword = VueCookies.get("memberId");
       
-      let articles = await this.getArticles(this.searchDto);
+      let articles = await this.getArticles({searchType : "member_id", searchKeyword : VueCookies.get("memberId")});
       
       return articles;
     }
