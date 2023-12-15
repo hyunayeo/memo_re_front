@@ -15,7 +15,11 @@
         <tr>
           <td>
             <!-- @click="goToDetail($event.target, book.id)" -->
-            <card-medium v-for="(book, i) in bookList" :key="i" v-bind:book="book"/>
+            <BookMedium
+              v-for="(book, i) in bookList"
+              :key="i"
+              v-bind:book="book"
+            />
           </td>
         </tr>
       </tbody>
@@ -36,18 +40,18 @@
   </div>
 </template>
 <script>
-import CardMedium from "@/components/book/BookMedium.vue";
+import BookMedium from "@/components/book/BookMedium.vue";
 // import bookApi from "@/api/book.api";
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   name: "BookList",
-  components: { CardMedium },
+  components: { BookMedium },
 
   data() {
     return {
       bookList: [],
-    }
+    };
   },
 
   mounted() {
@@ -56,15 +60,16 @@ export default {
 
   methods: {
     async fetchBookData() {
-      await axios.get('/api/books')
+      await axios
+        .get("/api/books")
         .then((response) => {
           console.log("getBookList", response);
           this.bookList = response.data.list;
           return this.bookList;
         })
         .catch((error) => {
-          console.error('API 호출 중 오류:', error);
-        })
+          console.error("API 호출 중 오류:", error);
+        });
     },
   },
 };
