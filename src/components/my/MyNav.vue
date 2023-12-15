@@ -51,8 +51,9 @@
   <div class="p-4">
     <h4 class="fst-italic">ect</h4>
     <ol class="list-unstyled">
-      <li><a href="/mypage/update">정보수정</a></li>
-      <li><a @click="goToAskList">문의하기</a></li>
+      <li>
+        <a @click="this.$router.push({ path: `/mypage/ask` })">문의하기</a>
+      </li>
     </ol>
   </div>
 </template>
@@ -60,11 +61,7 @@
 <script>
 export default {
   props: { picture: String },
-  methods: {
-    goToAskList() {
-      this.$router.push(`/ask`);
-    }
-  }
+  methods: {},
 };
 </script>
 
