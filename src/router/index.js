@@ -162,6 +162,11 @@ const routes = [
         name: "MyLibrary",
         component: MyLibrary,
       },
+      {
+        path: "/mypage/ask",
+        name: "AskInsert",
+        component: AskInsert,
+      },
     ],
   },
 ];
