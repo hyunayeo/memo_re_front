@@ -145,7 +145,7 @@
                 class="form-check-input"
                 type="checkbox"
                 id="isDone"
-                v-model="article.done"
+                v-model="article.isDone"
               />
               <label class="form-check-label" for="isDone">
                 다 읽었어요!
@@ -156,7 +156,7 @@
                 class="form-check-input"
                 type="checkbox"
                 id="isHide"
-                v-model="article.hide"
+                v-model="article.isHide"
               />
               <label class="form-check-label" for="isHide"> 비밀글 </label>
             </div>
@@ -230,8 +230,8 @@ export default {
         startDate: this.article.startDate,
         endDate: this.article.endDate,
         ratingScore: this.article?.ratingScore,
-        done: this.article?.done,
-        hide: this.article?.hide,
+        isDone: this.article?.isDone,
+        isHide: this.article?.isHide,
       };
 
       await articleApi.updateArticle(this.article.id, articleUpdateInfo);
