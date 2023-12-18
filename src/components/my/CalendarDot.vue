@@ -1,107 +1,87 @@
 <template>
   <div>
-    <VCalendar expanded :rows="2" :attributes="attributes" />
+    <VCalendar
+      class="my-calendar"
+      expanded
+      :rows="2"
+      :attributes="attributes"
+    />
   </div>
 </template>
 
-<script setup>
-import { ref, computed } from "vue";
-
-const todos = ref([
-  {
-    //다 읽은 책은 핑크점, Done 기준
-    description: "Take Noah to basketball practice.",
-    isComplete: false,
-    dates: [
-      new Date(2018, 0, 1), // Jan 1st
-      new Date(2018, 0, 10),
-    ],
-    color: "pink",
+<script>
+import articleApi from "@/api/article.api";
+export default {
+  data() {
+    return {
+      // colors: ["#FFC107", "#2196F3", "#FF5722", "#4CAF50"],
+      colors: ["blue", "purple", "teal", "gray", "indigo"],
+      attributes: [
+        {
+          bar: {
+            color: "gray",
+          },
+          dates: new Date(),
+          popover: {
+            label: "today!",
+          },
+          order: 1,
+        },
+      ],
+    };
   },
-  {
-    // 읽는 중은 회색점, createdAt 기준,
-    description: "Test code 입니다.",
-    isComplete: false,
-    dates: [
-      new Date(2018, 1, 1), // Jan 1st
+  methods: {
+    async fetchArticle() {
+      let res = await articleApi.getArticlesByMember();
+      let articles = res.data.list;
+      let i = 0;
+      articles.forEach((article) => {
+        if (article.isDone) {
+          this.attributes.push({
+            highlight: "gray",
+            dates: new Date(article.endDate),
+            popover: {
+              label: article.book.title,
+            },
+            order: 1,
+          });
+        } else {
+          this.attributes.push({
+            highlight: {
+              color: this.colors[i++ % this.colors.length],
+              class: "opacity-25",
+              contentClass: "text-secondary",
+            },
+            dates: {
+              start: new Date(article.startDate),
+              end: new Date(article.endDate),
+            },
+            popover: {
+              label: "plan_" + article.book.title,
+              style: {
+                opacity: "50",
+                color: "yellow",
+              },
+            },
+          });
+        }
+      });
 
-      {
-        start: new Date(2018, 0, 1), // Jan 1st
-        end: new Date(2018, 0, 4),
-      },
-    ],
-    color: "gray",
+      this.attributes.push({});
+    },
   },
-]);
-const plans = ref([
-  {
-    //계획1은 인디고 하이라이트(line), stratDate,endDate 기준
-    description: "Take Noah to basketball practice.",
-    isComplete: false,
-    dates: [
-      new Date(2018, 1, 5), // Jan 1st
-      {
-        start: new Date(2018, 0, 1), // Jan 1st
-        end: new Date(2018, 0, 4),
-      },
-    ],
-    color: "indigo",
+  mounted() {
+    this.fetchArticle();
   },
-]);
-
-const plans2 = ref([
-  {
-    //계획2는 그린 하이라이트(line), stratDate,endDate 기준
-    description: "Take Noah to basketball practice.",
-    isComplete: false,
-    dates: [
-      new Date(2018, 1, 5), // Jan 1st
-
-      {
-        start: new Date(2018, 0, 2), // Jan 1st
-        end: new Date(2018, 0, 3),
-      },
-    ],
-    color: "green",
-  },
-]);
-const attributes = computed(() => [
-  // Attributes for todos
-  ...todos.value.map((todo) => ({
-    dates: todo.dates,
-    dot: {
-      color: todo.color,
-      ...(todo.isComplete && { class: "opacity-75" }),
-    },
-    popover: {
-      label: todo.description,
-    },
-  })),
-  // Attributes for plans
-  ...plans.value.map((plan) => ({
-    dates: plan.dates,
-    highlight: {
-      color: plan.color,
-
-      ...(plan.isComplete && { class: "opacity-75" }),
-    },
-    popover: {
-      label: plan.description,
-    },
-  })),
-  // Attributes for plans
-  ...plans2.value.map((plan2) => ({
-    dates: plan2.dates,
-    highlight: {
-      color: plan2.color,
-
-      ...(plan2.isComplete && { class: "opacity-75" }),
-    },
-    popover: {
-      label: plan2.description,
-    },
-  })),
-]);
+  updated() {},
+};
 </script>
 
-<style></style>
+<style>
+.my-calendar .vc-weekday-1 {
+  color: red;
+}
+.my-calendar .vc-weekday-7 {
+  color: slateblue;
+}
+</style>
