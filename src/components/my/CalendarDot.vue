@@ -1,94 +1,87 @@
 <template>
   <div>
-    <VCalendar expanded :rows="2" :attributes="attributes" />
+    <VCalendar
+      class="my-calendar"
+      expanded
+      :rows="2"
+      :attributes="attributes"
+    />
   </div>
 </template>
 
-<script setup>
-import { ref, computed } from "vue";
+<script>
 import articleApi from "@/api/article.api";
-import memberApi from "@/api/member.api";
-const memberId = ref(null);
-const myStartDate = ref([]);
-
-const updateMemberId = () => {
-  memberId.value = memberApi.getMemberId();
-  memberId.value = 5; // 이거 빼면 내 로그인 값 나옴
-};
-updateMemberId();
-console.log("멤버아이디", memberId.value);
-
-const fetchArticleById = async () => {
-  let res = await articleApi.getArticles({
-    searchType: "member_id",
-    searchKeyword: memberId.value,
-  });
-  const myArticles = res.data.list;
-
-  myArticles.forEach((myArticle) => {
-    myStartDate.value.push(myArticle.startDate);
-  });
-
-  let dates = myStartDate.value.map((startDate) => {
-    return new Date(startDate);
-  });
-  console.log(todos.value[0].dates);
-  todos.value[0].dates = dates;
-
-  return dates;
-};
-fetchArticleById();
-
-const todos = ref([
-  {
-    //다 읽은 책은 핑크점, endDate 기준
-    description: "Take Noah to basketball practice.",
-    dates: [],
-    color: "pink",
+export default {
+  data() {
+    return {
+      // colors: ["#FFC107", "#2196F3", "#FF5722", "#4CAF50"],
+      colors: ["blue", "purple", "teal", "gray", "indigo"],
+      attributes: [
+        {
+          bar: {
+            color: "gray",
+          },
+          dates: new Date(),
+          popover: {
+            label: "today!",
+          },
+          order: 1,
+        },
+      ],
+    };
   },
-]);
-const plans = ref([
-  {
-    //계획1은 인디고 하이라이트(line), stratDate,endDate 기준
-    description: "Take Noah to basketball practice.",
-    isComplete: false,
-    dates: [
-      new Date(2018, 1, 5), // Jan 1st
-      {
-        start: new Date(2018, 0, 1), // Jan 1st
-        end: new Date(2018, 0, 4),
-      },
-    ],
-    color: "indigo",
+  methods: {
+    async fetchArticle() {
+      let res = await articleApi.getArticlesByMember();
+      let articles = res.data.list;
+      let i = 0;
+      articles.forEach((article) => {
+        if (article.isDone) {
+          this.attributes.push({
+            highlight: "gray",
+            dates: new Date(article.endDate),
+            popover: {
+              label: article.book.title,
+            },
+            order: 1,
+          });
+        } else {
+          this.attributes.push({
+            highlight: {
+              color: this.colors[i++ % this.colors.length],
+              class: "opacity-25",
+              contentClass: "text-secondary",
+            },
+            dates: {
+              start: new Date(article.startDate),
+              end: new Date(article.endDate),
+            },
+            popover: {
+              label: "plan_" + article.book.title,
+              style: {
+                opacity: "50",
+                color: "yellow",
+              },
+            },
+          });
+        }
+      });
+
+      this.attributes.push({});
+    },
   },
-]);
-
-const attributes = computed(() => [
-  // Attributes for todos
-  ...todos.value.map((todo) => ({
-    dates: todo.dates,
-    dot: {
-      color: todo.color,
-      ...(todo.isComplete && { class: "opacity-75" }),
-    },
-    popover: {
-      label: todo.description,
-    },
-  })),
-  // Attributes for plans
-  ...plans.value.map((plan) => ({
-    dates: plan.dates,
-    highlight: {
-      color: plan.color,
-
-      ...(plan.isComplete && { class: "opacity-75" }),
-    },
-    popover: {
-      label: plan.description,
-    },
-  })),
-]);
+  mounted() {
+    this.fetchArticle();
+  },
+  updated() {},
+};
 </script>
 
-//
-<style></style>
+<style>
+.my-calendar .vc-weekday-1 {
+  color: red;
+}
+.my-calendar .vc-weekday-7 {
+  color: slateblue;
+}
+</style>
