@@ -60,7 +60,6 @@ export default {
 
     const updateMemberId = () => {
       memberId.value = memberApi.getMemberId();
-      memberId.value = 5; // 이거 빼면 내 로그인 값 나옴
     };
     updateMemberId();
     console.log("멤버아이디", memberId.value);
