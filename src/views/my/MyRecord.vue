@@ -3,7 +3,7 @@
 
   <div class="row align-items-stretch">
     <div class="col-md-8 pb-4 mb-4">
-      <bar-chart-vue />
+      <bar-chart-vue :articles="articles"/>
     </div>
     <div class="col-md-4 h-auto d-inline-block">
       <doughnut-chart class="mb-4" :categories="categories"/>
@@ -12,7 +12,7 @@
   <div class="row">
     <div class="col-md-12">
       <card-group class="pb-4 mb-4" :articles="articles"/>
-      <line-chart class="pb-4 mb-4" />
+      <line-chart class="pb-4 mb-4" :articles="articles"/>
     </div>
   </div>
 </template>
@@ -55,10 +55,10 @@ export default {
       async getCategories() {
         let res = await axios.get(`/record/category/${this.memberId}`);
         this.categories = res.data;
-        console.log("카테고리 (레코드):", this.categories);        
+        // console.log("카테고리 (레코드):", this.categories);        
       },
       async getArticlesByMember() {
-        let res = await articleApi.getArticles({searchType : "member_id", searchKeyword : this.memberId});
+        let res = await articleApi.getArticles({searchType : "member_id", searchKeyword : this.memberId, recordSize : 100});
         this.articles = res.data.list;
         // console.log("articles:", this.articles);        
       }
