@@ -38,7 +38,7 @@
           </div>
         </div>
       </div>
-      <div v-if="isMine" class="row">
+      <div v-if="isMine" class="row" @click.stop>
         <div class="col">
           <div>독서 계획 : {{ datePlan }}</div>
           <div>완독 여부 : {{ isDone }}</div>
@@ -135,7 +135,7 @@ export default {
       return startDate.concat(" ~ ", endDate);
     },
     isDone() {
-      let done = this.article?.done;
+      let done = this.article?.isDone;
       if (done == true) {
         return "완독";
       } else {
@@ -143,7 +143,7 @@ export default {
       }
     },
     isHide() {
-      let hide = this.article?.hide;
+      let hide = this.article?.isHide;
       if (hide == true) {
         return "비밀글입니다.";
       } else {

@@ -8,6 +8,9 @@ export default {
       bookId: bookId,
     });
   },
+  getWishes: function (searchDto) {
+    return axios.get(`/api/wishes?${new URLSearchParams(searchDto).toString()}`);
+  },
   getWishByBookId: function (bookId, memberId) {
     return axios.get(`/api/wishes/${bookId}?memberId=${memberId}`);
   },

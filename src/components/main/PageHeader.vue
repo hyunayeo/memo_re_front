@@ -10,7 +10,7 @@
         >
       </div>
       <div class="col-4 d-flex justify-content-end align-items-center">
-        <form class="form-inline">
+        <div class="form-inline">
           <div class="input-group">
             <div class="input-group-prepend">
               <select
@@ -33,7 +33,7 @@
               type="text"
               class="form-control"
               aria-label="Text input with dropdown button"
-              @keydown.enter.prevent
+              @keypress.enter="searchByKeyword"
             />
             <a
               @click="searchByKeyword"
@@ -42,7 +42,7 @@
               /
             </a>
           </div>
-        </form>
+        </div>
         <div>
           <span v-if="memberId == null">
             <a class="btn btn-sm btn-outline-secondary mx-1" href="/login"

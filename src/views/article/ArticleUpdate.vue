@@ -182,7 +182,7 @@ import BookRegistration from "@/components/modal/BookRegistration.vue";
 import BookSmallVue from "@/components/book/BookSmall.vue";
 import articleApi from "@/api/article.api";
 import bookApi from "@/api/book.api";
-
+import memberApi from "@/api/member.api";
 export default {
   components: {
     BookSmallVue,
@@ -198,7 +198,11 @@ export default {
     };
   },
   async mounted() {
+    memberApi.checkLogin();
     this.fetchArticleById(this.$route.path.split("/").pop());
+  },
+  updated() {
+    this.article.memberId = memberApi.getMemberId();
   },
   methods: {
     toggleActive: function (e) {
@@ -226,8 +230,8 @@ export default {
         startDate: this.article.startDate,
         endDate: this.article.endDate,
         ratingScore: this.article?.ratingScore,
-        isDone: this.article?.isDone || false,
-        isHide: this.article?.isHide || false,
+        isDone: this.article?.isDone,
+        isHide: this.article?.isHide,
       };
 
       await articleApi.updateArticle(this.article.id, articleUpdateInfo);
