@@ -40,6 +40,7 @@
 
 <script>
 import wishApi from "@/api/wish.api";
+import bookApi from "@/api/book.api";
 
 export default {
   name: "CardMedium",
@@ -63,9 +64,9 @@ export default {
         console.log("잘 지움...");
       }
     },
-    goToDetail() {
-      console.log(this.book.id);
-      this.$router.push(`/book/detail/${this.book.id}`);
+    async goToDetail() {
+      let res = await bookApi.getBookByIsbn(this.book.isbn);
+      this.$router.push({ path: `/book/detail/${res.data.id}` });
     },
   },
 };
