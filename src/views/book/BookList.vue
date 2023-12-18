@@ -57,8 +57,10 @@
 <script>
 import BookMedium from "@/components/book/BookMedium.vue";
 import { ref } from "vue";
-// import bookApi from "@/api/book.api";
-import axios from "axios";
+import bookApi from "@/api/book.api";
+import wishApi from "@/api/wish.api";
+import memberApi from "@/api/member.api";
+
 export default {
   name: "BookList",
   components: { BookMedium },
@@ -81,6 +83,8 @@ export default {
         page: 1,
         recordSize: 5,
         pageSize: 5,
+        searchType: "",
+        searchKeyword: "",
       },
       currentEndPage: 5,
       isFromMyPage: false,
@@ -88,18 +92,37 @@ export default {
   },
 
   mounted() {
+    this.pathCheck();
     this.fetchBookData();
   },
 
   methods: {
+    pathCheck() {
+      if (this.$router.options.history.state.back) {
+        this.isFromMyPage = true;
+        this.searchDto.searchType = "member_id";
+        this.searchDto.searchKeyword = memberApi.getMemberId();
+      }
+      if (this.$route.query?.type == "도서명") {
+        this.searchDto.searchType = "title";
+        this.searchDto.searchKeyword = this.$route.query.keyword;
+      } else if (this.$route.query?.type == "작가명") {
+        this.searchDto.searchType = "author";
+        this.searchDto.searchKeyword = this.$route.query.keyword;
+      }
+    },
     async fetchBookData() {
       let res;
-      // res = await bookApi.getBook(this.searchDto);
-      res = await axios.get("/api/books");
-      // res = await bookApi.getBook({});
-
-      this.bookList = res.data.list;
-      this.pagination = res.data.pagination;
+      if (this.isFromMyPage == true) {
+        let res = await wishApi.getWishes(this.searchDto);
+        this.bookList = res.data.list.map((data) => data.book);
+        this.pagination = res.data.pagination;
+      } else {
+        res = await bookApi.getBooks(this.searchDto);
+        this.bookList = res.data.list;
+        console.log(this.bookList);
+        this.pagination = res.data.pagination;
+      }
     },
     fetchByPage(i) {
       this.searchDto.page = i;
@@ -128,9 +151,7 @@ export default {
 
       let end = this.pagination?.endPage;
       let start = this.pagination?.startPage;
-
       let pages = Array.from({ length: end }, (_, index) => index + 1);
-
       return pages?.slice(start - 1);
     },
   },

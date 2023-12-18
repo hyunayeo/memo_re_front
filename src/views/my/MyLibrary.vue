@@ -24,8 +24,8 @@
 
     <div v-if="isLibrary">
       <p></p>
-      <MyDone :articles="doneArticles"/>
-      <MyReading :articles="readingArticles"/>
+      <MyDone :articles="doneArticles" />
+      <MyReading :articles="readingArticles" />
       <MyWish :wishes="wishes" />
     </div>
     <div v-else>
@@ -55,14 +55,14 @@
         </ul>
       </div>
       <div v-if="activeIdx == 2">
-        <BookList :book="book" :key="book"/>
-      </div>      
+        <BookList />
+      </div>
       <div v-if="activeIdx == 0">
-        <ArticleList :isDone="false"/>
-      </div>  
+        <ArticleList :isDone="false" />
+      </div>
       <div v-if="activeIdx == 1">
-        <ArticleList :isDone="true"/>
-      </div>  
+        <ArticleList :isDone="true" />
+      </div>
     </div>
   </div>
 </template>
@@ -71,10 +71,10 @@
 import MyWish from "@/components/my/MyWish.vue";
 import MyDone from "@/components/my/MyDone.vue";
 import MyReading from "@/components/my/MyReading.vue";
-import ArticleList from "@/views/article/ArticleList.vue"
-import BookList from "@/views/book/BookList.vue"
+import ArticleList from "@/views/article/ArticleList.vue";
+import BookList from "@/views/book/BookList.vue";
 import wishApi from "@/api/wish.api";
-import articleApi from '@/api/article.api';
+import articleApi from "@/api/article.api";
 
 export default {
   name: "MyLibrary",
@@ -101,7 +101,7 @@ export default {
       console.log("getWishes", this.wishes);
       this.wishes.forEach((wish) => {
         this.booksFromWishes.push(wish.book);
-      })
+      });
     },
     async fetchArticlesAndClassify() {
       let res = await articleApi.getArticlesByMember();
@@ -109,14 +109,14 @@ export default {
       this.classifyArticles();
     },
     classifyArticles() {
-      this.articles.forEach(article => {
+      this.articles.forEach((article) => {
         if (article.isDone == true) {
           this.doneArticles.push(article);
         } else {
           this.readingArticles.push(article);
         }
-      })
-    }
+      });
+    },
   },
 };
 </script>
