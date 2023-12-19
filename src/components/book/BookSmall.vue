@@ -1,7 +1,7 @@
 <template>
   <a
     class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"
-    href="#"
+    @click="goToDetail"
   >
     <img
       :src="book?.cover"
@@ -15,8 +15,8 @@
     </div>
   </a>
 </template>
-
 <script>
+import bookApi from "@/api/book.api";
 export default {
   props: {
     book : Object
@@ -29,8 +29,13 @@ export default {
       
       return `${new Date(date).toLocaleDateString('en-us', options)} `;
     }
+  },
+  methods : {
+    async goToDetail() {
+      let res = await bookApi.getBookByIsbn(this.book.isbn);
+      this.$router.push({ path: `/book/detail/${res.data.id}` });    
+    }
   }
 };
 </script>
-
 <style></style>

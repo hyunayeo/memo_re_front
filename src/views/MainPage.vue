@@ -49,8 +49,8 @@
         <div>
           <h4 class="fst-italic">Recent posts</h4>
           <ul class="list-unstyled">
-            <li :article="article" v-for="article in myArticles" :key="article">
-              <PostSmall class="cursor" :article="article" />
+            <li v-for="book in specialBooks" :key="book">
+              <book-small :book="book"/>
             </li>
           </ul>
         </div>
@@ -62,7 +62,7 @@
 <script>
 import BlogPostVue from "@/components/article/BlogPost.vue";
 import CardBigVue from "@/components/main/CardBig.vue";
-import PostSmall from "@/components/article/PostSmall.vue";
+import BookSmall from "@/components/book/BookSmall.vue";
 import WrapAroundVue from "@/components/main/WrapAround.vue";
 import articleApi from "@/api/article.api";
 import bookApi from "@/api/book.api";
@@ -70,8 +70,8 @@ export default {
   components: {
     BlogPostVue,
     CardBigVue,
-    PostSmall,
     WrapAroundVue,
+    BookSmall
   },
   data() {
     return {
@@ -79,12 +79,14 @@ export default {
       articles: [],
       myArticles: [],
       activeIdx: 1,
+      specialBooks: []
     };
   },
   async mounted() {
     this.fetchBestSellers();
     this.fetchArticlesAsPopularity();
     this.fetchMyArticlesAsLatest();
+    this.fetchNewSpecial();
   },
   methods: {
     async fetchArticlesAsPopularity() {
@@ -120,6 +122,13 @@ export default {
         recordSize: 3,
       });
       this.myArticles = res.data.list;
+    },
+    async fetchNewSpecial() {
+      let res = await bookApi.getBooks({
+        searchType: "ItemNewSpecial",
+        recordSize: 5,
+      });
+      this.specialBooks = res.data.list;
     },
   },
 };
