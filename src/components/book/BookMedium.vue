@@ -47,17 +47,19 @@
 <script>
 import wishApi from "@/api/wish.api";
 import bookApi from "@/api/book.api";
+import memberApi from "@/api/member.api";
 
 export default {
   name: "CardMedium",
 
   props: ["book"],
   data() {
-    return { isWish: false };
+    return { isWish: false, memberId: null };
   },
 
   methods: {
     async clickWish() {
+      memberApi.checkLogin();
       if (!this.isWish) {
         let res = await bookApi.getBookByIsbn(this.book.isbn);
         wishApi.postWish(res.data.id);
@@ -82,7 +84,8 @@ export default {
     },
   },
   mounted() {
-    if (this.book.id != null) {
+    this.memberId = memberApi.getMemberId();
+    if (this.memberId != null && this.book.id != null) {
       this.fetchWishByBookId(this.book.id);
     }
   },
