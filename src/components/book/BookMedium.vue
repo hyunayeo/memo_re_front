@@ -25,11 +25,11 @@
           <a
             v-if="isWish"
             id="wish"
-            class="btn btn-sm btn-outline-secondary mx-1 active"
-            >wish ♡</a
+            class="btn btn-sm btn-outline-danger active mx-1"
+            >wish ❤</a
           >
-          <a v-else id="wish" class="btn btn-sm btn-outline-secondary mx-1"
-            >wish ♡</a
+          <a v-else id="wish" class="btn btn-sm btn-outline-danger mx-1"
+            >wish ❤</a
           >
         </div>
         <strong class="d-inline-block mb-2 text-primary-emphasis">World</strong>
@@ -61,8 +61,7 @@ export default {
     async clickWish() {
       memberApi.checkLogin();
       if (!this.isWish) {
-        let res = await bookApi.getBookByIsbn(this.book.isbn);
-        wishApi.postWish(res.data.id);
+        wishApi.postWish(this.book?.id);
         this.isWish = true;
       } else {
         wishApi.deleteWish(this.book?.id);
@@ -75,7 +74,6 @@ export default {
     },
     async fetchWishByBookId(bookId) {
       let res = await wishApi.getWishByBookId(bookId);
-      console.log("methods", res);
       if (res.data != "") {
         this.isWish = true;
       } else {

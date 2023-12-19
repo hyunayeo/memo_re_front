@@ -34,11 +34,11 @@
           <a
             v-if="isWish"
             id="wish"
-            class="btn btn-sm btn-outline-secondary mx-1 active"
-            >wish ♡</a
+            class="btn btn-sm btn-outline-danger active mx-1"
+            >wish ❤</a
           >
-          <a v-else id="wish" class="btn btn-sm btn-outline-secondary mx-1"
-            >wish ♡</a
+          <a v-else id="wish" class="btn btn-sm btn-outline-danger mx-1"
+            >wish ❤</a
           >
         </div>
       </div>
@@ -63,9 +63,6 @@ export default {
     return { memberId: null, isWish: false };
   },
   methods: {
-    updateMemberId() {
-      this.memberId = memberApi.getMemberId();
-    },
     clickWish() {
       memberApi.checkLogin();
       if (!this.isWish) {
@@ -78,19 +75,18 @@ export default {
     },
     async fetchWishByBookId(bookId) {
       let res = await wishApi.getWishByBookId(bookId);
-      console.log("methods", res);
       if (res.data != "") {
-        const wish = document.querySelector("#wish");
-        wish.classList.add("active");
+        this.isWish = true;
       } else {
-        const wish = document.querySelector("#wish");
-        wish.classList.remove("active");
+        this.isWish = false;
       }
     },
   },
+  mounted() {
+    this.memberId = memberApi.getMemberId();
+  },
   async updated() {
     if (this.memberId != null) {
-      console.log("updated book:", this.book.id);
       this.fetchWishByBookId(this.book.id);
     }
   },
