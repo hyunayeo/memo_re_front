@@ -1,7 +1,6 @@
 import MainPage from "@/views/MainPage.vue";
 import LoginPage from "@/views/LoginPage.vue";
 import SignupPage from "@/views/SignupPage.vue";
-import MyPage from "@/views/my/MyPage.vue";
 import MyRecord from "@/views/my/MyRecord.vue";
 import MyCalender from "@/views/my/MyCalender";
 import ProfileUpdate from "@/views/my/ProfileUpdate.vue";
@@ -135,13 +134,8 @@ const routes = [
     path: "/mypage",
     name: "MyLayout",
     component: MyLayout,
-    redirect: "/mypage",
+    redirect: "/mypage/library",
     children: [
-      {
-        path: "/mypage",
-        name: "MyPage",
-        component: MyPage,
-      },
       {
         path: "/mypage/record",
         name: "MyRecord",
