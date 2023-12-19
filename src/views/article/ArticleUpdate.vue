@@ -46,59 +46,12 @@
 
             <label for="title" class="form-label">평점</label>
             <br />
-            <div
-              class="btn-toolbar"
-              role="toolbar"
-              aria-label="Toolbar with button groups"
-            >
-              <div
-                @click="toggleActive($event.target)"
-                class="btn-group me-2"
-                role="group"
-                aria-label="First group"
-                id="rating"
-              >
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  id="rating"
-                  value="1"
-                >
-                  1
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  id="rating"
-                  value="2"
-                >
-                  2
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  id="rating"
-                  value="3"
-                >
-                  3
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  id="rating"
-                  value="4"
-                >
-                  4
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  id="rating"
-                  value="5"
-                >
-                  5
-                </button>
-              </div>
+
+            <div class="star-rating d-flex">
+              <span v-for="index in 5" :key="index" @click="check(index)">
+                <span class="text-warning" v-if="ratingCheck(index)">★</span>
+                <span v-else>☆</span>
+              </span>
             </div>
 
             <p></p>
@@ -191,6 +144,7 @@ export default {
   },
   data() {
     return {
+      score: 0,
       showModal: false,
       showRegisterModal: false,
       option: "",
@@ -205,17 +159,23 @@ export default {
     this.article.memberId = memberApi.getMemberId();
   },
   methods: {
-    toggleActive: function (e) {
-      console.log(e.parentElement.children);
-      Array.from(e.parentElement.children).forEach((btn) => {
-        btn.classList.remove("active");
-      });
-      e.classList.toggle("active");
-      this.article.ratingScore = e.value;
+    check(index) {
+      this.score = index + 1;
+      console.log(index);
+      this.article.ratingScore = index;
+    },
+    ratingCheck(index) {
+      if (index <= this.article?.ratingScore) {
+        return true;
+      } else {
+        return false;
+      }
     },
     async fetchArticleById(id) {
       let res = await articleApi.getArticle(id);
       this.article = res.data;
+      console.log(this.article.ratingScore);
+      this.ratingCheck();
     },
     async pickBook(book) {
       let res = await bookApi.getBookByIsbn(book.isbn);
