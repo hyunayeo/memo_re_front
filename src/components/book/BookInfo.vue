@@ -32,11 +32,15 @@
           class="d-grid gap-2 d-md-flex justify-content-md-end"
         >
           <a
-            v-if="isWish"
-            id="wish"
-            class="btn btn-sm btn-outline-danger active mx-1"
-            >wish ❤</a
+            class="btn btn-sm btn-outline-secondary"
+            @click="goToWrite()"
+            >go to write</a
           >
+          <a
+            class="btn btn-sm btn-outline-danger active mx-1"
+            v-if="isWish"
+            id="wish">
+            wish ❤</a>
           <a v-else id="wish" class="btn btn-sm btn-outline-danger mx-1"
             >wish ❤</a
           >
@@ -63,6 +67,10 @@ export default {
     return { memberId: null, isWish: false };
   },
   methods: {
+    goToWrite() {
+      // let res = await bookApi.getBookByIsbn(this.book.isbn);
+      this.$router.push({ path: `/article/insert`, query : {isbn : this.book.isbn} });
+    },
     clickWish() {
       memberApi.checkLogin();
       if (!this.isWish) {

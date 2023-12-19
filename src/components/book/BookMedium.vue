@@ -70,7 +70,7 @@ export default {
     },
     async goToDetail() {
       let res = await bookApi.getBookByIsbn(this.book.isbn);
-      this.$router.push({ path: `/book/detail/${res.data.id}` });
+      this.$router.push({ path: `/book/detail/${res.data.id}`});
     },
     async fetchWishByBookId(bookId) {
       let res = await wishApi.getWishByBookId(bookId);

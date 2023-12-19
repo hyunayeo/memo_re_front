@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="display-5 link-body-emphasis mb-1"></div>
-    <div @click="goToDetail" class="blog-post">
+    <div class="blog-post">
       <div class="row">
         <div class="col-auto">
           <div
@@ -12,6 +12,7 @@
                 class="bd-placeholder-img"
                 :src="article?.book?.cover"
                 width="200"
+                @click="goToDetail"
               />
               <title>Placeholder</title>
               <rect width="100%" height="100%" fill="#55595c" />
@@ -21,7 +22,7 @@
                 {{ article?.title }}
               </h2>
               <p class="blog-post-meta">
-                {{ dateEng }} <a href="#">{{ article?.member?.name }}</a>
+                {{ dateEng }} <a :href="`/article?keyword=${article?.member?.name}&type=작성자명`">{{ article?.member?.name }}</a>
               </p>
               <h3>{{ article?.book?.title }}</h3>
               <h5>{{ article?.author }}</h5>
@@ -62,6 +63,7 @@
 <script>
 import memberApi from "@/api/member.api";
 import articleApi from "@/api/article.api";
+import bookApi from "@/api/book.api";
 import { ref } from "vue";
 export default {
   name: "BlogPost",
@@ -95,8 +97,13 @@ export default {
         return false;
       }
     },
-    goToDetail() {
-      this.$router.push({ path: `/article/detail/${this.article.id}` });
+    async goToDetail() {
+      if (this.$route.path.includes("article")) {
+        let res = await bookApi.getBookByIsbn(this.article.book.isbn);
+        this.$router.push({ path: `/book/detail/${res.data.id}` });
+      } else {
+        this.$router.push({ path: `/article/detail/${this.article.id}` });
+      }
     },
     goToUpdate() {
       this.$router.push({ path: `/article/update/${this.article.id}` });
@@ -158,5 +165,8 @@ export default {
 .star-rating {
   font-weight: 300;
   font-size: 20px;
+}
+img {
+  cursor: pointer;
 }
 </style>

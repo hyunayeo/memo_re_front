@@ -29,7 +29,7 @@
               @close="showRegisterModal = false"
             />
 
-            <book-small-vue :book="pickedBook" />
+            <book-small-vue @click.capture.stop :book="pickedBook"/>
 
             <div class="mb-3 mt-3">
               <label for="title" class="form-label">제목</label>
@@ -166,15 +166,25 @@ export default {
   mounted() {
     memberApi.checkLogin();
     this.articleInfo.memberId = memberApi.getMemberId();
+    this.hasIsbn(this.$route.query.isbn);
   },
   methods: {
+    hasIsbn(isbn) {
+      if (isbn) {
+        this.pickBookByIsbn(isbn);
+      } 
+    },
+    async pickBookByIsbn(isbn) {
+      let res = await bookApi.getBookByIsbn(isbn);
+      this.pickedBook = res.data;
+      this.articleInfo.bookId = this.pickedBook.id;
+    },
     async pickBook(book) {
       this.pickedBook = book;
       console.log(book);
       let res = await bookApi.getBookByIsbn(book.isbn);
       this.pickedBook = res.data;
       this.articleInfo.bookId = this.pickedBook.id;
-      console.log(this.pickedBook);
     },
     check(index) {
       this.score = index + 1;
