@@ -5,7 +5,7 @@
     <wrap-around-vue class="cursor" :books="books" />
 
     <div class="col-md-8">
-      <h3 class="pb-4 mb-4 fst-italic border-bottom">From the Firehose</h3>
+      <h3 class="pb-4 mb-4 fst-italic border-bottom">게시글 목록</h3>
       <nav class="blog-pagination" aria-label="Pagination">
         <a
           @click="fetchArticlesAsPopularity"
@@ -28,7 +28,6 @@
       </nav>
 
       <blog-post-vue
-        class="cursor"
         :article="article"
         v-for="article in articles"
         :key="article"
@@ -47,7 +46,7 @@
         </div>
 
         <div>
-          <h4 class="fst-italic">Recent posts</h4>
+          <h4 class="fst-italic">주목할 만한 신간 리스트</h4>
           <ul class="list-unstyled">
             <li v-for="book in specialBooks" :key="book">
               <book-small :book="book"/>
@@ -135,7 +134,4 @@ export default {
 </script>
 
 <style>
-.cursor {
-  cursor: pointer;
-}
 </style>

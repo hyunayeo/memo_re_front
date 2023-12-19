@@ -30,6 +30,11 @@
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
           <a
             class="btn btn-sm btn-outline-secondary"
+            @click="goToWrite()"
+            >go to write</a
+          >
+          <a
+            class="btn btn-sm btn-outline-secondary"
             id="wish"
             @click="addToWishlist()"
             >wish ♡</a
@@ -67,20 +72,23 @@ export default {
   },
   methods: {
     addToWishlist() {
+      console.log(this.book);
       memberApi.checkLogin();
       this.postWish();
+    },
+    goToWrite() {
+      // let res = await bookApi.getBookByIsbn(this.book.isbn);
+      this.$router.push({ path: `/article/insert`, query : {isbn : this.book.isbn} });
     },
     postWish: async function () {
       const wish = document.querySelector("#wish");
       const hasClass = wish.classList.contains("active");
       if (!hasClass) {
         wishApi.postWish(this.book?.id);
-        console.log("잘 들어감...");
         wish.classList.add("active");
       } else {
         wishApi.deleteWish(this.book?.id);
         wish.classList.remove("active");
-        console.log("잘 지움...");
       }
     },
     async fetchWishByBookId(bookId) {

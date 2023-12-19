@@ -35,18 +35,19 @@ export default {
     }
   },
   updated() {
-    this.getAchievement();
+    this.calcAchievement();
     this.diffFromPreMonth = this.getDiffFromPreviousMonth();
   },
   methods : {
     getDiffFromPreviousMonth() {
       let prev = 0;
       let cur = 0;
+      console.log(new Date().getMonth());
       this.articles.forEach((article) => {
         if (article.createdAt.slice(0, 4) == new Date().getFullYear()) {
-          if (article.createdAt.slice(5, 7) == new Date().getMonth()) {
+          if (article.createdAt.slice(5, 7) == new Date().getMonth() + 1) {
             cur++;
-          } else if (article.createdAt.slice(5, 7) == new Date().getMonth() - 1) {
+          } else if (article.createdAt.slice(5, 7) == new Date().getMonth()) {
             prev++;
           }
         }
@@ -59,11 +60,11 @@ export default {
       if (diff > 0) {
         diff = `▲${diff}`;
       } else if (diff < 0) {
-        diff = `▼${diff}`;
+        diff = `▼${Math.abs(diff)}`;
       }
       return diff;
     },
-    getAchievement() {
+    calcAchievement() {
       let doneCount = 0;
       this.articles.forEach((article) => {
         if (article.isDone) {
@@ -72,6 +73,7 @@ export default {
       })
       // console.log(Math.round((doneCount / this.articles?.length) * 100) );
       this.achievement = Math.round((doneCount / this.articles?.length) * 100);
+      this.achievement = this.achievement || 0;
     },
   }
 };
