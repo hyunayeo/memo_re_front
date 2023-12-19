@@ -74,17 +74,17 @@ export default {
       const wish = document.querySelector("#wish");
       const hasClass = wish.classList.contains("active");
       if (!hasClass) {
-        wishApi.postWish(this.memberId, this.book?.id);
+        wishApi.postWish(this.book?.id);
         console.log("잘 들어감...");
         wish.classList.add("active");
       } else {
-        wishApi.deleteWish(this.book?.id, this.memberId);
+        wishApi.deleteWish(this.book?.id);
         wish.classList.remove("active");
         console.log("잘 지움...");
       }
     },
     async fetchWishByBookId(bookId) {
-      let res = await wishApi.getWishByBookId(bookId, this.memberId);
+      let res = await wishApi.getWishByBookId(bookId);
       console.log("methods", res);
       if (res.data != "") {
         const wish = document.querySelector("#wish");

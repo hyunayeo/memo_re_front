@@ -2,26 +2,28 @@ import axios from "axios";
 import VueCookies from "vue-cookies";
 
 export default {
-  postWish: function (memberId, bookId) {
+  memberId: VueCookies.get("memberId"),
+  postWish: function (bookId) {
     return axios.post(`/api/wishes`, {
-      memberId: memberId,
+      memberId: this.memberId,
       bookId: bookId,
     });
   },
   getWishes: function (searchDto) {
-    return axios.get(`/api/wishes?${new URLSearchParams(searchDto).toString()}`);
+    return axios.get(
+      `/api/wishes?${new URLSearchParams(searchDto).toString()}`
+    );
   },
-  getWishByBookId: function (bookId, memberId) {
-    return axios.get(`/api/wishes/${bookId}?memberId=${memberId}`);
+  getWishByBookId: function (bookId) {
+    return axios.get(`/api/wishes/${bookId}?memberId=${this.memberId}`);
   },
   getWishesByMemberId: function () {
-    let memberId = VueCookies.get("memberId");
     return axios.get(
-      `/api/wishes?searchType=member_id&searchKeyword=${memberId}`
+      `/api/wishes?searchType=member_id&searchKeyword=${this.memberId}`
     );
   },
 
-  deleteWish: function (bookId, memberId) {
-    return axios.delete(`/api/wishes/${bookId}?memberId=${memberId}`);
+  deleteWish: function (bookId) {
+    return axios.delete(`/api/wishes/${bookId}?memberId=${this.memberId}`);
   },
 };
