@@ -84,6 +84,7 @@
 import articleApi from "@/api/article.api.js";
 import { ref } from "vue";
 import memberApi from "@/api/member.api";
+import { useRoute } from "vue-router";
 
 export default {
   setup() {
@@ -118,18 +119,19 @@ export default {
   },
   methods: {
     pathCheck() {
-      if (this.$router.options.history.state.back) {
+      if (this.path == "/mypage/library") {
         this.isFromMyPage = true;
-      }
-      if (this.$route.query?.type == "제목") {
-        this.searchDto.searchType = "title";
-        this.searchDto.searchKeyword = this.$route.query.keyword;
-      } else if (this.$route.query?.type == "작성자명") {
-        this.searchDto.searchType = "writer";
-        this.searchDto.searchKeyword = this.$route.query.keyword;
-      } else if (this.$route.query?.type == "category") {
-        (this.searchDto.filter = "category"),
-          (this.searchDto.filterKeyword = this.$route.query.keyword);
+      } else {
+        if (this.$route.query?.type == "제목") {
+          this.searchDto.searchType = "title";
+          this.searchDto.searchKeyword = this.$route.query.keyword;
+        } else if (this.$route.query?.type == "작성자명") {
+          this.searchDto.searchType = "writer";
+          this.searchDto.searchKeyword = this.$route.query.keyword;
+        } else if (this.$route.query?.type == "category") {
+          (this.searchDto.filter = "category"),
+            (this.searchDto.filterKeyword = this.$route.query.keyword);
+        }
       }
     },
     async fetchArticlesWithBookAndMember(searchDto) {
@@ -219,6 +221,10 @@ export default {
       let pages = Array.from({ length: end }, (_, index) => index + 1);
 
       return pages?.slice(start - 1);
+    },
+    path() {
+      const route = useRoute();
+      return route.path;
     },
   },
 };
