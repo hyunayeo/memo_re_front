@@ -144,12 +144,12 @@ export default {
         console.log(articles);
         return articles;
     },      
-    getArticlesByMember : async function() {
+    getArticlesByMember : async function(recordSize = 10) {
       // this.searchDto.searchType = "member_id";
       // // this.searchDto.searchKeyword = id;
       // this.searchDto.searchKeyword = VueCookies.get("memberId");
       
-      let articles = await this.getArticles({searchType : "member_id", searchKeyword : VueCookies.get("memberId")});
+      let articles = await this.getArticles({searchType : "member_id", searchKeyword : VueCookies.get("memberId"), recordSize : recordSize});
       
       return articles;
     }

@@ -32,20 +32,21 @@ export default {
   },
   methods: {
     async fetchArticle() {
-      let res = await articleApi.getArticlesByMember();
+      let res = await articleApi.getArticlesByMember(100);
       let articles = res.data.list;
       let i = 0;
+      console.log(articles);
       articles.forEach((article) => {
         if (article.isDone) {
           this.attributes.push({
-            highlight: "gray",
+            highlight: { color : "red", fillMode : "outline" },            
             dates: new Date(article.endDate),
             popover: {
               label: article.book.title,
             },
             order: 1,
           });
-        } else {
+        } else if (article.startDate != null && article.endDate != null) {
           this.attributes.push({
             highlight: {
               color: this.colors[i++ % this.colors.length],

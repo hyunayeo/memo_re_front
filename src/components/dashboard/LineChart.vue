@@ -1,5 +1,25 @@
 <template>
-  <LineWithLineChart :data="data" :options="options" />
+  <LineWithLineChart 
+  :data="{
+    labels : [
+          'January',
+          'February',
+          'March',
+          'April',
+          'May',
+          'June',
+          'July',
+          'August',
+          'September',
+          'October',
+          'November',
+          'December'
+        ],
+    datasets : [
+      {label : '월별 게시물 수', backgroundColor: '#f87979', data: this?.counts}
+      ]
+  }"
+  :options="options"/>
 </template>
 
 <script>
@@ -61,26 +81,12 @@ const LineWithLineChart = createTypedChart(
 export default {
   name: "LineChart",
   components: { LineWithLineChart },
+  props : {
+    articles : Array
+  },
   data() {
     return {
-      data: {
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-        ],
-        datasets: [
-          {
-            label: "Data One",
-            backgroundColor: "#f87979",
-            data: [40, 39, 10, 40, 39, 80, 40],
-          },
-        ],
-      },
+      counts: [],
       options: {
         responsive: true,
         tooltips: {
@@ -89,5 +95,35 @@ export default {
       },
     };
   },
+  updated() {
+    this.counts = this.getCountPerMonths();
+  },
+  methods : {
+    getCountPerMonths() {
+      let countPerMonths = 
+        new Map([['01', 0], ['02', 0], ['03', 0],
+                ['04', 0], ['05', 0], ['06', 0],
+                ['07', 0], ['08', 0], ['09', 0],
+                ['10', 0], ['11', 0], ['12', 0]]); 
+      this.articles.forEach((article) => {
+        // console.log(article.createdAt);
+        if (article.createdAt.slice(0, 4) == 2023) {
+          let month = article.createdAt.slice(5, 7);
+          if (countPerMonths.has(month)) {
+            countPerMonths.set(month, countPerMonths.get(month) + 1);
+          } else {
+            countPerMonths.set(month, 1);
+          }
+        }
+      })
+      // console.log(countPerMonths)
+      countPerMonths = [...countPerMonths].sort();
+      // console.log(countPerMonths)
+      let counts = countPerMonths.map((month) => {
+        return month[1];
+      })
+      return counts;
+    }
+  }
 };
 </script>
