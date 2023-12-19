@@ -60,7 +60,7 @@ import { ref } from "vue";
 import bookApi from "@/api/book.api";
 import wishApi from "@/api/wish.api";
 import memberApi from "@/api/member.api";
-
+import { useRoute } from "vue-router";
 export default {
   name: "BookList",
   components: { BookMedium },
@@ -98,7 +98,7 @@ export default {
 
   methods: {
     pathCheck() {
-      if (this.$router.options.history.state.back) {
+      if (this.path == "/mypage/library") {
         this.isFromMyPage = true;
         this.searchDto.searchType = "member_id";
         this.searchDto.searchKeyword = memberApi.getMemberId();
@@ -153,6 +153,10 @@ export default {
       let start = this.pagination?.startPage;
       let pages = Array.from({ length: end }, (_, index) => index + 1);
       return pages?.slice(start - 1);
+    },
+    path() {
+      const route = useRoute();
+      return route.path;
     },
   },
 };

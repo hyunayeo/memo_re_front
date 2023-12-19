@@ -45,58 +45,11 @@
 
             <label for="title" class="form-label">평점</label>
             <br />
-            <div
-              class="btn-toolbar"
-              role="toolbar"
-              aria-label="Toolbar with button groups"
-            >
-              <div
-                @click="toggleActive($event.target)"
-                class="btn-group me-2"
-                role="group"
-                aria-label="First group"
-                id="rating"
-              >
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  id="rating"
-                  value="1"
-                >
-                  1
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  id="rating"
-                  value="2"
-                >
-                  2
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  id="rating"
-                  value="3"
-                >
-                  3
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  id="rating"
-                  value="4"
-                >
-                  4
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  id="rating"
-                  value="5"
-                >
-                  5
-                </button>
+
+            <div class="star-rating d-flex">
+              <div v-for="index in 5" :key="index" @click="check(index)">
+                <div v-if="index < score">★</div>
+                <div v-if="index >= score">☆</div>
               </div>
             </div>
 
@@ -187,6 +140,7 @@ export default {
   name: "ArticleInsert",
   data() {
     return {
+      score: 0,
       pickedBook: {},
       showModal: false,
       showRegisterModal: false,
@@ -215,14 +169,6 @@ export default {
     this.hasIsbn(this.$route.query.isbn);
   },
   methods: {
-    toggleActive: function (e) {
-      console.log(e.parentElement.children);
-      Array.from(e.parentElement.children).forEach((btn) => {
-        btn.classList.remove("active");
-      });
-      e.classList.toggle("active");
-      this.articleInfo.ratingScore = e.value;
-    },
     hasIsbn(isbn) {
       if (isbn) {
         this.pickBookByIsbn(isbn);
@@ -239,6 +185,11 @@ export default {
       let res = await bookApi.getBookByIsbn(book.isbn);
       this.pickedBook = res.data;
       this.articleInfo.bookId = this.pickedBook.id;
+    },
+    check(index) {
+      this.score = index + 1;
+      console.log(index);
+      this.articleInfo.ratingScore = index;
     },
     async insertArticle() {
       console.log(this.articleInfo);

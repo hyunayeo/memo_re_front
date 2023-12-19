@@ -4,7 +4,7 @@
     @click="goToDetail"
   >
     <img
-      v-if="book.cover"
+      v-if="book?.cover"
       :src="book?.cover"
       class="bd-placeholder-img"
       height="90"

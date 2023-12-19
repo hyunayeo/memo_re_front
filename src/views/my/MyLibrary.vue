@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>My Library</h1>
+    <h1 class="position-absolute">My Library</h1>
     <div class="d-flex justify-content-end align-items-center">
       <ul class="nav nav-pills">
         <li class="nav-item">
@@ -21,9 +21,7 @@
         </li>
       </ul>
     </div>
-
-    <div v-if="isLibrary">
-      <p></p>
+    <div v-if="isLibrary" class="py-3">
       <MyDone :articles="doneArticles" />
       <MyReading :articles="readingArticles" />
       <MyWish :wishes="wishes" />
