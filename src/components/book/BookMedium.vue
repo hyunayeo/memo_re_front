@@ -25,11 +25,11 @@
           <a
             v-if="isWish"
             id="wish"
-            class="btn btn-sm btn-outline-secondary mx-1 active"
-            >wish ♡</a
+            class="btn btn-sm btn-outline-danger active mx-1"
+            >wish ❤</a
           >
-          <a v-else id="wish" class="btn btn-sm btn-outline-secondary mx-1"
-            >wish ♡</a
+          <a v-else id="wish" class="btn btn-sm btn-outline-danger mx-1"
+            >wish ❤</a
           >
         </div>
         <strong class="d-inline-block mb-2 text-primary-emphasis">World</strong>
@@ -47,20 +47,21 @@
 <script>
 import wishApi from "@/api/wish.api";
 import bookApi from "@/api/book.api";
+import memberApi from "@/api/member.api";
 
 export default {
   name: "CardMedium",
 
   props: ["book"],
   data() {
-    return { isWish: false };
+    return { isWish: false, memberId: null };
   },
 
   methods: {
     async clickWish() {
+      memberApi.checkLogin();
       if (!this.isWish) {
-        let res = await bookApi.getBookByIsbn(this.book.isbn);
-        wishApi.postWish(res.data.id);
+        wishApi.postWish(this.book?.id);
         this.isWish = true;
       } else {
         wishApi.deleteWish(this.book?.id);
@@ -73,7 +74,6 @@ export default {
     },
     async fetchWishByBookId(bookId) {
       let res = await wishApi.getWishByBookId(bookId);
-      console.log("methods", res);
       if (res.data != "") {
         this.isWish = true;
       } else {
@@ -82,7 +82,8 @@ export default {
     },
   },
   mounted() {
-    if (this.book.id != null) {
+    this.memberId = memberApi.getMemberId();
+    if (this.memberId != null && this.book.id != null) {
       this.fetchWishByBookId(this.book.id);
     }
   },

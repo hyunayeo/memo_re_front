@@ -27,12 +27,18 @@
             </div>
           </div>
         </div>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <div
+          @click.stop="clickWish"
+          class="d-grid gap-2 d-md-flex justify-content-md-end"
+        >
           <a
-            class="btn btn-sm btn-outline-secondary"
+            v-if="isWish"
             id="wish"
-            @click="addToWishlist()"
-            >wish ♡</a
+            class="btn btn-sm btn-outline-danger active mx-1"
+            >wish ❤</a
+          >
+          <a v-else id="wish" class="btn btn-sm btn-outline-danger mx-1"
+            >wish ❤</a
           >
         </div>
       </div>
@@ -49,55 +55,40 @@
 <script>
 import wishApi from "@/api/wish.api";
 import memberApi from "@/api/member.api";
-import { ref } from "vue";
 
 export default {
   name: "BookInfo",
   props: ["book"],
-
-  setup() {
-    const memberId = ref(null);
-
-    const updateMemberId = () => {
-      memberId.value = memberApi.getMemberId();
-    };
-    updateMemberId();
-    console.log("멤버아이디", memberId.value);
-    return { memberId };
+  data() {
+    return { memberId: null, isWish: false };
   },
   methods: {
-    addToWishlist() {
+    clickWish() {
       memberApi.checkLogin();
-      this.postWish();
-    },
-    postWish: async function () {
-      const wish = document.querySelector("#wish");
-      const hasClass = wish.classList.contains("active");
-      if (!hasClass) {
+      if (!this.isWish) {
         wishApi.postWish(this.book?.id);
-        console.log("잘 들어감...");
-        wish.classList.add("active");
+        this.isWish = true;
       } else {
         wishApi.deleteWish(this.book?.id);
-        wish.classList.remove("active");
-        console.log("잘 지움...");
+        this.isWish = false;
       }
     },
     async fetchWishByBookId(bookId) {
       let res = await wishApi.getWishByBookId(bookId);
-      console.log("methods", res);
       if (res.data != "") {
-        const wish = document.querySelector("#wish");
-        wish.classList.add("active");
+        this.isWish = true;
       } else {
-        const wish = document.querySelector("#wish");
-        wish.classList.remove("active");
+        this.isWish = false;
       }
     },
   },
+  mounted() {
+    this.memberId = memberApi.getMemberId();
+  },
   async updated() {
-    console.log("updated book:", this.book.id);
-    this.fetchWishByBookId(this.book.id);
+    if (this.memberId != null) {
+      this.fetchWishByBookId(this.book.id);
+    }
   },
 };
 </script>
