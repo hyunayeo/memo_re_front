@@ -115,26 +115,28 @@ export default {
   },
   async mounted() {
     this.pathCheck();
-    this.fetchArticlesWithBookAndMember(this.searchDto);
+    this.fetchArticlesWithBookAndMember();
   },
   methods: {
     pathCheck() {
       if (this.path == "/mypage/library") {
         this.isFromMyPage = true;
       } else {
+        this.searchDto.searchType = "is_hide";
+        this.searchDto.searchKeyword = false;
         if (this.$route.query?.type == "제목") {
-          this.searchDto.searchType = "title";
-          this.searchDto.searchKeyword = this.$route.query.keyword;
+          this.searchDto.searchType2 = "title";
+          this.searchDto.searchKeyword2 = this.$route.query.keyword;
         } else if (this.$route.query?.type == "작성자명") {
-          this.searchDto.searchType = "writer";
-          this.searchDto.searchKeyword = this.$route.query.keyword;
+          this.searchDto.searchType2 = "writer";
+          this.searchDto.searchKeyword2 = this.$route.query.keyword;
         } else if (this.$route.query?.type == "category") {
           (this.searchDto.filter = "category"),
             (this.searchDto.filterKeyword = this.$route.query.keyword);
         }
       }
     },
-    async fetchArticlesWithBookAndMember(searchDto) {
+    async fetchArticlesWithBookAndMember() {
       let res;
       // if (this.isFromMyPage == true) {
       //     res = await articleApi.getArticlesByMember();
@@ -162,7 +164,8 @@ export default {
           this.searchDto.searchKeyword2 = false;
         }
       }
-      res = await articleApi.getArticles(searchDto);
+      console.log(this.searchDto);
+      res = await articleApi.getArticles(this.searchDto);
       this.articles = await res.data.list;
       this.pagination = await res.data.pagination;
     },
