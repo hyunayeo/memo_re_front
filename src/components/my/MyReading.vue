@@ -66,7 +66,7 @@
             width="200"
             @click="
               this.$router.push({
-                path: `/article/detail/${this.articles[3]?.id}`,
+                path: `/article/detail/${this.articles[4]?.id}`,
               })
             "
           />

@@ -49,7 +49,7 @@
 
               <div class="star-rating d-flex">
                 <div v-for="index in 5" :key="index" @click="check(index)">
-                  <div v-if="index < score">★</div>
+                  <div class="text-warning" v-if="index < score">★</div>
                   <div v-if="index >= score">☆</div>
                 </div>
               </div>

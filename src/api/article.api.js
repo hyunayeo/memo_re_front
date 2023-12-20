@@ -149,7 +149,7 @@ export default {
       // // this.searchDto.searchKeyword = id;
       // this.searchDto.searchKeyword = VueCookies.get("memberId");
       
-      let articles = await this.getArticles({searchType : "member_id", searchKeyword : VueCookies.get("memberId"), recordSize : recordSize});
+      let articles = await this.getArticles({searchType : "member_id", searchKeyword : VueCookies.get("memberId"), recordSize : recordSize, isHide : "true"});
       
       return articles;
     }
