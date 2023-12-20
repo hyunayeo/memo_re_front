@@ -58,7 +58,7 @@ export default {
         // console.log("카테고리 (레코드):", this.categories);        
       },
       async getArticlesByMember() {
-        let res = await articleApi.getArticles({searchType : "member_id", searchKeyword : this.memberId, recordSize : 100});
+        let res = await articleApi.getArticles({searchType : "member_id", searchKeyword : this.memberId, recordSize : 100, isHide : "true"});
         this.articles = res.data.list;
         // console.log("articles:", this.articles);        
       }

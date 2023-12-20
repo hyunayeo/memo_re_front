@@ -56,10 +56,10 @@
         <BookList />
       </div>
       <div v-if="activeIdx == 0">
-        <ArticleList :isDone="false" />
+        <ArticleList :isDone="true" />
       </div>
       <div v-if="activeIdx == 1">
-        <ArticleList :isDone="true" />
+        <ArticleList :isDone="false" />
       </div>
     </div>
   </div>
