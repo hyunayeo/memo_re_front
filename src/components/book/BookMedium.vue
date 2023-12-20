@@ -54,23 +54,37 @@ export default {
 
   props: ["book"],
   data() {
-    return { isWish: false, memberId: null };
+    return { isWish: false, memberId: null, bookId: null };
   },
 
   methods: {
     async clickWish() {
       memberApi.checkLogin();
+      if (this.book.id == null) {
+        let res = await bookApi.getBookByIsbn(this.book.isbn);
+        console.log("get 책아이디:", res);
+        this.bookId = res.data.id;
+      } else {
+        this.bookId = this.book.id;
+      }
       if (!this.isWish) {
-        wishApi.postWish(this.book?.id);
+        console.log("위시추가. 책아이디:", this.bookId);
+        wishApi.postWish(this.bookId);
         this.isWish = true;
       } else {
-        wishApi.deleteWish(this.book?.id);
+        wishApi.deleteWish(this.bookId);
         this.isWish = false;
       }
     },
     async goToDetail() {
-      let res = await bookApi.getBookByIsbn(this.book.isbn);
-      this.$router.push({ path: `/book/detail/${res.data.id}`});
+      if (this.book.id == null) {
+        let res = await bookApi.getBookByIsbn(this.book.isbn);
+        console.log("get 책아이디:", res);
+        this.bookId = res.data.id;
+      } else {
+        this.bookId = this.book.id;
+      }
+      this.$router.push({ path: `/book/detail/${this.bookId}` });
     },
     async fetchWishByBookId(bookId) {
       let res = await wishApi.getWishByBookId(bookId);
