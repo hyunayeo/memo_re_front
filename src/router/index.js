@@ -1,11 +1,9 @@
 import MainPage from "@/views/MainPage.vue";
 import LoginPage from "@/views/LoginPage.vue";
-import SignupPage from "@/views/SignupPage.vue";
 import MyRecord from "@/views/my/MyRecord.vue";
 import MyCalender from "@/views/my/MyCalender";
 import ProfileUpdate from "@/views/my/ProfileUpdate.vue";
 import SearchPage from "@/views/SearchPage.vue";
-
 import LibraryLayout from "@/layouts/LibraryLayout.vue";
 import BookDetail from "@/views/book/BookDetail.vue";
 import ArticleInsert from "@/views/article/ArticleInsert.vue";
@@ -43,11 +41,6 @@ const routes = [
     path: "/login",
     name: "Login",
     component: LoginPage,
-  },
-  {
-    path: "/signup",
-    name: "signup",
-    component: SignupPage,
   },
   {
     path: "/search",
