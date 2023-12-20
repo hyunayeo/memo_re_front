@@ -5,7 +5,7 @@
       <div class="col">
         <div class="card card-cover overflow-hidden rounded-3 shadow-lg">
           <img
-            :src="this.wishes[0]?.book.cover"
+            :src="wishes[0]?.book.cover"
             class="card-img img-fluid"
             width="200"
             @click="
@@ -20,7 +20,7 @@
         <div class="card card-cover overflow-hidden rounded-3 shadow-lg">
           <img
             class="card-img img-fluid"
-            :src="this.wishes[1]?.book.cover"
+            :src="wishes[1]?.book.cover"
             width="200"
             @click="
               this.$router.push({
@@ -33,7 +33,7 @@
       <div class="col">
         <div class="card card-cover overflow-hidden rounded-3 shadow-lg">
           <img
-            class="this.card-img img-fluid"
+            class="card-img img-fluid"
             :src="wishes[2]?.book.cover"
             width="200"
             @click="
@@ -48,7 +48,7 @@
       <div class="col">
         <div class="card card-cover overflow-hidden rounded-3 shadow-lg">
           <img
-            class="this.card-img img-fluid"
+            class="card-img img-fluid"
             :src="wishes[3]?.book.cover"
             width="200"
             @click="
@@ -63,7 +63,7 @@
       <div class="col">
         <div class="card card-cover overflow-hidden rounded-3 shadow-lg">
           <img
-            class="this.card-img img-fluid"
+            class="card-img img-fluid"
             :src="wishes[4]?.book.cover"
             width="200"
             @click="
@@ -79,10 +79,7 @@
 </template>
 <script>
 export default {
-  name: "MyWish",
-  props: ["wishes"],
-
-  methods: {},
+  props: { wishes: Array },
 };
 </script>
 <style scoped>
