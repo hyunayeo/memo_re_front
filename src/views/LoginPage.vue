@@ -11,107 +11,72 @@
                 <div class="card-body text-black">
                   <form>
                     <div class="d-flex align-items-center mb-3 pb-1">
-                      <i
-                        class="fas fa-cubes fa-2x me-3"
-                        style="color: #ff6219"
-                      ></i>
-                      <span class="h1 fw-bold mb-0">로그인</span>
+                      <span class="h1 fw-bold mb-0">계정 로그인</span>
                     </div>
-
-                    <p>&nbsp;&nbsp;</p>
-
-                    <div class="form-outline mb-4">
-                      <label class="form-label" for="email">이메일 주소</label>
-                      <input
-                        type="email"
-                        id="email"
-                        placeholder="memore@example.com"
-                        class="form-control form-control-lg"
-                        required
-                        autofocus
-                      />
-                    </div>
-
-                    <div class="form-outline mb-4">
-                      <label class="form-label" for="password">비밀번호</label>
-                      <input
-                        type="password"
-                        id="password"
-                        class="form-control form-control-lg"
-                      />
-                    </div>
-
-                    <div class="pt-2 mb-4" style="text-align: center">
-                      <button type="button" class="btn btn-dark btn-lg">
-                        로그인
-                      </button>
-                    </div>
-                    <div class="pt-2 mb-4" style="text-align: center">
-                      <span class="m-2">
-                        <img
-                          src="@/assets/google_logo.png"
-                          class="rounded-circle"
-                          width="50"
-                          height="50"
-                          alt="profile_image"
-                          onerror="@/assets/profile_sample.jpg"
-                          @click="onClickGoogle()"
-                        />
-                      </span>
-                      <span class="m-2">
-                        <img
-                          src="@/assets/naver_logo.png"
-                          class="rounded-circle"
-                          width="50"
-                          height="50"
-                          alt="profile_image"
-                          onerror="@/assets/profile_sample.jpg"
-                          @click="onClickNaver"
-                        />
-                      </span>
-                    </div>
-
-                    <div class="mb-3">
-                      <div class="form-check" style="text-align: center">
-                        <label class="form-check-label" for="dropdownCheck">
-                          <input
-                            type="checkbox"
-                            class="form-check-input"
-                            id="dropdownCheck"
+                    <div class="row g-4">
+                      <div style="text-align: center">
+                        <svg
+                          class="bd-placeholder-img rounded-circle"
+                          width="140"
+                          height="140"
+                          xmlns="http://www.w3.org/2000/svg"
+                          role="img"
+                          aria-label="Placeholder"
+                        >
+                          <title>Placeholder</title>
+                          <rect
+                            width="100%"
+                            height="100%"
+                            fill="var(--bs-secondary-color)"
                           />
-                          아이디 정보 저장
-                        </label>
-                        <div class="mt-2">
-                          <a class="text-muted" @click="showModalId = true"
-                            >아이디 찾기</a
-                          >
-                          <b> &nbsp; / &nbsp; </b>
-                          <a
-                            class="text-muted"
-                            @click="
-                              showModalPw = true;
-                              option = 'pw';
-                            "
-                            >비밀번호 찾기</a
-                          >
+                        </svg>
+                        <p></p>
+                        <h2 class="fw-normal text-danger">♥</h2>
+                        <p>지금 메모리와 함께 독서를 시작하세요!</p>
+                      </div>
+                      <!-- /.col-lg-4 -->
+
+                      <div class="pt-2 mb-4" style="text-align: center">
+                        <div
+                          class="card border-gray mb-3"
+                          style="
+                            max-width: 18rem text-center;
+                            box-shadow: 1px 1px 1px 1px gray;
+                          "
+                        >
+                          <div class="card-header bg-danger-subtle">
+                            3초만에 시작하기
+                          </div>
+                          <div class="card-body text-dark">
+                            <span class="m-2">
+                              <img
+                                src="@/assets/google_logo.png"
+                                class="rounded-circle"
+                                width="50"
+                                height="50"
+                                alt="profile_image"
+                                style="box-shadow: 0px 5px 4px 0px gray"
+                                onerror="@/assets/profile_sample.jpg"
+                                @click="onClickGoogle()"
+                              />
+                            </span>
+                            &nbsp;
+                            <span class="m-2">
+                              <img
+                                src="@/assets/naver_logo.png"
+                                class="rounded-circle"
+                                width="50"
+                                height="50"
+                                alt="profile_image"
+                                style="box-shadow: 1px 1px 1px 1px gray"
+                                onerror="@/assets/profile_sample.jpg"
+                                @click="onClickNaver()"
+                              />
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
-                    <FindEmail
-                      @close="showModalId = false"
-                      v-if="showModalId"
-                    />
-                    <FindPassword
-                      @close="showModalPw = false"
-                      v-if="showModalPw"
-                    />
-
-                    <p class="mb-5 pb-lg-2" style="text-align: center">
-                      Memo.re 회원이 아닌가요?
-                      <a href="/signup" style="color: #6b21a8"
-                        >지금 가입하세요.</a
-                      >
-                    </p>
                   </form>
                 </div>
               </div>
@@ -123,14 +88,9 @@
   </div>
 </template>
 <script>
-import FindEmail from "@/components/modal/FindEmail.vue";
-
-import FindPassword from "@/components/modal/FindPassword.vue";
 export default {
-  data() {
-    return { showModalId: false, showModalPw: false };
-  },
-  components: { FindEmail, FindPassword },
+  data() {},
+
   methods: {
     onClickGoogle: function () {
       window.location.href =
