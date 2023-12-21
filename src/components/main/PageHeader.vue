@@ -79,24 +79,17 @@ export default {
     },
     searchByKeyword(value) {
       console.log(value)
-      // this.keyword = value;
       if (this.type == "도서명" || this.type == "작가명") {
         location.href = `/book?keyword=${this.keyword}&type=${this.type}`;
         this.keyword = '';
-        // this.$router.push( {path : '/book'}, { query : { keyword : this.keyword, type : this.type }});
       } else {
-        // location.href = `/article?keyword=${this.keyword}&type=${this.type}`;
-        this.$router.replace( {path : '/book', query : { keyword : this.keyword, type : this.type }});
+        location.href = `/article?keyword=${this.keyword}&type=${this.type}`;
         this.keyword = '';
       }
     },
   },
   mounted() {
     this.memberId = memberApi.getMemberId();
-    this.keyword = "";
-    console.log(this.memberId);
-    console.log(this.keyword);
-    console.log(this.$refs.keyword);
   },
 };
 </script>

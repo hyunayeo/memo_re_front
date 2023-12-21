@@ -102,7 +102,7 @@ export default {
       });
     },
     async fetchArticlesAndClassify() {
-      let res = await articleApi.getArticlesByMember();
+      let res = await articleApi.getArticlesByMember(100);
       this.articles = res.data.list;
       this.classifyArticles();
     },
