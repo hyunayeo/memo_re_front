@@ -33,10 +33,11 @@
               type="text"
               class="form-control"
               aria-label="Text input with dropdown button"
-              @keypress.enter="searchByKeyword"
+              @keypress.enter="searchByKeyword($event.target.value)"
+              ref="keyword"
             />
             <a
-              @click="searchByKeyword"
+              @click="searchByKeyword($event.target.value)"
               class="btn btn-outline-success my-2 my-sm-0"
             >
               /
@@ -76,17 +77,19 @@ export default {
     logout: function () {
       memberApi.logout();
     },
-    searchByKeyword() {
+    searchByKeyword(value) {
+      console.log(value)
       if (this.type == "도서명" || this.type == "작가명") {
         location.href = `/book?keyword=${this.keyword}&type=${this.type}`;
+        this.keyword = '';
       } else {
         location.href = `/article?keyword=${this.keyword}&type=${this.type}`;
+        this.keyword = '';
       }
     },
   },
   mounted() {
     this.memberId = memberApi.getMemberId();
-    console.log(this.memberId);
   },
 };
 </script>
