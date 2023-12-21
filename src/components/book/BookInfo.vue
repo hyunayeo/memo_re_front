@@ -4,15 +4,9 @@
     <article class="book-info">
       <div class="row">
         <div class="col-auto">
-          <div
-            class="row g-0 rounded overflow-hidden flex-md-row mb-4 h-md-250 position-relative"
-          >
+          <div class="row g-0 rounded overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
             <div class="col-auto d-none d-lg-block">
-              <img
-                class="bd-placeholder-img"
-                :src="this.book?.cover"
-                width="200"
-              />
+              <img class="bd-placeholder-img" :src="this.book?.cover" width="200" />
               <title>Placeholder</title>
               <rect width="100%" height="100%" fill="#55595c" />
             </div>
@@ -27,23 +21,11 @@
             </div>
           </div>
         </div>
-        <div
-          @click.stop="clickWish"
-          class="d-grid gap-2 d-md-flex justify-content-md-end"
-        >
-          <a
-            class="btn btn-sm btn-outline-secondary"
-            @click="goToWrite()"
-            >go to write</a
-          >
-          <a
-            class="btn btn-sm btn-outline-danger active mx-1"
-            v-if="isWish"
-            id="wish">
+        <div @click="clickWish" class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <a class="btn btn-sm btn-outline-secondary" @click.stop="goToWrite">go to write</a>
+          <a class="btn btn-sm btn-outline-danger active mx-1" v-if="isWish" id="wish">
             wish ❤</a>
-          <a v-else id="wish" class="btn btn-sm btn-outline-danger mx-1"
-            >wish ❤</a
-          >
+          <a v-else id="wish" class="btn btn-sm btn-outline-danger mx-1">wish ❤</a>
         </div>
       </div>
 
@@ -69,7 +51,7 @@ export default {
   methods: {
     goToWrite() {
       // let res = await bookApi.getBookByIsbn(this.book.isbn);
-      this.$router.push({ path: `/article/insert`, query : {isbn : this.book.isbn} });
+      this.$router.push({ path: `/article/insert`, query: { isbn: this.book.isbn } });
     },
     clickWish() {
       memberApi.checkLogin();
