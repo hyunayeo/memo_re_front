@@ -16,19 +16,12 @@
                     <div class="row g-4">
                       <div style="text-align: center">
                         <svg
-                          class="bd-placeholder-img rounded-circle"
-                          width="140"
-                          height="140"
-                          xmlns="http://www.w3.org/2000/svg"
+                          class="bd-placeholder-img rounded-circle login_bg"
+                          width="200"
+                          height="200"
                           role="img"
-                          aria-label="Placeholder"
                         >
                           <title>Placeholder</title>
-                          <rect
-                            width="100%"
-                            height="100%"
-                            fill="var(--bs-secondary-color)"
-                          />
                         </svg>
                         <p></p>
                         <h2 class="fw-normal text-danger">♥</h2>
@@ -44,7 +37,10 @@
                             box-shadow: 1px 1px 1px 1px gray;
                           "
                         >
-                          <div class="card-header bg-danger-subtle">
+                          <div
+                            class="card-header bg-danger p-2 text-white"
+                            style="--bs-bg-opacity: 0.9"
+                          >
                             3초만에 시작하기
                           </div>
                           <div class="card-body text-dark">
@@ -103,4 +99,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.login_bg {
+  background-image: url("@/assets/login_image.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+</style>
