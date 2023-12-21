@@ -98,6 +98,9 @@ export default {
 
   methods: {
     pathCheck() {
+      console.log('query : type' + this.$route.query.type);
+      console.log('query : keyword ' + this.$route.query.keyword);
+      console.log('path ' + this.$route.path);
       if (this.path == "/mypage/library") {
         this.isFromMyPage = true;
         this.searchDto.searchType = "member_id";
