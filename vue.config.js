@@ -5,6 +5,7 @@ module.exports = defineConfig({
 
 module.exports = {
   devServer: {
+    allowedHosts: "all",
     proxy: 'http://localhost:8080'
   }
 }
