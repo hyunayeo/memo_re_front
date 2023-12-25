@@ -90,10 +90,11 @@ export default {
   methods: {
     onClickGoogle: function () {
       window.location.href =
-        "http://localhost:8080/oauth2/authorization/google";
+        "http://52.78.159.72:8080/oauth2/authorization/google";
     },
     onClickNaver: function () {
-      window.location.href = "http://localhost:8080/oauth2/authorization/naver";
+      window.location.href =
+        "http://52.78.159.72:8080/oauth2/authorization/naver";
     },
   },
 };
